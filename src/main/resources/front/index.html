@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    
+    <!-- Style -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <title>POC</title>
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="toggle">
+        <a href="#" class="burger js-menu-toggle" data-toggle="collapse" data-target="#main-navbar">
+          <span></span>
+        </a>
+      </div>
+      <div class="side-inner">
+
+        <div class="profile">
+          <img src="images/person_profile.png" alt="Image" class="img-fluid">
+          <h3 class="name">Nom Prénom</h3>
+          <span class="country">Ville, Pays</span>
+        </div>
+        
+        <div class="nav-menu">
+          <ul>
+            <li class="active"><a href="#">Tous les rayons</a></li>
+            <li><a href="#">Fruits</a></li>
+            <li><a href="legumes.html">Légumes</a></li>
+            <li><a href="#">Produit frais</a></li>
+          </ul>
+        </div>
+      </div>
+      
+    </aside>
+    <main>
+      <div class="site-section">
+        <div class="container">
+          <div class="form-group">
+            <input type="text form-control" onkeyup="searchProduct()" id="searchBar" placeholder="Rechercher..."/>
+          </div>
+          <div class="card product" style="width: 100%; margin-bottom: 10px;">
+            <img class="card-img-top" src="images/aliments.jpg" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Légumes</h5>
+                <p class="card-text">Sa description...</p>
+                <a href="product_1.html" class="btn btn-success" style="float: right">Go !</a>
+            </div>
+          </div>
+          <div class="card product" style="width: 100%; margin-bottom: 10px;">
+            <img class="card-img-top" src="images/oeuf.jpg" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Oeuf</h5>
+              <p class="card-text">Sa description...</p>
+              <a href="#" class="btn btn-success" style="float: right">Go !</a>
+            </div>
+          </div>
+          <div class="card product" style="width: 100%; margin-bottom: 10px;">
+            <img class="card-img-top" src="images/pain.jpg" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Pain</h5>
+              <p class="card-text">Sa description...</p>
+              <a href="#" class="btn btn-success" style="float: right">Go !</a>
+            </div>
+          </div>
+        </div>
+      </div>  
+    </main>
+
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
