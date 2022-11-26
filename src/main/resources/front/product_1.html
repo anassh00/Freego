@@ -39,7 +39,7 @@
       </div>
       
     </aside>
-    <main>
+    <div style="height:fit-content;">
       <div class="site-section">
         <div class="container">
           <h1 style="text-align: center;">Nom de l'article</h1>
@@ -50,15 +50,43 @@
             Non laborum et corporis molestias et possimus voluptates ea accusamus obcaecati. Et laborum saepe hic autem doloribus non dolorem praesentium et perferendis assumenda! Eum quia provident vel modi omnis quo placeat laborum ea Quis dolorem.
             Et sint possimus rem quia voluptatem et nemo delectus eos autem illum. Non dolore deleniti qui nisi harum et sint sequi qui perspiciatis itaque.
           </p>
-          <a href="#" class="btn btn-success" style="float: right">Réserver</a>
         </div>
       </div>  
-    </main>
-    
-    
+    </div>
+    <div class="row m-3">
+      <h2>Emplacement</h2>
+      <div id="map"></div>
+      <span id="coord"></span>
+    </div>
+    <div class="row m-3" style="float: right">
+      <a href="#" class="btn btn-success">Réserver</a>
+    </div>
 
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&v=weekly" defer></script>
+
+    <script>
+      // Initialize and add the map
+      function initMap() {
+        // The location of Uluru
+        const uluru = { lat: 45.7235113, lng: 4.893547 };
+        // The map, centered at Uluru
+        const map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 12,
+          center: uluru,
+        });
+        // The marker, positioned at Uluru
+        const marker = new google.maps.Marker({
+          position: uluru,
+          map: map,
+        });
+        document.querySelector("#coord").innerHTML = "<b>Latitude</b> : " + uluru.lat + "<br> <b>Longitude</b> : " + uluru.lng;
+      }
+
+      window.initMap = initMap;
+
+    </script>
   </body>
 </html>
