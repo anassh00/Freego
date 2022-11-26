@@ -9,7 +9,7 @@ import java.util.Set;
 import javax.persistence.*;
 
 @Entity
-@Table(	name = "users", 
+@Table(	name = "utilisateur", 
 		uniqueConstraints = { 
 			@UniqueConstraint(columnNames = "username"),
 			@UniqueConstraint(columnNames = "email") 
@@ -29,7 +29,9 @@ public class User {
 	private String first_name;
 	private String last_name;
 	
-	private String status;
+	@Enumerated(EnumType.STRING)
+	@Column(length = 20) 
+	private EAccountStatus status;
 	
 	private Long creation_date_timestamp;
 	private Long update_date_timestamp;
@@ -55,10 +57,10 @@ public class User {
 		update_date_timestamp = timestamp.getTime();
 	}	
 
-	public String getStatus() {
+	public EAccountStatus getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
+	public void setStatus(EAccountStatus status) {
 		this.status = status;
 	}
 	

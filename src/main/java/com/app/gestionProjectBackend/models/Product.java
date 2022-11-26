@@ -14,38 +14,48 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
+import javax.persistence.Table;
 
 
 @Entity
+@Table(name = "product")
 public class Product implements Serializable{
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id_product ;
 	
-//	@ManyToOne(fetch = FetchType.LAZY ,cascade = {CascadeType.ALL})
-//	@JoinColumn(name="category_id")
-//	private SousCategory category ;
-	
-//	@OneToOne(cascade = {CascadeType.ALL})
-//	@JoinColumn(name="supplier_id")
-//	private Supplier supplier;
+	@ManyToOne
+	@JoinColumn(name="categoryId")
+	private Category category;
 	
 	private String name;
 	private String description;
 	private int quantity_stock;
 	private int status;
 	private Long creation_date;
-	// src img
-	private String img;
 	
-	public String getImg() {
-		return img;
-	}
-	public void setImg(String img) {
-		this.img = img;
-	}
+	@ManyToOne
+	@JoinColumn(name="userId")
+	private User user;
+	
+    @OneToMany(mappedBy = "product")
+    private Set<OrderProduct> order_product;
+    
+    @OneToMany(mappedBy = "product")
+    private Set<CarteProduct> carte_product;
+	
+	// src img
+//	private String img;
+//	
+//	public String getImg() {
+//		return img;
+//	}
+//	public void setImg(String img) {
+//		this.img = img;
+//	}
 
 	@PrePersist
 	protected void onCreate() {
@@ -107,5 +117,35 @@ public class Product implements Serializable{
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	
+	public Category getCategory() {
+		return category;
+	}
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Set<OrderProduct> getOrder_product() {
+		return order_product;
+	}
+
+	public void setOrder_product(Set<OrderProduct> order_product) {
+		this.order_product = order_product;
+	}
+
+	public Set<CarteProduct> getCarte_product() {
+		return carte_product;
+	}
+
+	public void setCarte_product(Set<CarteProduct> carte_product) {
+		this.carte_product = carte_product;
+	}
+
 }
