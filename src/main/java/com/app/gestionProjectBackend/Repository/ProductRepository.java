@@ -15,4 +15,5 @@ public interface ProductRepository extends CrudRepository<Product, Long>{
 	
 	public Page<Product> findByNameContains(String mc, Pageable pageable);
 
+	public Optional<List<Product>> findByCategory_Id(Long id);
 }

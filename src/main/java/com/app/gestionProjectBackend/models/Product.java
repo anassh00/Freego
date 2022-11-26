@@ -6,7 +6,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -34,7 +37,10 @@ public class Product implements Serializable{
 	private String name;
 	private String description;
 	private int quantity_stock;
-	private int status;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(length = 20) 
+	private EProductStatus status;
 	private Long creation_date;
 	
 	@ManyToOne
@@ -110,11 +116,11 @@ public class Product implements Serializable{
 		this.quantity_stock = quantity_stock;
 	}
 
-	public int getStatus() {
+	public EProductStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(EProductStatus status) {
 		this.status = status;
 	}
 	public Category getCategory() {

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.gestionProjectBackend.Services.ProductService;
+import com.app.gestionProjectBackend.models.EProductStatus;
 import com.app.gestionProjectBackend.models.Product;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -25,6 +26,7 @@ public class ProductController {
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<Product> saveProduct(@RequestBody Product product) {
+		product.setStatus(EProductStatus.ACTIVE);
 		Product p = productService.add(product);
 		return new ResponseEntity<>(p, HttpStatus.OK);
 	}

@@ -72,6 +72,9 @@ public class AuthController {
 			JwtResponseDto resp = new JwtResponseDto();
 			resp.setStatus(true);
 			resp.setToken(jwt);
+			resp.setEmail(userDetails.getEmail());
+			resp.setId(userDetails.getId());
+			resp.setUsername(userDetails.getUsername());
 			//resp.setToken(decodeJWT(jwt));
 			return ResponseEntity.ok(resp);
 		}catch(Exception e){
