@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+    <!-- Style -->
+    <link rel="stylesheet" href="css/home.css">
+
+    <title>POC</title>
+  </head>
+  <body>
+    <div id="head-section">
+      <div class="row">
+        <div class="col-auto">
+          <img class="mx-3" src="images/logo_long.png"/>
+        </div>
+        <div class="col btn-don"> 
+          <button class="btn_submit mx-3" href="home.html">Je donne</button>
+        </div>
+      </div>
+    </div>
+    <div style="height: 60px"></div>
+    <div class="section mx-3">
+      <div class="top-freego">
+        <h3>Freego à la une</h3>
+      </div>
+
+      <div class="rayons">
+        <h3>Rayons</h3>
+        <hr>
+        <h6>Légumes</h6>
+      </div>
+
+      <div class="container">
+        <div class="form-group">
+          <input class="form-control my-3" type="text form-control" onkeyup="searchProduct()" id="searchBar" placeholder="Rechercher..."/>
+        </div>
+        <div class="card product" style="width: 100%; margin-bottom: 10px;">
+          <img class="card-img-top" src="images/aliments.jpg" alt="Card image cap">
+          <div class="card-body">
+              <h5 class="card-title">Légumes</h5>
+              <p class="card-text">Sa description...</p>
+              <a href="product_1.html" class="btn btn-success" style="float: right">Go !</a>
+          </div>
+        </div>
+        <div class="card product" style="width: 100%; margin-bottom: 10px;">
+          <img class="card-img-top" src="images/oeuf.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Oeuf</h5>
+            <p class="card-text">Sa description...</p>
+            <a href="#" class="btn btn-success" style="float: right">Go !</a>
+          </div>
+        </div>
+        <div class="card product" style="width: 100%; margin-bottom: 10px;">
+          <img class="card-img-top" src="images/pain.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Pain</h5>
+            <p class="card-text">Sa description...</p>
+            <a href="#" class="btn btn-success" style="float: right">Go !</a>
+          </div>
+        </div>
+      </div>
+    </div>  
+    <div style="height:50px"></div>
+    <div id="navigBar">
+      <div class="row">
+        <div class="col">
+          <a href="Home">
+            <img class="navIcon" src="images/icon/home.png"/>
+          </a>
+        </div>
+        <div class="col">
+          <a href="Home">
+            <img class="navIcon" src="images/icon/message.png"/>
+          </a>
+        </div>
+        <div class="col">
+          <a href="Home">
+            <img class="navIcon" src="images/icon/map.png"/>
+          </a>
+        </div>
+        <div class="col">
+          <a href="Home">
+            <img class="navIcon" src="images/icon/user.png"/>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap Script -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <!-- Script -->
+    <script src="js/home.js"></script>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+#searchBar {
+    width: 100%;
+}
+
+#navigBar {
+    position: fixed;
+    bottom: 0px; 
+    left: 0px;
+    height: 50px;
+    padding: 5px;
+    width: 100%;
+    background-color: #FE835A;
+}
+
+#navigBar .col {
+    display: flex;
+    justify-content: center;
+}
+
+.navIcon {
+    width:40px;
+}
+
+#head-section {
+    position: absolute;
+    top: 0px; 
+    left: 0px;
+    height: 60px;
+    padding: 5px;
+    width: 100%;
+    background-color: #E94E1B;
+}
+
+.btn_submit {
+    background-color: white !important;
+    color: #E94E1B !important;
+    font-weight: bold !important;
+    border-radius: 50px !important;
+    width: 100px;
+    height: 26px;
+    font-size: 14px;
+    justify-content: center;
+}
+
+.btn-don {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h3, h6 {
+    color: #345DA8;
+}
