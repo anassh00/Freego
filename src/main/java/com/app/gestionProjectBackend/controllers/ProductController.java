@@ -70,8 +70,8 @@ public class ProductController {
 			ArrayList<Product> result = new ArrayList<>();
 			Iterable<Product> list = productService.findAll();
 			if(list != null) {
-				list.forEach(category -> {
-					result.add(category);
+				list.forEach(product -> {
+					result.add(product);
 				});
 			}
 			return new ResponseEntity<ArrayList<Product>>(result, HttpStatus.OK);
