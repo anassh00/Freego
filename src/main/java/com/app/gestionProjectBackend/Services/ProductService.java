@@ -29,19 +29,35 @@ public class ProductService {
 	
 	@Transactional
 	public Product update(Long id, Product product, Long categoryId) {
-		product.setId_product(id);
-		if(categoryId != null) {
-			product.setCategory(categoryService.findById(categoryId).get());
+		Product productOld = findById(id).get();
+		if(product.getDescription() != null) {
+			productOld.setDescription(product.getDescription());
 		}
-		Product productToUpdate = productRepository.save(product);
+		if(product.getName() != null) {
+			productOld.setName(product.getName());
+		}
+		if(product.getQuantity_stock() == 0) {
+			productOld.setQuantity_stock(product.getQuantity_stock());
+		}
+		if(product.getStatus() != null) {
+			productOld.setStatus(product.getStatus());
+		}
+		if(product.getUser() != null) {
+			productOld.setUser(product.getUser());
+		}
+		if(categoryId != null) {
+			productOld.setCategory(categoryService.findById(categoryId).get());
+		}
+		Product productToUpdate = productRepository.save(productOld);
 		return productToUpdate;
 	}
 	
 	@Transactional
-	public Product delete(Long id, Product product) {
-		product.setId_product(id);
-		product.setStatus(EProductStatus.DELETED);
-		return null;
+	public Product delete(Long id) {
+		Product productOld = findById(id).get();
+		productOld.setStatus(EProductStatus.DELETED);
+		Product productToUpdate = productRepository.save(productOld);
+		return productToUpdate;
 	}
 	
 	public Iterable<Product> findAll() {
