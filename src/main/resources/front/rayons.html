@@ -11,61 +11,55 @@
     <!-- Style -->
     <link rel="stylesheet" href="css/home.css">
 
-    <title>POC</title>
+    <title>Rayons - Freego</title>
   </head>
   <body>
-    <div id="head-section">
-      <div class="row">
-        <div class="col-auto">
-          <img class="mx-3" src="images/logo_long.png"/>
+    <div id="head-section-bis">
+      <div class="row mx-3 my-1">
+        <div class="col">
+          <a href="home.html"><img src="images/icon/left_arrow.png"/></a>
         </div>
-        <div class="col btn-don"> 
-          <button class="btn_submit mx-3" href="home.html">Je donne</button>
+        <div class="col-auto"> 
+          <img src="images/logo_orange.png"/>
         </div>
       </div>
     </div>
     <div style="height: 60px"></div>
     <div class="section m-3">
-      <div class="top-freego">
-        <h3>Freego à la une</h3>
+      <div class="form-group">
+        <input class="my-3" type="text form-control" onkeyup="searchRayon()" id="searchBar" placeholder="Rechercher un rayon..."/>
+        <img id="searchBarLogo" src="images/icon/search.png"/>
       </div>
-
       <div class="rayons">
-        <h3>Rayons</h3>
-        <hr>
-        <h6>Légumes</h6>
-      </div>
-
-      <div class="container">
-        <div class="form-group">
-          <input class="form-control my-3" type="text form-control" onkeyup="searchProduct()" id="searchBar" placeholder="Rechercher..."/>
-        </div>
-        <div class="card product" style="width: 100%; margin-bottom: 10px;">
-          <img class="card-img-top" src="images/aliments.jpg" alt="Card image cap">
-          <div class="card-body">
-              <h5 class="card-title">Légumes</h5>
-              <p class="card-text">Sa description...</p>
-              <a href="product_1.html" class="btn btn-success" style="float: right">Go !</a>
+        <h3 class="my-3"><b>Rayons</b></h3>
+        <div class="rayon">
+          <div class="row" style="height:75%;"></div>
+          <div class="row title">
+            <h6 class="mx-3">Fruits et légumes</h6>
           </div>
         </div>
-        <div class="card product" style="width: 100%; margin-bottom: 10px;">
-          <img class="card-img-top" src="images/oeuf.jpg" alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title">Oeuf</h5>
-            <p class="card-text">Sa description...</p>
-            <a href="#" class="btn btn-success" style="float: right">Go !</a>
+        <div class="rayon">
+          <div class="row" style="height:75%;"></div>
+          <div class="row title">
+            <h6 class="mx-3">Produits laitiers</h6>
           </div>
         </div>
-        <div class="card product" style="width: 100%; margin-bottom: 10px;">
-          <img class="card-img-top" src="images/pain.jpg" alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title">Pain</h5>
-            <p class="card-text">Sa description...</p>
-            <a href="#" class="btn btn-success" style="float: right">Go !</a>
+        <div class="rayon">
+          <div class="row" style="height:75%;"></div>
+          <div class="row title">
+            <h6 class="mx-3">Produits secs</h6>
           </div>
         </div>
+        <div class="rayon">
+          <div class="row" style="height:75%;"></div>
+          <div class="row title">
+            <h6 class="mx-3">Conserves</h6>
+          </div>
+        </div>
+        
       </div>
     </div>  
+    
     <div style="height:50px"></div>
     <div id="navigBar">
       <div class="row">
