@@ -10,12 +10,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.gestionProjectBackend.Security.Payload.Response.MessageResponse;
 import com.app.gestionProjectBackend.Services.CategoryService;
 import com.app.gestionProjectBackend.models.Category;
+import com.app.gestionProjectBackend.models.Product;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -37,6 +39,18 @@ public class CategoryController {
 		}
 	}
 	
+	@RequestMapping(value = "/getCategory", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<?> getCategory(@RequestParam Long id) {
+		try {
+			Category category = categoryService.findById(id).get();
+			return new ResponseEntity<Category>(category, HttpStatus.OK);
+		}catch(Exception e){
+	        e.printStackTrace(); 
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: An internal error has occurred");
+		}
+	}
+
 	@GetMapping("/listCategory")
 	public ResponseEntity<?> allCategory() {
 		try {

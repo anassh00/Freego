@@ -4,10 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.app.gestionProjectBackend.Repository.ProductRepository;
+import com.app.gestionProjectBackend.Security.Services.UserDetailsImpl;
 import com.app.gestionProjectBackend.models.EProductStatus;
 import com.app.gestionProjectBackend.models.Product;
 
@@ -21,8 +24,14 @@ public class ProductService {
 	@Autowired
 	private CategoryService categoryService;
 	
+	@Autowired
+	private UserService userService;
+	
 	@Transactional
 	public Product add(Product product) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();	
+		product.setUser(userService.findById(userDetails.getId()).get());
 		Product newProduct = productRepository.save(product);
 		return newProduct;
 	}
