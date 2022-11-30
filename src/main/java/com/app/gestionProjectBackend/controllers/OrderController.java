@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.gestionProjectBackend.Dto.Request.OrderRequestDto;
+import com.app.gestionProjectBackend.Dto.Response.OrderResponseDto;
 import com.app.gestionProjectBackend.Services.OrderService;
 import com.app.gestionProjectBackend.models.Order;
 
@@ -27,8 +28,8 @@ public class OrderController {
 	@ResponseBody
 	public ResponseEntity<?> saveOrder(@RequestBody OrderRequestDto order) {
 		try {
-			Order orderRes = orderService.addOrder(order);
-			return new ResponseEntity<Order>(orderRes, HttpStatus.OK);
+			OrderResponseDto orderRes = orderService.addOrder(order);
+			return new ResponseEntity<OrderResponseDto>(orderRes, HttpStatus.OK);
 		}catch(Exception e){
 	        e.printStackTrace(); 
 	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: An internal error has occurred");

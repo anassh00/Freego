@@ -25,6 +25,14 @@ public class OrderProduct {
     
     private int quantity;
 
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
 	public Order getOrder() {
 		return order;
 	}

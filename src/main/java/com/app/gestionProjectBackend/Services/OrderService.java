@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.app.gestionProjectBackend.Dto.Request.OrderRequestDto;
+import com.app.gestionProjectBackend.Dto.Response.OrderProductResponseDto;
+import com.app.gestionProjectBackend.Dto.Response.OrderResponseDto;
 import com.app.gestionProjectBackend.Repository.OrderRepository;
 import com.app.gestionProjectBackend.models.Order;
 import com.app.gestionProjectBackend.models.OrderProduct;
@@ -29,7 +31,7 @@ public class OrderService {
 		return orderRepository.findById(id);
 	}
 	
-	public Order addOrder(OrderRequestDto orderDto) {
+	public OrderResponseDto addOrder(OrderRequestDto orderDto) {
 		Order order = new Order();
 		if(orderDto.getAddress() != null) {
 			order.setAddress(orderDto.getAddress());
@@ -48,7 +50,31 @@ public class OrderService {
 			});
 			order.setOrder_product(list);
 		}
-		return add(order);
+		Order newOrder = add(order);
+		return convertOrderToOrderResponseDto(newOrder);
+	}
+	
+	public OrderResponseDto convertOrderToOrderResponseDto (Order order) {
+		OrderResponseDto resp = new OrderResponseDto();
+		resp.setAddress(order.getAddress());
+		resp.setCreation_date_timestamp(order.getCreation_date_timestamp());
+		resp.setId_order(order.getId_order());
+		//resp.setOrder_product(order.getOrder_product());
+		if(order.getOrder_product() != null) {
+			Set<OrderProductResponseDto> order_product = new HashSet<>();
+			order.getOrder_product().forEach(element -> {
+				OrderProductResponseDto o = new OrderProductResponseDto();
+				o.setId(element.getId());
+				o.setProduct(element.getProduct());
+				o.setQuantity(element.getQuantity());
+				order_product.add(o);
+			});
+			resp.setOrder_product(order_product);
+		}
+		resp.setStatus(order.getStatus());
+		resp.setUpdate_date_timestamp(order.getUpdate_date_timestamp());
+		resp.setUser(order.getUser());
+		return resp;
 	}
 	
 	@Transactional

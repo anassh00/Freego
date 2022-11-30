@@ -8,6 +8,8 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(	name = "utilisateur", 
 		uniqueConstraints = { 
@@ -23,6 +25,7 @@ public class User {
 
 	private String username;
 	private String email;
+	@JsonIgnore
 	private String password;
 	
 	private String phone;
