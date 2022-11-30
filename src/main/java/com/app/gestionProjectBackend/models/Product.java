@@ -22,6 +22,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name = "product")
@@ -48,9 +50,11 @@ public class Product implements Serializable{
 	private User user;
 	
     @OneToMany(mappedBy = "product")
+    @JsonIgnore
     private Set<OrderProduct> order_product;
     
     @OneToMany(mappedBy = "product")
+    @JsonIgnore
     private Set<CarteProduct> carte_product;
 	
 	// src img

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.gestionProjectBackend.Services.UserService;
-import com.app.gestionProjectBackend.models.Product;
 import com.app.gestionProjectBackend.models.User;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
