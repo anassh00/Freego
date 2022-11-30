@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Message - Freego</title>
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+        <!-- Style -->
+        <link rel="stylesheet" href="css/style.css">
+
+        <!-- Google Icon -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+        <style>
+            .material-icons.orangeIcon {
+                color: #FE835A;
+                font-size: 46px;
+            }
+
+            .userImage {
+                width: 55px;
+                border-radius: 50px;
+            }
+            .enTete {
+                display: flex;
+                align-items: center;
+            }
+            .messU {
+                background-color: #345DA8;
+                color: white;
+                border-radius: 10px;
+                padding: 1rem;
+                width: 75%;
+                margin-left: auto;
+                margin-right: 1rem;
+            }
+            .messO {
+                background-color: #FE835A;
+                color: white;
+                border-radius: 10px;
+                padding: 1rem;
+                width: 75%;
+                margin-right: auto;
+                margin-left: 1rem;
+            }
+            span {
+                text-align: right;
+            }
+            .sendMessage {
+                color: #E94E1B;
+
+            }
+        </style>
+    </head>
+    <body>
+        <div id="head-section-bis">
+            <div class="row m-1 enTete">
+                <div class="col-auto">
+                    <a href="messaging.html"><i class="material-icons orangeIcon">keyboard_backspace</i></a>
+                </div>
+                <div class="col-auto">
+                    <img class="userImage" src="images/person_profile.png"/>
+                </div>
+                <div class="col">
+                    <h6>Prénom Nom</h6>
+                </div>
+            </div>
+        </div>
+        <div style="height: 60px;"></div>
+        <div class="container">
+            <div class="row">
+                <span>1:15pm</span>
+                <div class="messU">
+                    Hello ! Je suis intéressé par vos carottes et votre oignon, sont ils toujours disponibles ?
+                </div>
+            </div>
+            <div class="row">
+                <span>1:18pm</span>
+                <div class="messO">
+                    Bonjour Julien ! Oui bien sûr, quand pouvez-vous passer ?
+                </div>
+            </div>
+            <div class="row">
+                <span>1:21pm</span>
+                <div class="messU">
+                    Dans 20 minutes, c’est possible pour vous ?
+                </div>
+            </div>
+            <div class="row">
+                <span>1:22pm</span>
+                <div class="messO">
+                    Oui, parfait. On peut se retrouver à l’angle de la rue Savoie devant le restaurant les marmottes, cela vous convient ?
+                </div>
+            </div>
+            <div class="row">
+                <span>1:23pm</span>
+                <div class="messU">
+                    Super, à tout à l’heure !
+                </div>
+            </div>
+        </div>
+        <div class="row m-3">
+            <div class="col">
+                <input type="text" class="form-control"/>
+            </div>
+            <div class="col-auto p-0">
+                <button class="btn"><i class="material-icons sendMessage">send</i></button>
+            </div>
+        </div>
+
+        <!-- Nav bar basse -->
+        <div id="footNavBar"></div>
+        <div style="height:50px"></div>
+
+        <!-- Bootstrap Script -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+        <!-- Script -->
+        <script src="js/home.js"></script>
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+        <script>
+            $(function(){
+                $("#footNavBar").load("footNavBar.html");
+            });
+        </script>
+    </body>
+</html>

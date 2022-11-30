@@ -57,14 +57,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0;
 }
 
 h3, h6 {
     color: #345DA8;
 }
 
-.rayons h3 {
-    margin-top: -20px !important;
+.rayons {
+    margin-top: -20px;
 }
 
 .rayon {
@@ -108,4 +109,24 @@ h3, h6 {
     visibility: hidden;
     height: 0px;
     margin-bottom: 0px !important;
+}
+
+.btnModifProfil {
+    background-color: #E94E1B !important;
+    color: white !important;
+    font-weight: bold !important;
+    border-radius: 50px !important;
+    width: 200px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+}
+
+.iconButton {
+    margin-right: 5px;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
 }
