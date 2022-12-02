@@ -14,6 +14,7 @@ import com.app.gestionProjectBackend.Dto.Response.OrderResponseDto;
 import com.app.gestionProjectBackend.Repository.OrderRepository;
 import com.app.gestionProjectBackend.models.Order;
 import com.app.gestionProjectBackend.models.OrderProduct;
+import com.app.gestionProjectBackend.models.Product;
 
 @Service
 public class OrderService {
@@ -46,12 +47,21 @@ public class OrderService {
 				orderProductTmp.setOrder(order);
 				orderProductTmp.setProduct(productService.findById(element.getProductId()).get());
 				orderProductTmp.setQuantity(element.getQuantity());
-				list.add(orderProductTmp);
+				if(orderProductTmp.getProduct().getQuantity_stock() >= orderProductTmp.getQuantity()) {
+					list.add(orderProductTmp);
+					Product p = orderProductTmp.getProduct();
+					p.setQuantity_stock(orderProductTmp.getProduct().getQuantity_stock() - orderProductTmp.getQuantity());
+					productService.update(orderProductTmp.getProduct().getId_product(), p);
+				}
 			});
 			order.setOrder_product(list);
 		}
-		Order newOrder = add(order);
-		return convertOrderToOrderResponseDto(newOrder);
+		if(order.getOrder_product().size() > 0) {
+			Order newOrder = add(order);
+			return convertOrderToOrderResponseDto(newOrder);
+		}else {
+			return null;
+		}
 	}
 	
 	public OrderResponseDto convertOrderToOrderResponseDto (Order order) {

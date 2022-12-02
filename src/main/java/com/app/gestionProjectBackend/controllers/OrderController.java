@@ -29,7 +29,11 @@ public class OrderController {
 	public ResponseEntity<?> saveOrder(@RequestBody OrderRequestDto order) {
 		try {
 			OrderResponseDto orderRes = orderService.addOrder(order);
-			return new ResponseEntity<OrderResponseDto>(orderRes, HttpStatus.OK);
+			if (orderRes != null) {
+				return new ResponseEntity<OrderResponseDto>(orderRes, HttpStatus.OK);
+			}else {
+		        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: One or multiple selected products are no longer available");
+			}
 		}catch(Exception e){
 	        e.printStackTrace(); 
 	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: An internal error has occurred");

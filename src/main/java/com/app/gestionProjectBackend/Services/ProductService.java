@@ -37,6 +37,11 @@ public class ProductService {
 	}
 	
 	@Transactional
+	public Product update(Long id, Product product) {
+		return update(id, product, 0L);
+	}
+	
+	@Transactional
 	public Product update(Long id, Product product, Long categoryId) {
 		Product productOld = findById(id).get();
 		if(product.getDescription() != null) {
@@ -54,7 +59,7 @@ public class ProductService {
 		if(product.getUser() != null) {
 			productOld.setUser(product.getUser());
 		}
-		if(categoryId != null) {
+		if(categoryId != 0) {
 			productOld.setCategory(categoryService.findById(categoryId).get());
 		}
 		Product productToUpdate = productRepository.save(productOld);
