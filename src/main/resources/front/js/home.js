@@ -27,3 +27,28 @@ function searchRayon() {
 		}
 	}
 }
+
+function searchUser() {
+	let input = document.getElementById("searchBar").value.toLowerCase();
+	let messages = document.getElementsByClassName('message');
+	for (let i = 0; i < messages.length; i++) {
+		if (!messages[i].querySelector("h5").innerHTML.toLowerCase().includes(input)) {
+			messages[i].classList.add("noSearch");
+			messages[i].style.visibility = "hidden";
+		}
+		else {
+			messages[i].classList.remove("noSearch");
+			messages[i].style.visibility = "visible";
+		}
+	}
+}
+
+function fBurgerMenu() {
+	const burgerMenu = document.querySelector("#burgerMenu");
+	if (burgerMenu.style.display == 'none') {
+		burgerMenu.style.display = 'block';
+	}
+	else {
+		burgerMenu.style.display = 'none';
+	}
+}
