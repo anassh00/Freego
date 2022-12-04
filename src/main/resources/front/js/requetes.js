@@ -64,3 +64,37 @@ function saveProduct(desc, name, qte, categoryId) {
        console.log(response);
     });
 }
+
+function getProductById(productId) {
+    // To-DO : ajout du token dynamiquement
+    const settings = {
+        "url": "http://localhost:8080/api/product/getProduct?id="+productId,
+        "method": "GET",
+        "timeout": 0,
+        "headers": {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmbG9yaWFuIiwiaWF0IjoxNjcwMTY2MDM3LCJlbWFpbCI6ImZsb3JpYW4tN0BnbWFpbC5jb20iLCJ1c2VybmFtZSI6ImZsb3JpYW4iLCJyb2xlIjpbIlJPTEVfVVNFUiJdLCJleHAiOjE2NzAyNTI0Mzd9.YJJ7X5o4Q8-ZugqwOjnBvpdT1vkhGqI6XZ8-SB3JKk9JyAIfRn1Sd_-tXcfd7osENFMBczx7VMTSJn1bcJYW9Q",
+        },
+    };
+
+    $.ajax(settings).done(function (response) {
+       console.log(response);
+    });
+}
+
+function getAllProduct(){
+    // To-DO : ajout du token dynamiquement
+    const settings = {
+        "url": "http://localhost:8080/api/product/listProduct",
+        "method": "GET",
+        "timeout": 0,
+        "headers": {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmbG9yaWFuIiwiaWF0IjoxNjcwMTY2MDM3LCJlbWFpbCI6ImZsb3JpYW4tN0BnbWFpbC5jb20iLCJ1c2VybmFtZSI6ImZsb3JpYW4iLCJyb2xlIjpbIlJPTEVfVVNFUiJdLCJleHAiOjE2NzAyNTI0Mzd9.YJJ7X5o4Q8-ZugqwOjnBvpdT1vkhGqI6XZ8-SB3JKk9JyAIfRn1Sd_-tXcfd7osENFMBczx7VMTSJn1bcJYW9Q",
+        },
+    };
+
+    $.ajax(settings).done(function (response) {
+       console.log(response);
+    });    
+}
