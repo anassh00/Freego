@@ -40,6 +40,8 @@ public class User {
 	private Long update_date_timestamp;
 
 	private String address;
+	private double longitude;
+	private double latitude;
 	  
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(	name = "user_roles", 
@@ -60,6 +62,18 @@ public class User {
 		update_date_timestamp = timestamp.getTime();
 	}	
 
+	public double getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+	public double getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
 	public EAccountStatus getStatus() {
 		return status;
 	}

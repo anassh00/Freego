@@ -130,6 +130,8 @@ public class AuthController {
 			user.setFirst_name(userDto.getFirst_name());
 			user.setLast_name(userDto.getLast_name());
 			user.setPhone(userDto.getPhone());
+			user.setLatitude(userDto.getLatitude());
+			user.setLongitude(userDto.getLongitude());
 			if(!userDto.getRoles().isEmpty()) {
 				Set<Role> roles =  new HashSet<>();
 				roles.add(roleRepository.findByName(ERole.ROLE_USER).get());

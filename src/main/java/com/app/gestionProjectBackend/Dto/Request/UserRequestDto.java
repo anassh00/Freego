@@ -16,8 +16,26 @@ public class UserRequestDto {
 	private String last_name;
 	
 	private String address;
+	private double longitude;
+	private double latitude;
 	
 	private Set<String> roles = new HashSet<>();
+
+	public double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+
+	public double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
 
 	public Long getId() {
 		return id;

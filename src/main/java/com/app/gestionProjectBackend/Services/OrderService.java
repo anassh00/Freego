@@ -5,6 +5,8 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,8 +14,12 @@ import com.app.gestionProjectBackend.Dto.Request.OrderRequestDto;
 import com.app.gestionProjectBackend.Dto.Response.OrderProductResponseDto;
 import com.app.gestionProjectBackend.Dto.Response.OrderResponseDto;
 import com.app.gestionProjectBackend.Repository.OrderRepository;
+import com.app.gestionProjectBackend.Security.Services.UserDetailsImpl;
+import com.app.gestionProjectBackend.models.Message;
 import com.app.gestionProjectBackend.models.Order;
 import com.app.gestionProjectBackend.models.OrderProduct;
+import com.app.gestionProjectBackend.models.Product;
+import com.app.gestionProjectBackend.models.User;
 
 @Service
 public class OrderService {
@@ -27,18 +33,21 @@ public class OrderService {
 	@Autowired
 	private ProductService productService;
 	
+	@Autowired
+	private MessageService messageService;
+	
 	public Optional<Order> findById(Long id) {
 		return orderRepository.findById(id);
 	}
 	
 	public OrderResponseDto addOrder(OrderRequestDto orderDto) {
 		Order order = new Order();
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();	
 		if(orderDto.getAddress() != null) {
 			order.setAddress(orderDto.getAddress());
 		}
-		if(orderDto.getUser_id() != 0) {
-			order.setUser(userService.findById(orderDto.getUser_id()).get());
-		}
+		order.setUser(userService.findById(userDetails.getId()).get());
 		if(orderDto.getProductList() != null ) {
 			Set<OrderProduct> list = new HashSet<>();
 			orderDto.getProductList().forEach(element -> {
@@ -46,12 +55,29 @@ public class OrderService {
 				orderProductTmp.setOrder(order);
 				orderProductTmp.setProduct(productService.findById(element.getProductId()).get());
 				orderProductTmp.setQuantity(element.getQuantity());
-				list.add(orderProductTmp);
+				if(orderProductTmp.getProduct().getQuantity_stock() >= orderProductTmp.getQuantity()) {
+					list.add(orderProductTmp);
+					Product p = orderProductTmp.getProduct();
+					p.setQuantity_stock(orderProductTmp.getProduct().getQuantity_stock() - orderProductTmp.getQuantity());
+					productService.update(orderProductTmp.getProduct().getId_product(), p);
+					Message message = new Message();
+					User receiver = productService.findById(orderProductTmp.getProduct().getId_product()).get().getUser();
+					User sender = userService.findById(userDetails.getId()).get();
+					message.setMessageRead("false");
+					message.setMessageText("Hello "+receiver.getFirst_name()+" ! Votre produit "+p.getName()+" m'intéresse.");
+					message.setUserReceiver(receiver);
+					message.setUserSender(sender);
+					messageService.add(message);
+				}
 			});
 			order.setOrder_product(list);
 		}
-		Order newOrder = add(order);
-		return convertOrderToOrderResponseDto(newOrder);
+		if(order.getOrder_product().size() > 0) {
+			Order newOrder = add(order);
+			return convertOrderToOrderResponseDto(newOrder);
+		}else {
+			return null;
+		}
 	}
 	
 	public OrderResponseDto convertOrderToOrderResponseDto (Order order) {

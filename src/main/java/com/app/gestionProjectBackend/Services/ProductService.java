@@ -28,12 +28,20 @@ public class ProductService {
 	private UserService userService;
 	
 	@Transactional
-	public Product add(Product product) {
+	public Product add(Product product,Long categoryId) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();	
 		product.setUser(userService.findById(userDetails.getId()).get());
+		if(categoryId != 0 && categoryId != null) {
+			product.setCategory(categoryService.findById(categoryId).get());
+		}
 		Product newProduct = productRepository.save(product);
 		return newProduct;
+	}
+	
+	@Transactional
+	public Product update(Long id, Product product) {
+		return update(id, product, 0L);
 	}
 	
 	@Transactional
@@ -54,7 +62,7 @@ public class ProductService {
 		if(product.getUser() != null) {
 			productOld.setUser(product.getUser());
 		}
-		if(categoryId != null) {
+		if(categoryId != 0) {
 			productOld.setCategory(categoryService.findById(categoryId).get());
 		}
 		Product productToUpdate = productRepository.save(productOld);
