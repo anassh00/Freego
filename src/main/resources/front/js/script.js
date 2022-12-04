@@ -52,3 +52,38 @@ function fBurgerMenu() {
 		burgerMenu.style.display = 'none';
 	}
 }
+
+function fCategSelect() {
+	const categSelect = document.querySelector("#categSelect");
+	if (categSelect.style.display == 'none') {
+		categSelect.style.display = 'block';
+	}
+	else {
+		categSelect.style.display = 'none';
+	}
+}
+
+function fEtatSelect() {
+	const etatSelect = document.querySelector("#etatSelect");
+	if (etatSelect.style.display == 'none') {
+		etatSelect.style.display = 'block';
+	}
+	else {
+		etatSelect.style.display = 'none';
+	}
+}
+
+function fChoixCateg(item) {
+	const categChoisie = item.querySelector("span").innerHTML;
+	if(categChoisie.toString() == "Produits laitiers") {
+		document.querySelector("#modalContainer").style.display = 'block';
+	}
+	document.querySelector("#categorie").innerHTML = "Catégorie : " + item.querySelector("div").innerHTML;
+	document.querySelector("#categSelect").style.display = 'none';
+}
+
+function fChoixEtat(item) {
+	const etatChoisi = item.querySelector("span").innerHTML;
+	document.querySelector("#etat").innerHTML = "Etat : " + item.querySelector("div").innerHTML;
+	document.querySelector("#etatSelect").style.display = 'none';
+}

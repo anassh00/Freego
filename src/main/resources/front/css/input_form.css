@@ -22,7 +22,7 @@
     */
 
 .field__input {
-    --uiFieldPlaceholderColor: var(--fieldPlaceholderColor, #767676);
+    --uiFieldPlaceholderColor: var(--fieldPlaceholderColor, white);
 
     background-color: transparent;
     border-radius: 0;

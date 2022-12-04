@@ -15,14 +15,18 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
     <title>Rayons - Freego</title>
+
+    <style>
+
+    </style>
   </head>
   <body>
     <div id="head-section-bis">
-      <div class="row mx-3 my-1">
-        <div class="col">
-          <a href="home.html"><img src="images/icon/left_arrow.png"/></a>
+      <div class="row m-1">
+        <div class="col-auto">
+          <a href="home.html"><i class="material-icons orangeIcon">keyboard_backspace</i></a>
         </div>
-        <div class="col-auto"> 
+        <div class="col" style="display: flex; justify-content: right;">
           <img src="images/logo_orange.png"/>
         </div>
       </div>
@@ -31,35 +35,34 @@
     <div class="section m-3">
       <div class="form-group">
         <input class="my-3" type="text form-control" onkeyup="searchRayon()" id="searchBar" placeholder="Rechercher un rayon..."/>
-        <img id="searchBarLogo" src="images/icon/search.png"/>
+        <i class="material-icons" id="searchBarLogo">search</i>
       </div>
       <div class="rayons">
         <h3 id="#rayonTitle"><b>Rayons</b></h3>
-        <div class="rayon">
+        <div id="fruitsLegumes" class="rayon">
           <div class="row" style="height:75%;"></div>
           <div class="row title">
             <h6 class="mx-3">Fruits et légumes</h6>
           </div>
         </div>
-        <div class="rayon">
+        <div id="produitsLaitiers" class="rayon">
           <div class="row" style="height:75%;"></div>
           <div class="row title">
             <h6 class="mx-3">Produits laitiers</h6>
           </div>
         </div>
-        <div class="rayon">
-          <div class="row" style="height:75%;"></div>
-          <div class="row title">
-            <h6 class="mx-3">Produits secs</h6>
-          </div>
-        </div>
-        <div class="rayon">
+        <div id="conserves" class="rayon">
           <div class="row" style="height:75%;"></div>
           <div class="row title">
             <h6 class="mx-3">Conserves</h6>
           </div>
         </div>
-        
+        <div id="produitsSecs" class="rayon">
+          <div class="row" style="height:75%;"></div>
+          <div class="row title">
+            <h6 class="mx-3">Produits secs</h6>
+          </div>
+        </div>
       </div>
     </div>  
     
@@ -69,7 +72,7 @@
     <!-- Bootstrap Script -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     <!-- Script -->
-    <script src="js/home.js"></script>
+    <script src="js/script.js"></script>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script>

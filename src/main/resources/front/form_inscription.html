@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html style="height: 100%">
+<html>
     <head>
         <meta charset="UTF-8">
         <title>Inscription - Freego</title>
@@ -58,7 +58,7 @@
         </style>
     </head>
 
-    <body>
+    <body class="mb-5">
         <div id="logo_container">
             <img id="logo" src="images/logo.png" />
         </div>
@@ -115,10 +115,10 @@
         </form>
         <span class="mx-3 textError"></span>
         <div style="display: flex; justify-content: center; margin-top: 30px;">
-            <a href="form_connexion.html" class="mx-3 link">Je suis déjà membre</a>
+            <button class="btn btn_submit mx-3" id="btnSendForm" onclick="sendForm()">Inscription</button>
         </div>
         <div style="display: flex; justify-content: center; margin-top: 30px;">
-            <button class="btn btn_submit mx-3" id="btnSendForm" onclick="sendForm()">Inscription</button>
+            <a href="form_connexion.html" class="mx-3 link">Je suis déjà membre</a>
         </div>
 
         <!-- jQuery -->
