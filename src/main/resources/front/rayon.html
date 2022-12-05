@@ -14,7 +14,35 @@
     <!-- Google Icon -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-    <title>Rayons - Freego</title>
+    <title>Rayon - Freego</title>
+
+    <style>
+      .imgProduit {
+        width: 90px;
+        height: 90px;
+        border-radius: 10px;
+        background-color: #E94E1B;
+      }
+      .rayon a {
+        text-decoration: none;
+      }
+      .rayon button {
+        color: #E94E1B;
+        background-color: white;
+        border: 1px solid #E94E1B;
+        border-radius: 20px;
+        width: fit-content;
+      }
+      .rayon span {
+        color: #345DA8;
+        font-size: 14px;
+        text-align: right;
+        padding-right: 1.8rem;
+      }
+      .rayon > .row > .col > .row {
+        height: 33%;
+      }
+    </style>
   </head>
   <body>
     <div id="head-section-bis">
@@ -28,35 +56,34 @@
       </div>
     </div>
     <div style="height: 60px"></div>
-    <div class="section m-3">
+    <h3 id="rayonTitle" class="mt-3" style="text-align: center"><b>Nom du rayon</b></h3>
+    <div class="section mx-3">
       <div class="form-group">
-        <input class="my-3" type="text form-control" onkeyup="searchRayon()" id="searchBar" placeholder="Rechercher un rayon..."/>
+        <input class="my-3" type="text form-control" onkeyup="searchRayon()" id="searchBar" placeholder="Rechercher un produit..."/>
         <i class="material-icons" id="searchBarLogo">search</i>
       </div>
-      <div class="rayons">
-        <h3 id="rayonTitle"><b>Rayons</b></h3>
-        <div id="fruitsLegumes" class="rayon">
-          <div class="row" style="height:75%;"></div>
-          <div class="row title">
-            <h6 class="mx-3">Fruits et légumes</h6>
+      <div class="rayon">
+        <div class="row">
+          <div class="col-auto">
+            <a href="product.html">
+              <div class="imgProduit"></div>
+            </a>
           </div>
-        </div>
-        <div id="produitsLaitiers" class="rayon">
-          <div class="row" style="height:75%;"></div>
-          <div class="row title">
-            <h6 class="mx-3">Produits laitiers</h6>
-          </div>
-        </div>
-        <div id="conserves" class="rayon">
-          <div class="row" style="height:75%;"></div>
-          <div class="row title">
-            <h6 class="mx-3">Conserves</h6>
-          </div>
-        </div>
-        <div id="produitsSecs" class="rayon">
-          <div class="row" style="height:75%;"></div>
-          <div class="row title">
-            <h6 class="mx-3">Produits secs</h6>
+          <div class="col">
+            <div class="row">
+              <h6>Nom produit</h6>
+            </div>
+            <div class="row">
+              <span>par Prénom Nom</span>
+            </div>
+            <div class="row">
+              <div class="col-auto">
+                <button>Message</button>
+              </div>
+              <div class="col">
+                <button>Voir le freego</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

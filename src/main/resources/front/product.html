@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    
+    <!-- Style -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Google Icon -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <title>Produit - Freego</title>
+
+    <style>
+      #imageContainer {
+        height: 300px;
+        background-color: #345DA8;
+        background-size: cover;
+      }
+      #imageContainer a {
+        width: fit-content;
+        padding: 0;
+      }
+      #imageContainer a i {
+        color: white;
+      }
+      #profilContainer {
+        height: fit-content;
+        background-color: #E94E1B;
+      }
+      #produitContainer p {
+        font-size: 12px;
+        color: #345DA8;
+      }
+      #btnReserv button {
+        width: 100%;
+      }
+      .userImage {
+        width: 55px;
+        border-radius: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="imageContainer">
+      <div class="row mx-1" style="height: 5%";>
+        <a href="home.html"><i class="material-icons orangeIcon">keyboard_backspace</i></a>
+      </div>
+      <div class="row" style="height: 85%;"></div>
+      <div class="row" style="display: flex; justify-content: center">
+        <a href="javascript:void(0)" id="photo1" onclick="fChangePhoto(this);"><i class="material-icons">radio_button_checked</i></a>
+        <a href="javascript:void(0)" id="photo2" onclick="fChangePhoto(this);"><i class="material-icons">radio_button_unchecked</i></a>
+        <a href="javascript:void(0)" id="photo3" onclick="fChangePhoto(this);"><i class="material-icons">radio_button_unchecked</i></a>
+      </div>
+    </div>
+    <div id="profilContainer" class="p-3">
+      <div class="row">
+        <div class="col-auto">
+          <img class="userImage" src="images/person_profile.png"/>
+        </div>
+        <div class="col">
+          <div class="row">
+            Prénom Nom
+          </div>
+          <div class="row">
+            Notation
+          </div>
+        </div>
+        <div class="col-auto" style="display: flex; align-items: center">
+          <button class="btn_submit" style="width: fit-content">Envoyer un message</button>
+        </div>
+      </div>
+    </div>
+    <div id="produitContainer" class="m-3">
+      <h3>Carrottes de mon jardin</h3>
+      <h6>Cueillis hier - fraiches</h6>
+      <div id="btnReserv" class="my-3">
+        <button class="btn btnModifProfil" style="justify-content: center">Réserver</button>
+      </div>
+      <h6>Description du produit</h6>
+      <p>Je cultive mes carottes en transition biologiques (elles ne sont pas bio mais j’utilise le moins de pesticides possibles). J’en ai un grand nombre et je trouve ca dommage d’en jeter une partie... Je donne donc une dizaine. Premier venu premier servi !</p>
+    </div>
+    <!--
+    <div class="row m-3">
+      <h2>Emplacement</h2>
+      <div id="map"></div>
+      <span id="coord"></span>
+    </div>
+    <div class="row m-3" style="float: right">
+      <a href="#" class="btn btn-success">Réserver</a>
+    </div>
+    -->
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+    <script>
+      function fChangePhoto(item) {
+        const images = ['images/aliments.jpg', 'images/conserves.jpg', 'images/pain.jpg'];
+        const imageContainer = document.querySelector("#imageContainer");
+        switch(item.id) {
+          case "photo1":
+            imageContainer.style.backgroundImage = "url(" + images[0] + ")";
+            break;
+          case "photo2":
+            imageContainer.style.backgroundImage = "url(" + images[1] + ")";
+            break;
+          case "photo3":
+            imageContainer.style.backgroundImage = "url(" + images[2] + ")";
+            break;
+        }
+        const allA = item.parentElement.querySelectorAll("a");
+        allA.forEach(a => {
+          if(a.id != item.id) {
+            a.querySelector("i").innerHTML = "radio_button_unchecked";
+          } else {
+            a.querySelector("i").innerHTML = "radio_button_checked";
+          }
+        })
+      }
+    </script>
+
+    <!--
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&v=weekly" defer></script>
+
+    <script>
+      // Initialize and add the map
+      function initMap() {
+        // The location of Uluru
+        const uluru = { lat: 45.7235113, lng: 4.893547 };
+        // The map, centered at Uluru
+        const map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 12,
+          center: uluru,
+        });
+        // The marker, positioned at Uluru
+        const marker = new google.maps.Marker({
+          position: uluru,
+          map: map,
+        });
+        document.querySelector("#coord").innerHTML = "<b>Latitude</b> : " + uluru.lat + "<br> <b>Longitude</b> : " + uluru.lng;
+      }
+
+      window.initMap = initMap;
+
+    </script>
+    -->
+  </body>
+</html>
