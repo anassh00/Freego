@@ -14,6 +14,7 @@ public class UserRequestDto {
 	private String phone;
 	private String first_name;
 	private String last_name;
+	private String biographie;
 	
 	private String address;
 	private double longitude;
@@ -35,6 +36,15 @@ public class UserRequestDto {
 
 	public void setLatitude(double latitude) {
 		this.latitude = latitude;
+	}
+
+	
+	public String getBiographie() {
+		return biographie;
+	}
+
+	public void setBiographie(String biographie) {
+		this.biographie = biographie;
 	}
 
 	public Long getId() {

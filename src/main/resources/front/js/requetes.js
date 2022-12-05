@@ -98,3 +98,4 @@ function getAllProduct(){
        console.log(response);
     });    
 }
+

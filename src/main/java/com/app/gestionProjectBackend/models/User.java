@@ -31,6 +31,7 @@ public class User {
 	private String phone;
 	private String first_name;
 	private String last_name;
+	private String biographie;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(length = 20) 
@@ -61,7 +62,12 @@ public class User {
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		update_date_timestamp = timestamp.getTime();
 	}	
-
+	public String getBiographie() {
+		return biographie;
+	}
+	public void setBiographie(String biographie) {
+		this.biographie = biographie;
+	}
 	public double getLongitude() {
 		return longitude;
 	}
