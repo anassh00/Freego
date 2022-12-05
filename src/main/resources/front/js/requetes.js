@@ -98,3 +98,15 @@ function getAllProduct(){
        console.log(response);
     });    
 }
+
+function getUserById() {
+    return {
+        "url": "http://localhost:8080/api/user/getUser?id=" + sessionStorage.getItem("userID"),
+        "method": "GET",
+        "timeout": 0,
+        "headers": {
+            "Authorization": "Bearer " + sessionStorage.getItem("userToken"),
+            "Content-Type": "application/json"
+        },
+    };
+}

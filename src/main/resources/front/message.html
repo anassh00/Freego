@@ -124,6 +124,14 @@
             $(function(){
                 $("#footNavBar").load("footNavBar.html");
             });
+
+            onload = function() {
+                if(sessionStorage.getItem('userID') == null) {
+                    location.href = "connexion.html";
+                } else {
+
+                }
+            }
         </script>
     </body>
 </html>

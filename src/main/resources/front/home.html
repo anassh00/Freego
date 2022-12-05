@@ -78,26 +78,27 @@
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script src="js/requetes.js"></script>
     <script>
-      onload = getAllProduct()
+
       $(function(){
         $("#footNavBar").load("footNavBar.html");
       });
-
       onload = function() {
-        let burgerMenu = ['Mon freego', 'Messagerie', 'Map', 'Rayons'];
-        let burgerMenuUrl = ['#', 'messaging.html', '#', 'rayons.html'];
-        const burgerMenuChild = document.querySelector("#burgerMenu");
-        for(let i = 0; i < burgerMenu.length; i++) {
-          burgerMenuChild.innerHTML += '' +
-            '<a href="' + burgerMenuUrl[i] + '">' +
-              '<div class="row p-3">' +
-                burgerMenu[i] +
-              '</div>' +
-            '</a>';
+        if(sessionStorage.getItem('userID') == null) {
+          location.href = "connexion.html";
+        } else {
+          getAllProduct();
+          let burgerMenu = ['Mon freego', 'Messagerie', 'Map', 'Rayons'];
+          let burgerMenuUrl = ['#', 'messaging.html', '#', 'rayons.html'];
+          const burgerMenuChild = document.querySelector("#burgerMenu");
+          for(let i = 0; i < burgerMenu.length; i++) {
+            burgerMenuChild.innerHTML += '' +
+                    '<a href="' + burgerMenuUrl[i] + '">' +
+                    '<div class="row p-3">' +
+                    burgerMenu[i] +
+                    '</div>' +
+                    '</a>';
+          }
         }
-        burgerMenu.forEach(menu => {
-
-        })
       }
     </script>
   </body>

@@ -118,7 +118,7 @@
             <button class="btn btn_submit mx-3" id="btnSendForm" onclick="sendForm()">Inscription</button>
         </div>
         <div style="display: flex; justify-content: center; margin-top: 30px;">
-            <a href="form_connexion.html" class="mx-3 link">Je suis déjà membre</a>
+            <a href="connexion.html" class="mx-3 link">Je suis déjà membre</a>
         </div>
 
         <!-- jQuery -->
@@ -128,7 +128,7 @@
                 let name = document.querySelector("#last-name").value;
                 let firstname = document.querySelector("#first-name").value;
                 let email = document.querySelector("#email").value;
-                let tel = document.querySelector("#tel").value;
+                let tel = document.querySelector("#phone").value;
 
                 let mdp = document.querySelector("#password").value;
                 let confMdp = document.querySelector("#confirm-password").value;
@@ -153,7 +153,7 @@
 
                     $.ajax(settings).done(function (response) {
                         if(response.message == "User registered successfully!") {
-                            window.location.href = "form_connexion.html";
+                            window.location.href = "connexion.html";
                         }
                     });
                     document.querySelector(".textError").innerHTML = "";

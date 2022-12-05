@@ -123,6 +123,14 @@
           }
         })
       }
+
+      onload = function() {
+        if(sessionStorage.getItem('userID') == null) {
+          location.href = "connexion.html";
+        } else {
+
+        }
+      }
     </script>
 
     <!--

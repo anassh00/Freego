@@ -70,23 +70,28 @@
             $(function(){
                 $("#footNavBar").load("footNavBar.html");
             });
+
             onload = function() {
-                const messages = document.querySelector(".messages");
-                for(let i = 0; i < 5; i++) {
-                    messages.innerHTML += "" +
-                        "<a href=\"message.html\">" +
-                        "   <div class=\"row message\">" +
-                        "       <div class=\"col-auto\">" +
-                        "           <img class=\"imgMessage\" src=\"images/person_profile.png\"/>" +
-                        "       </div>" +
-                        "       <div class=\"col\">" +
-                        "            <h5>Prénom nom</h5>" +
-                        "       </div>" +
-                        "       <div class=\"col-auto\">" +
-                        "           <span>Heure</span>" +
-                        "       </div>" +
-                        "    </div>" +
-                        "</a>";
+                if(sessionStorage.getItem('userID') == null) {
+                    location.href = "connexion.html";
+                } else {
+                    const messages = document.querySelector(".messages");
+                    for(let i = 0; i < 5; i++) {
+                        messages.innerHTML += "" +
+                            "<a href=\"message.html\">" +
+                            "   <div class=\"row message\">" +
+                            "       <div class=\"col-auto\">" +
+                            "           <img class=\"imgMessage\" src=\"images/person_profile.png\"/>" +
+                            "       </div>" +
+                            "       <div class=\"col\">" +
+                            "            <h5>Prénom nom</h5>" +
+                            "       </div>" +
+                            "       <div class=\"col-auto\">" +
+                            "           <span>Heure</span>" +
+                            "       </div>" +
+                            "    </div>" +
+                            "</a>";
+                    }
                 }
             }
         </script>
