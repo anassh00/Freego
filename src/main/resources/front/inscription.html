@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html style="height: 100%">
+<html>
     <head>
         <meta charset="UTF-8">
         <title>Inscription - Freego</title>
@@ -58,7 +58,7 @@
         </style>
     </head>
 
-    <body>
+    <body class="mb-5">
         <div id="logo_container">
             <img id="logo" src="images/logo.png" />
         </div>
@@ -115,10 +115,10 @@
         </form>
         <span class="mx-3 textError"></span>
         <div style="display: flex; justify-content: center; margin-top: 30px;">
-            <a href="form_connexion.html" class="mx-3 link">Je suis déjà membre</a>
+            <button class="btn btn_submit mx-3" id="btnSendForm" onclick="sendForm()">Inscription</button>
         </div>
         <div style="display: flex; justify-content: center; margin-top: 30px;">
-            <button class="btn btn_submit mx-3" id="btnSendForm" onclick="sendForm()">Inscription</button>
+            <a href="connexion.html" class="mx-3 link">Je suis déjà membre</a>
         </div>
 
         <!-- jQuery -->
@@ -128,7 +128,7 @@
                 let name = document.querySelector("#last-name").value;
                 let firstname = document.querySelector("#first-name").value;
                 let email = document.querySelector("#email").value;
-                let tel = document.querySelector("#tel").value;
+                let tel = document.querySelector("#phone").value;
 
                 let mdp = document.querySelector("#password").value;
                 let confMdp = document.querySelector("#confirm-password").value;
@@ -142,7 +142,7 @@
                         },
                         "data": JSON.stringify({
                             "username": firstname.toLowerCase() + "." + name.toLowerCase(),
-                            "firstname": firstname,
+                            "first_name": firstname,
                             "last_name": name,
                             "email": email,
                             "password": mdp,
@@ -153,7 +153,7 @@
 
                     $.ajax(settings).done(function (response) {
                         if(response.message == "User registered successfully!") {
-                            window.location.href = "form_connexion.html";
+                            window.location.href = "connexion.html";
                         }
                     });
                     document.querySelector(".textError").innerHTML = "";

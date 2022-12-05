@@ -2,7 +2,7 @@
 <html style="height: 100%">
     <head>
         <meta charset="UTF-8">
-        <title>Inscription - Freego</title>
+        <title>Connexion - Freego</title>
 
         <style>
             body {
@@ -67,10 +67,10 @@
             <br>
         </form>
         <div style="display: flex; justify-content: center; margin-top: 30px;">
-            <a href="form_inscription.html" class="mx-3 link">Je ne suis pas encore membre</a>
+            <button class="btn btn_submit mx-3" onclick="sendForm()">Connexion</button>
         </div>
         <div style="display: flex; justify-content: center; margin-top: 30px;">
-            <button class="btn btn_submit mx-3" onclick="sendForm()">Connexion</button>
+            <a href="inscription.html" class="mx-3 link">Je ne suis pas encore membre</a>
         </div>
 
         <!-- jQuery -->
@@ -94,6 +94,8 @@
                 };
 
                 $.ajax(settings).done(function (response) {
+                    sessionStorage.setItem('userID', response.id);
+                    sessionStorage.setItem('userToken', response.token);
                     window.location.href = "home.html";
                 });
             }
