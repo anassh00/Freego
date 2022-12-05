@@ -38,6 +38,47 @@
         justify-content: center;
         border-bottom: 1px solid white;
       }
+      .topFreego {
+        width: 150px;
+        height: 170px;
+        background: url('images/freego_one.png');
+        border-radius: 20px;
+      }
+      .topFreegoButton {
+        background-color: #345DA8;
+        border-radius: 10px;
+        color: white;
+        width: 100px;
+        border: none;
+      }
+      .rayons span {
+        font-size: 14px;
+        color: #345DA8;
+      }
+      .imgContainer {
+        width: 100%;
+        height: 100px;
+        background-color: #345DA8;
+        border-radius: 10px;
+        margin: 0;
+      }
+      .productContainer .titleProduct {
+        font-size: 12px;
+        color: #345DA8;
+        display: flex;
+        justify-content: center;
+      }
+      .buttonProduct {
+        display: flex;
+        justify-content: center;
+      }
+      .buttonProduct button {
+        width: 70%;
+        background-color: #345DA8;
+        border: none;
+        border-radius: 10px;
+        color: white;
+      }
     </style>
   </head>
   <body>
@@ -84,13 +125,76 @@
     <div style="height: 60px"></div>
     <div class="section m-3">
       <div class="top-freego">
-        <h3>Freego à la une</h3>
+        <h6>Freego à la une</h6>
+        <div class="row pb-3" style="flex-wrap: unset; overflow: auto;">
+          <div class="col mx-2">
+            <div class="topFreego row">
+              <div style="height: 100%; border-radius: 10px; color: white; display: flex; align-items: center; justify-content: center">Freego de ...</div>
+            </div>
+            <div class="row mt-1" style="width: 150px; display: flex; justify-content: center">
+              <button class="topFreegoButton">J'y go !</button>
+            </div>
+          </div>
+          <div class="col mx-2">
+            <div class="topFreego row">
+              <div style="height: 100%; border-radius: 10px; color: white; display: flex; align-items: center; justify-content: center">Freego de ...</div>
+            </div>
+            <div class="row mt-1" style="width: 150px; display: flex; justify-content: center">
+              <button class="topFreegoButton">J'y go !</button>
+            </div>
+          </div>
+          <div class="col mx-2">
+            <div class="topFreego row">
+              <div style="height: 100%; border-radius: 10px; color: white; display: flex; align-items: center; justify-content: center">Freego de ...</div>
+            </div>
+            <div class="row mt-1" style="width: 150px; display: flex; justify-content: center">
+              <button class="topFreegoButton">J'y go !</button>
+            </div>
+          </div>
+          <div class="col mx-2">
+            <div class="topFreego row">
+              <div style="height: 100%; border-radius: 10px; color: white; display: flex; align-items: center; justify-content: center">Freego de ...</div>
+            </div>
+            <div class="row mt-1" style="width: 150px; display: flex; justify-content: center">
+              <button class="topFreegoButton">J'y go !</button>
+            </div>
+          </div>
+        </div>
       </div>
-
+      <div style="height: 50px"></div>
       <div class="rayons">
-        <h3 class="my-3">Rayons</h3>
+        <h6 class="my-3">Tous les produits par rayon</h6>
         <hr>
-        <h6>Légumes</h6>
+        <span>Fruits et légumes</span>
+        <div class="row">
+          <div class="col productContainer">
+            <div class="row imgContainer"></div>
+            <div class="row titleProduct">
+              Nom produit
+            </div>
+            <div class="row buttonProduct">
+              <button>J'y go !</button>
+            </div>
+          </div>
+          <div class="col productContainer">
+            <div class="row imgContainer"></div>
+            <div class="row titleProduct">
+              Nom produit
+            </div>
+            <div class="row buttonProduct">
+              <button>J'y go !</button>
+            </div>
+          </div>
+          <div class="col productContainer">
+            <div class="row imgContainer"></div>
+            <div class="row titleProduct">
+              Nom produit
+            </div>
+            <div class="row buttonProduct">
+              <button>J'y go !</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>  
     <div style="height:50px"></div>
