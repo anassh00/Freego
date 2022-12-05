@@ -44,14 +44,13 @@ function inscription(username, mdp, email, phone, first_name, last_name, address
 }
 
 function saveProduct(desc, name, qte, categoryId) {
-    // To-DO : ajout du token dynamiquement
     const settings = {
         "url": "http://localhost:8080/api/product/save?category_id="+categoryId,
         "method": "POST",
         "timeout": 0,
         "headers": {
             "Content-Type": "application/json",
-            "Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmbG9yaWFuIiwiaWF0IjoxNjcwMTY2MDM3LCJlbWFpbCI6ImZsb3JpYW4tN0BnbWFpbC5jb20iLCJ1c2VybmFtZSI6ImZsb3JpYW4iLCJyb2xlIjpbIlJPTEVfVVNFUiJdLCJleHAiOjE2NzAyNTI0Mzd9.YJJ7X5o4Q8-ZugqwOjnBvpdT1vkhGqI6XZ8-SB3JKk9JyAIfRn1Sd_-tXcfd7osENFMBczx7VMTSJn1bcJYW9Q",
+            "Authorization": "Bearer " + sessionStorage.getItem("userToken"),
         },
         "data": JSON.stringify({
             "description": desc,
@@ -66,14 +65,13 @@ function saveProduct(desc, name, qte, categoryId) {
 }
 
 function getProductById(productId) {
-    // To-DO : ajout du token dynamiquement
     const settings = {
         "url": "http://localhost:8080/api/product/getProduct?id="+productId,
         "method": "GET",
         "timeout": 0,
         "headers": {
             "Content-Type": "application/json",
-            "Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmbG9yaWFuIiwiaWF0IjoxNjcwMTY2MDM3LCJlbWFpbCI6ImZsb3JpYW4tN0BnbWFpbC5jb20iLCJ1c2VybmFtZSI6ImZsb3JpYW4iLCJyb2xlIjpbIlJPTEVfVVNFUiJdLCJleHAiOjE2NzAyNTI0Mzd9.YJJ7X5o4Q8-ZugqwOjnBvpdT1vkhGqI6XZ8-SB3JKk9JyAIfRn1Sd_-tXcfd7osENFMBczx7VMTSJn1bcJYW9Q",
+            "Authorization": "Bearer " + sessionStorage.getItem("userToken"),
         },
     };
 
@@ -83,14 +81,13 @@ function getProductById(productId) {
 }
 
 function getAllProduct(){
-    // To-DO : ajout du token dynamiquement
     const settings = {
         "url": "http://localhost:8080/api/product/listProduct",
         "method": "GET",
         "timeout": 0,
         "headers": {
             "Content-Type": "application/json",
-            "Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmbG9yaWFuIiwiaWF0IjoxNjcwMTY2MDM3LCJlbWFpbCI6ImZsb3JpYW4tN0BnbWFpbC5jb20iLCJ1c2VybmFtZSI6ImZsb3JpYW4iLCJyb2xlIjpbIlJPTEVfVVNFUiJdLCJleHAiOjE2NzAyNTI0Mzd9.YJJ7X5o4Q8-ZugqwOjnBvpdT1vkhGqI6XZ8-SB3JKk9JyAIfRn1Sd_-tXcfd7osENFMBczx7VMTSJn1bcJYW9Q",
+            "Authorization": "Bearer " + sessionStorage.getItem("userToken"),
         },
     };
 
