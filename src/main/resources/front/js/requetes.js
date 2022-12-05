@@ -108,6 +108,18 @@ function getUserById(id) {
     };
 }
 
+function getAllUsers() {
+    return {
+        "url": "http://localhost:8080/api/user/listUser",
+        "method": "GET",
+        "timeout": 0,
+        "headers": {
+            "Authorization": "Bearer " + sessionStorage.getItem("userToken"),
+            "Content-Type": "application/json"
+        },
+    };
+}
+
 function addProduct(nom, description) {
     return {
         "url": "http://localhost:8080/api/product/save",

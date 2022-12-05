@@ -78,7 +78,7 @@
                     const messages = document.querySelector(".messages");
                     for(let i = 0; i < 5; i++) {
                         messages.innerHTML += "" +
-                            "<a href=\"message.html\">" +
+                            "<a href=\"javascript:void(0)\" onclick=\"sessionStorage.setItem('lastUrl', location.href); location.href='message.html'\">" +
                             "   <div class=\"row message\">" +
                             "       <div class=\"col-auto\">" +
                             "           <img class=\"imgMessage\" src=\"images/person_profile.png\"/>" +
