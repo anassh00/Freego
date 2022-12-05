@@ -96,14 +96,30 @@ function getAllProduct(){
     });    
 }
 
-function getUserById() {
+function getUserById(id) {
     return {
-        "url": "http://localhost:8080/api/user/getUser?id=" + sessionStorage.getItem("userID"),
+        "url": "http://localhost:8080/api/user/getUser?id=" + id,
         "method": "GET",
         "timeout": 0,
         "headers": {
             "Authorization": "Bearer " + sessionStorage.getItem("userToken"),
             "Content-Type": "application/json"
         },
+    };
+}
+
+function addProduct(nom, description) {
+    return {
+        "url": "http://localhost:8080/api/product/save",
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+            "Authorization": "Bearer " + sessionStorage.getItem("userToken"),
+            "Content-Type": "application/json"
+        },
+        "data": JSON.stringify({
+            "name": nom,
+            "description": description
+        }),
     };
 }
