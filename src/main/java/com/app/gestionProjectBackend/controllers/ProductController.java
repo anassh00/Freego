@@ -1,6 +1,8 @@
 package com.app.gestionProjectBackend.controllers;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -87,6 +89,18 @@ public class ProductController {
 		try {
 			Product product = productService.findById(id).get();
 			return new ResponseEntity<Product>(product, HttpStatus.OK);
+		}catch(Exception e){
+	        e.printStackTrace(); 
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: An internal error has occurred");
+		}
+	}
+	
+	@RequestMapping(value = "/getProductsByCategory", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<?> findProductsByCategory(@RequestParam Long id) {
+		try {
+			List<Product> products = productService.findByCategory(id).get();
+			return new ResponseEntity<List<Product>>(products, HttpStatus.OK);
 		}catch(Exception e){
 	        e.printStackTrace(); 
 	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: An internal error has occurred");

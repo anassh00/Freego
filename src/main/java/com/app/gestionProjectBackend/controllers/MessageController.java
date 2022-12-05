@@ -1,5 +1,8 @@
 package com.app.gestionProjectBackend.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +23,7 @@ import com.app.gestionProjectBackend.Services.MessageService;
 import com.app.gestionProjectBackend.Services.UserService;
 import com.app.gestionProjectBackend.models.Category;
 import com.app.gestionProjectBackend.models.Message;
+import com.app.gestionProjectBackend.models.User;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -62,4 +66,35 @@ public class MessageController {
 	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: An internal error has occurred");
 		}
 	}
+	
+	@RequestMapping(value = "/getDiscussion", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<?> getDiscussion(@RequestParam Long idReceiver) {
+		try {
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();	
+			List<Message> list = messageService.findMessageBetweenTwo(userDetails.getId(), idReceiver);
+			return new ResponseEntity<List<Message>>(list, HttpStatus.OK);
+		}catch(Exception e){
+	        e.printStackTrace(); 
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: An internal error has occurred");
+		}
+	}
+	
+	@RequestMapping(value = "/getListOfContact", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<?> getListOfContact() {
+		List<User> list = new ArrayList<>();
+		try {
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();	
+			list = messageService.findListOfContactedUsers(userDetails.getId());
+			return new ResponseEntity<List<User>>(list, HttpStatus.OK);
+		}catch(Exception e){
+	        e.printStackTrace(); 
+	        return new ResponseEntity<List<User>>(list, HttpStatus.OK);
+		}
+	}
+	
+	
 }
