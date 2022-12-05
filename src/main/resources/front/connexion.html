@@ -96,8 +96,7 @@
                 $.ajax(settings).done(function (response) {
                     sessionStorage.setItem('userID', response.id);
                     sessionStorage.setItem('userToken', response.token);
-                    sessionStorage.setItem('userName', response.username);
-                    //window.location.href = "home.html";
+                    window.location.href = "home.html";
                 });
             }
         </script>

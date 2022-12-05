@@ -51,7 +51,33 @@
         </div>
         <div class="col-auto menu">
           <a href="javascript:void(0)" onclick="fBurgerMenu()"><i class="material-icons menuIcon">menu</i></a>
-          <div id="burgerMenu" style="display: none"></div>
+          <div id="burgerMenu" style="display: none">
+            <a href="">
+              <div class="row p-3">
+                Mon freego
+              </div>
+            </a>
+            <a href="messaging.html">
+              <div class="row p-3">
+                Messagerie
+              </div>
+            </a>
+            <a href="">
+              <div class="row p-3">
+                Map
+              </div>
+            </a>
+            <a href="rayons.html">
+              <div class="row p-3">
+                Rayons
+              </div>
+            </a>
+            <a href="javascript:void(0)" onclick="sessionStorage.removeItem('userID'); location.href='connexion.html';">
+              <div class="row p-3">
+                Déconnexion
+              </div>
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -87,17 +113,6 @@
           location.href = "connexion.html";
         } else {
           getAllProduct();
-          let burgerMenu = ['Mon freego', 'Messagerie', 'Map', 'Rayons'];
-          let burgerMenuUrl = ['#', 'messaging.html', '#', 'rayons.html'];
-          const burgerMenuChild = document.querySelector("#burgerMenu");
-          for(let i = 0; i < burgerMenu.length; i++) {
-            burgerMenuChild.innerHTML += '' +
-                    '<a href="' + burgerMenuUrl[i] + '">' +
-                    '<div class="row p-3">' +
-                    burgerMenu[i] +
-                    '</div>' +
-                    '</a>';
-          }
         }
       }
     </script>
