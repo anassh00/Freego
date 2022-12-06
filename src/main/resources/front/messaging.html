@@ -80,20 +80,22 @@
                         const messages = document.querySelector(".messages");
                         console.log(response);
                         for(let i = 0; i < response.length; i++) {
-                            messages.innerHTML += "" +
-                                "<a href=\"javascript:void(0)\" onclick=\"sessionStorage.setItem('lastUrl', location.href); location.href='message.html?userID=" + response[i].id + "';\">" +
-                                "   <div class=\"row message\">" +
-                                "       <div class=\"col-auto\">" +
-                                "           <img class=\"imgMessage\" src=\"images/person_profile.png\"/>" +
-                                "       </div>" +
-                                "       <div class=\"col\">" +
-                                "            <h5>" + response[i].first_name + " " + response[i].last_name + "</h5>" +
-                                "       </div>" +
-                                "       <div class=\"col-auto\">" +
-                                "           <span>Heure</span>" +
-                                "       </div>" +
-                                "    </div>" +
-                                "</a>";
+                            if(response[i].id != sessionStorage.getItem('userID')) {
+                                messages.innerHTML += "" +
+                                    "<a href=\"javascript:void(0)\" onclick=\"sessionStorage.setItem('lastUrl', location.href); location.href='message.html?userID=" + response[i].id + "';\">" +
+                                    "   <div class=\"row message\">" +
+                                    "       <div class=\"col-auto\">" +
+                                    "           <img class=\"imgMessage\" src=\"images/person_profile.png\"/>" +
+                                    "       </div>" +
+                                    "       <div class=\"col\">" +
+                                    "            <h5>" + response[i].first_name + " " + response[i].last_name + "</h5>" +
+                                    "       </div>" +
+                                    "       <div class=\"col-auto\">" +
+                                    "           <span>Heure</span>" +
+                                    "       </div>" +
+                                    "    </div>" +
+                                    "</a>";
+                            }
                         }
                     });
                 }

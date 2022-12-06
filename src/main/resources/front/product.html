@@ -52,6 +52,11 @@
         width: 55px;
         border-radius: 50px;
       }
+      #prenomNom {
+        color: white;
+        font-weight: bold;
+        font-size: 14px;
+      }
     </style>
   </head>
   <body>
@@ -72,9 +77,7 @@
           <img class="userImage" src="images/person_profile.png"/>
         </div>
         <div class="col">
-          <div class="row">
-            Prénom Nom
-          </div>
+          <div id="prenomNom" class="row"></div>
           <div class="row">
             Notation
           </div>
@@ -85,13 +88,13 @@
       </div>
     </div>
     <div id="produitContainer" class="m-3">
-      <h3>Carrottes de mon jardin</h3>
+      <h3></h3>
       <h6>Cueillis hier - fraiches</h6>
       <div id="btnReserv" class="my-3">
         <button class="btn btnModifProfil" style="justify-content: center">Réserver</button>
       </div>
       <h6>Description du produit</h6>
-      <p>Je cultive mes carottes en transition biologiques (elles ne sont pas bio mais j’utilise le moins de pesticides possibles). J’en ai un grand nombre et je trouve ca dommage d’en jeter une partie... Je donne donc une dizaine. Premier venu premier servi !</p>
+      <p></p>
     </div>
     <!--
     <div class="row m-3">
@@ -101,8 +104,13 @@
     </div>
     -->
 
-    <!-- JavaScript Bundle with Popper -->
+    <!-- Bootstrap Script -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <!-- Script -->
+    <script src="js/script.js"></script>
+    <script src="js/requetes.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 
     <script>
       function fChangePhoto(item) {
@@ -134,6 +142,19 @@
           location.href = "connexion.html";
         } else {
           //initMap();
+          const url = new URL(location.href);
+          const search_params = new URLSearchParams(url.search);
+          if(search_params.has('productID')) {
+            const productID = search_params.get('productID');
+            $.ajax(getProductById(productID)).done(function (product) {
+              document.querySelector("#prenomNom").innerHTML = product.user.first_name + " " + product.user.last_name;
+              const produitContainer = document.querySelector("#produitContainer");
+              produitContainer.querySelector("h3").innerHTML = product.name;
+              produitContainer.querySelector("p").innerHTML = product.description;
+              console.log(product);
+            });
+          }
+
         }
       }
     </script>

@@ -65,19 +65,16 @@ function saveProduct(desc, name, qte, categoryId) {
 }
 
 function getProductById(productId) {
-    const settings = {
+    return {
         "url": "http://localhost:8080/api/product/getProduct?id="+productId,
         "method": "GET",
         "timeout": 0,
+        "async": false,
         "headers": {
             "Content-Type": "application/json",
             "Authorization": "Bearer " + sessionStorage.getItem("userToken"),
         },
     };
-
-    $.ajax(settings).done(function (response) {
-       console.log(response);
-    });
 }
 
 function getAllProduct(){
@@ -137,7 +134,7 @@ function addProduct(nom, description) {
 }
 
 function getAllCategory(){
-    var settings = {
+    return {
         "url": "http://localhost:8080/api/category/listCategory",
         "method": "GET",
         "timeout": 0,
@@ -146,27 +143,19 @@ function getAllCategory(){
           "Authorization": "Bearer " + sessionStorage.getItem("userToken")
         },
       };
-      
-      $.ajax(settings).done(function (response) {
-        console.log(response);
-      });
 }
 
 function getProductsByCategory(id_category){
-    var settings = {
+    return {
         "url": "http://localhost:8080/api/product/getProductsByCategory?id="+id_category,
         "method": "GET",
         "timeout": 0,
+        "async": false,
         "headers": {
             "Authorization": "Bearer " + sessionStorage.getItem("userToken"),
             "Content-Type": "application/json"
         },
-        "data": JSON.stringify({}),
       };
-      
-      $.ajax(settings).done(function (response) {
-        console.log(response);
-      });
 }
 
 function updateUserInfo(id_user,phone,first_name,last_name,biographie,address,longitude,latitude){
