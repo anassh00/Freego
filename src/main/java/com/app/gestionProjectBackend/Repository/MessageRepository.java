@@ -13,10 +13,10 @@ import com.app.gestionProjectBackend.models.User;
 @Repository
 public interface MessageRepository extends CrudRepository<Message, Long>{
 	
-	@Query(value="SELECT * FROM messaging m where m.user_sender_id = :idSender AND m.user_receiver_id = :idReceiver", nativeQuery = true)
+	@Query(value="SELECT * FROM messaging m where (m.user_sender_id = :idSender AND m.user_receiver_id = :idReceiver) OR (m.user_sender_id = :idReceiver AND m.user_receiver_id = :idSender)", nativeQuery = true)
 	public Optional<ArrayList<Message>> findMessageBetweenTwo(Long idSender, Long idReceiver);
 
-	@Query(value="SELECT DISTINCT m.user_receiver_id FROM messaging m where m.user_sender_id = :idSender", nativeQuery = true)
+	@Query(value="SELECT DISTINCT m.user_receiver_id FROM messaging m where m.user_sender_id = :idSender OR m.user_receiver_id = :idSender", nativeQuery = true)
 	public Optional<ArrayList<Long>> findListOfContactedUsers(Long idSender);
 	
 }

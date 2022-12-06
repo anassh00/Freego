@@ -136,6 +136,22 @@ function addProduct(nom, description) {
     };
 }
 
+function getAllCategory(){
+    var settings = {
+        "url": "http://localhost:8080/api/category/listCategory",
+        "method": "GET",
+        "timeout": 0,
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + sessionStorage.getItem("userToken")
+        },
+      };
+      
+      $.ajax(settings).done(function (response) {
+        console.log(response);
+      });
+}
+
 function getProductsByCategory(id_category){
     var settings = {
         "url": "http://localhost:8080/api/product/getProductsByCategory?id="+id_category,
