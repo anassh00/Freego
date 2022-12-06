@@ -152,3 +152,10 @@ h3, h6 {
     color: #FE835A;
     font-size: 46px;
 }
+
+#ecranChargement {
+    position: absolute;
+    top: 0px;
+    height: 100%;
+    display: none;
+}
