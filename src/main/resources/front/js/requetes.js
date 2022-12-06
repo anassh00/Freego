@@ -188,7 +188,7 @@ function updateUserInfo(id_user,phone,first_name,last_name,biographie,address,lo
 }
 
 function getDiscussion(idReceiver){
-    var settings = {
+    return {
         "url": "http://localhost:8080/api/message/getDiscussion?idReceiver="+idReceiver,
         "method": "GET",
         "timeout": 0,
@@ -197,14 +197,10 @@ function getDiscussion(idReceiver){
             "Authorization": "Bearer " + sessionStorage.getItem("userToken"),
         },
       };
-      
-      $.ajax(settings).done(function (response) {
-        console.log(response);
-      });
 }
 
 function sendMessage(idReceiver, message){
-    var settings = {
+    return {
         "url": "http://localhost:8080/api/message/saveMessage",
         "method": "POST",
         "timeout": 0,
@@ -214,14 +210,10 @@ function sendMessage(idReceiver, message){
         },
         "data": JSON.stringify({"userReceiverId": idReceiver,"text": message}),
       };
-      
-      $.ajax(settings).done(function (response) {
-        console.log(response);
-      });
 }
 
 function getDiscussionContactList(){
-    var settings = {
+    return {
         "url": "http://localhost:8080/api/message/getListOfContact",
         "method": "GET",
         "timeout": 0,
@@ -230,8 +222,4 @@ function getDiscussionContactList(){
           "Authorization": "Bearer " + sessionStorage.getItem("userToken"),
         },
       };
-      
-      $.ajax(settings).done(function (response) {
-        console.log(response);
-      });
 }

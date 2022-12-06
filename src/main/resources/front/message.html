@@ -52,6 +52,10 @@
                 color: #E94E1B;
 
             }
+            #messageAction {
+                position: absolute;
+                bottom: 40px;
+            }
         </style>
     </head>
     <body>
@@ -69,44 +73,13 @@
             </div>
         </div>
         <div style="height: 60px;"></div>
-        <div class="container">
-            <div class="row">
-                <span>1:15pm</span>
-                <div class="messU">
-                    Hello ! Je suis intéressé par vos carottes et votre oignon, sont ils toujours disponibles ?
-                </div>
-            </div>
-            <div class="row">
-                <span>1:18pm</span>
-                <div class="messO">
-                    Bonjour Julien ! Oui bien sûr, quand pouvez-vous passer ?
-                </div>
-            </div>
-            <div class="row">
-                <span>1:21pm</span>
-                <div class="messU">
-                    Dans 20 minutes, c’est possible pour vous ?
-                </div>
-            </div>
-            <div class="row">
-                <span>1:22pm</span>
-                <div class="messO">
-                    Oui, parfait. On peut se retrouver à l’angle de la rue Savoie devant le restaurant les marmottes, cela vous convient ?
-                </div>
-            </div>
-            <div class="row">
-                <span>1:23pm</span>
-                <div class="messU">
-                    Super, à tout à l’heure !
-                </div>
-            </div>
-        </div>
-        <div class="row m-3">
+        <div id="messageContainer" class="container"></div>
+        <div id="messageAction" class="row m-3">
             <div class="col">
-                <input type="text" class="form-control"/>
+                <input id="messageInput" type="text" class="form-control"/>
             </div>
             <div class="col-auto p-0">
-                <button class="btn"><i class="material-icons sendMessage">send</i></button>
+                <button class="btn" onclick="fSendMessage()"><i class="material-icons sendMessage">send</i></button>
             </div>
         </div>
 
@@ -125,7 +98,7 @@
             $(function(){
                 $("#footNavBar").load("footNavBar.html");
             });
-
+            let userID = null;
             onload = function() {
                 if(sessionStorage.getItem('userID') == null) {
                     location.href = "connexion.html";
@@ -133,12 +106,50 @@
                     const url = new URL(location.href);
                     const search_params = new URLSearchParams(url.search);
                     if(search_params.has('userID')) {
-                        const userID = search_params.get('userID');
+                        userID = search_params.get('userID');
                         $.ajax(getUserById(userID)).done(function (user) {
                             document.querySelector("#prenomNom").innerHTML = user.first_name + " " + user.last_name;
                         });
+                        fGetDiscussion();
                     }
                 }
+            }
+            function fSendMessage() {
+                const message = document.querySelector("#messageInput");
+                $.ajax(sendMessage(userID, message.value)).done(function (response) {
+                    if(response.message != "Message registered successfully!") {
+                        console.log("Erreur d'envoi !");
+                    } else {
+                        message.value = "";
+                        fGetDiscussion();
+                    }
+                    //document.querySelector("#prenomNom").innerHTML = user.first_name + " " + user.last_name;
+                });
+            }
+
+            function fGetDiscussion() {
+                $.ajax(getDiscussion(userID)).done(function (messages) {
+                    const messageContainer = document.querySelector("#messageContainer");
+                    messageContainer.innerHTML = "";
+                    for(let i = 0; i < messages.length; i++) {
+                        let classMess = "";
+                        if(messages[i].userReceiver.id != sessionStorage.getItem('userID')) {
+                            classMess = "messU";
+                        } else {
+                            classMess = "messO";
+                        }
+                        var date = new Date(messages[i].creation_date_timestamp);
+                        messageContainer.innerHTML += '' +
+                            '<div class="row">' +
+                                '<span>' + date.getHours() + ":" + date.getMinutes() + '</span>' +
+                                '<div class="' + classMess + '">' +
+                                    messages[i].messageText +
+                                '</div>' +
+                            '</div>';
+                    }
+                    console.log(messages);
+                    //document.querySelector("#prenomNom").innerHTML = user.first_name + " " + user.last_name;
+                });
             }
         </script>
     </body>
