@@ -64,6 +64,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
         <!-- Script -->
         <script src="js/script.js"></script>
+        <script src="js/requetes.js"></script>
         <!-- jQuery -->
         <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
         <script>
@@ -75,23 +76,26 @@
                 if(sessionStorage.getItem('userID') == null) {
                     location.href = "connexion.html";
                 } else {
-                    const messages = document.querySelector(".messages");
-                    for(let i = 0; i < 5; i++) {
-                        messages.innerHTML += "" +
-                            "<a href=\"javascript:void(0)\" onclick=\"sessionStorage.setItem('lastUrl', location.href); location.href='message.html'\">" +
-                            "   <div class=\"row message\">" +
-                            "       <div class=\"col-auto\">" +
-                            "           <img class=\"imgMessage\" src=\"images/person_profile.png\"/>" +
-                            "       </div>" +
-                            "       <div class=\"col\">" +
-                            "            <h5>Prénom nom</h5>" +
-                            "       </div>" +
-                            "       <div class=\"col-auto\">" +
-                            "           <span>Heure</span>" +
-                            "       </div>" +
-                            "    </div>" +
-                            "</a>";
-                    }
+                    $.ajax(getDiscussionContactList()).done(function (response) {
+                        const messages = document.querySelector(".messages");
+                        console.log(response);
+                        for(let i = 0; i < response.length; i++) {
+                            messages.innerHTML += "" +
+                                "<a href=\"javascript:void(0)\" onclick=\"sessionStorage.setItem('lastUrl', location.href); location.href='message.html?userID=" + response[i].id + "';\">" +
+                                "   <div class=\"row message\">" +
+                                "       <div class=\"col-auto\">" +
+                                "           <img class=\"imgMessage\" src=\"images/person_profile.png\"/>" +
+                                "       </div>" +
+                                "       <div class=\"col\">" +
+                                "            <h5>" + response[i].first_name + " " + response[i].last_name + "</h5>" +
+                                "       </div>" +
+                                "       <div class=\"col-auto\">" +
+                                "           <span>Heure</span>" +
+                                "       </div>" +
+                                "    </div>" +
+                                "</a>";
+                        }
+                    });
                 }
             }
         </script>

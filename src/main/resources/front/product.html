@@ -99,9 +99,6 @@
       <div id="map"></div>
       <span id="coord"></span>
     </div>
-    <div class="row m-3" style="float: right">
-      <a href="#" class="btn btn-success">Réserver</a>
-    </div>
     -->
 
     <!-- JavaScript Bundle with Popper -->
@@ -136,13 +133,12 @@
         if(sessionStorage.getItem('userID') == null) {
           location.href = "connexion.html";
         } else {
-
+          //initMap();
         }
       }
     </script>
-
     <!--
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&v=weekly" defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcoRMlVkWxBqcTTQ25AorH_PQCpZA_Wfc" defer></script>
 
     <script>
       // Initialize and add the map
