@@ -128,7 +128,9 @@
             }
 
             function fGetDiscussion() {
-                $.ajax(getDiscussion(userID)).done(function (messages) {
+                $.ajax(getDiscussion(userID)).done(function (messagesA) {
+                    let messages = messagesA.sort(
+                        (p1, p2) => (p1.creation_date_timestamp > p2.creation_date_timestamp) ? 1 : (p1.creation_date_timestamp < p2.creation_date_timestamp) ? -1 : 0);
                     const messageContainer = document.querySelector("#messageContainer");
                     messageContainer.innerHTML = "";
                     for(let i = 0; i < messages.length; i++) {
@@ -147,7 +149,6 @@
                                 '</div>' +
                             '</div>';
                     }
-                    console.log(messages);
                     //document.querySelector("#prenomNom").innerHTML = user.first_name + " " + user.last_name;
                 });
             }
