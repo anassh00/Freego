@@ -112,124 +112,126 @@
     <link href="css/input_form.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
-    <div id="head-section-bis">
-        <div class="row m-1">
-            <div class="col-auto">
-                <a href="home.html"><i class="material-icons orangeIcon">keyboard_backspace</i></a>
-            </div>
-            <div class="col" style="display: flex; justify-content: right;">
-                <img src="images/logo_orange.png"/>
-            </div>
-        </div>
-    </div>
-    <div style="height: 70px"></div>
-    <div id="categEtat" class="p-3">
-        <a href="javascript:void(0)" onclick="fCategSelect()" style="text-decoration: none; color: white;">
-            <div class="row">
-                <div id="categorie" class="col">
-                    Catégorie
-                </div>
+    <div class="allContent">
+        <div id="head-section-bis">
+            <div class="row m-1">
                 <div class="col-auto">
-                    <i class="material-icons">chevron_right</i>
+                    <a href="home.html"><i class="material-icons orangeIcon">keyboard_backspace</i></a>
                 </div>
-            </div>
-        </a>
-        <hr style="color: white; opacity: 1; margin-top: 0">
-        <div id="categSelect" style="display: none"></div>
-        <div id="modalContainer" style="display: none">
-            <div id="modal" class="p-3">
-                <div style="display: flex; justify-content: center;"><i class="material-icons" style="font-size: 60px; color: white">report</i></div>
-                <div class="mx-4">
-                    <p style="text-align: center; color: white;">Nous n’acceptons pas les produits laitiers dont la date est dépassée de plus de 2 semaines.
-                        Afin que notre équipe puisse vérifier, veuillez mettre une photo de la date limite de consommation.</p>
-                </div>
-                <div class="my-3" style="display: flex; justify-content: center">
-                    <button class="btn_submit" onclick="document.querySelector('#modalContainer').style.display = 'none';">J'ai compris</button>
+                <div class="col" style="display: flex; justify-content: right;">
+                    <img src="images/logo_orange.png"/>
                 </div>
             </div>
         </div>
-        <a href="javascript:void(0)" onclick="fEtatSelect()" style="text-decoration: none; color: white;">
+        <div style="height: 70px"></div>
+        <div id="categEtat" class="p-3">
+            <a href="javascript:void(0)" onclick="fCategSelect()" style="text-decoration: none; color: white;">
+                <div class="row">
+                    <div id="categorie" class="col">
+                        Catégorie
+                    </div>
+                    <div class="col-auto">
+                        <i class="material-icons">chevron_right</i>
+                    </div>
+                </div>
+            </a>
+            <hr style="color: white; opacity: 1; margin-top: 0">
+            <div id="categSelect" style="display: none"></div>
+            <div id="modalContainer" style="display: none">
+                <div id="modal" class="p-3">
+                    <div style="display: flex; justify-content: center;"><i class="material-icons" style="font-size: 60px; color: white">report</i></div>
+                    <div class="mx-4">
+                        <p style="text-align: center; color: white;">Nous n’acceptons pas les produits laitiers dont la date est dépassée de plus de 2 semaines.
+                            Afin que notre équipe puisse vérifier, veuillez mettre une photo de la date limite de consommation.</p>
+                    </div>
+                    <div class="my-3" style="display: flex; justify-content: center">
+                        <button class="btn_submit" onclick="document.querySelector('#modalContainer').style.display = 'none';">J'ai compris</button>
+                    </div>
+                </div>
+            </div>
+            <a href="javascript:void(0)" onclick="fEtatSelect()" style="text-decoration: none; color: white;">
+                <div class="row">
+                    <div id="etat" class="col">
+                        Etat
+                    </div>
+                    <div class="col-auto">
+                        <i class="material-icons">chevron_right</i>
+                    </div>
+                </div>
+            </a>
+            <hr style="color: white; opacity: 1; margin-top: 0">
+            <div id="etatSelect" style="display: none">
+                <a href="javascript:void(0)" onclick="fChoixEtat(this)">
+                    <div class="row p-3">
+                        <span>Frais</span>
+                    </div>
+                </a>
+                <a href="javascript:void(0)" onclick="fChoixEtat(this)">
+                    <div class="row p-3">
+                        <span>A consommer immédiatement</span>
+                    </div>
+                </a>
+                <a href="javascript:void(0)" onclick="fChoixEtat(this)">
+                    <div class="row p-3">
+                        <span>A consommer rapidement</span>
+                    </div>
+                </a>
+                <a hhref="javascript:void(0)" onclick="fChoixEtat(this)">
+                    <div class="row p-3">
+                        <span>A consommer dans la semaine</span>
+                    </div>
+                </a>
+                <a href="javascript:void(0)" onclick="fChoixEtat(this)">
+                    <div class="row p-3">
+                        <span>A consommer dans le mois ou plus</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="py-3" id="ajoutPhoto">
             <div class="row">
-                <div id="etat" class="col">
-                    Etat
-                </div>
-                <div class="col-auto">
-                    <i class="material-icons">chevron_right</i>
-                </div>
+                <span>Je donne un produit</span>
             </div>
-        </a>
-        <hr style="color: white; opacity: 1; margin-top: 0">
-        <div id="etatSelect" style="display: none">
-            <a href="javascript:void(0)" onclick="fChoixEtat(this)">
-                <div class="row p-3">
-                    <span>Frais</span>
-                </div>
-            </a>
-            <a href="javascript:void(0)" onclick="fChoixEtat(this)">
-                <div class="row p-3">
-                    <span>A consommer immédiatement</span>
-                </div>
-            </a>
-            <a href="javascript:void(0)" onclick="fChoixEtat(this)">
-                <div class="row p-3">
-                    <span>A consommer rapidement</span>
-                </div>
-            </a>
-            <a hhref="javascript:void(0)" onclick="fChoixEtat(this)">
-                <div class="row p-3">
-                    <span>A consommer dans la semaine</span>
-                </div>
-            </a>
-            <a href="javascript:void(0)" onclick="fChoixEtat(this)">
-                <div class="row p-3">
-                    <span>A consommer dans le mois ou plus</span>
-                </div>
-            </a>
-        </div>
-    </div>
-    <div class="py-3" id="ajoutPhoto">
-        <div class="row">
-            <span>Je donne un produit</span>
-        </div>
-        <div class="row">
-            <span style="font-size: 12px;">(3 photos maximum)</span>
-        </div>
-        <div class="row" style="display: flex; justify-content: center">
-            <button class="btn_submit my-3" style="width: fit-content;">Ajouter une ou des photo(s)</button>
-        </div>
-        <div class="row">
-            <div class="col productImageCol">
-                <div class="productImage">
+            <div class="row">
+                <span style="font-size: 12px;">(3 photos maximum)</span>
+            </div>
+            <div class="row" style="display: flex; justify-content: center">
+                <button class="btn_submit my-3" style="width: fit-content;">Ajouter une ou des photo(s)</button>
+            </div>
+            <div class="row">
+                <div class="col productImageCol">
+                    <div class="productImage">
 
+                    </div>
                 </div>
-            </div>
-            <div class="col productImageCol">
-                <div class="productImage">
+                <div class="col productImageCol">
+                    <div class="productImage">
 
+                    </div>
                 </div>
-            </div>
-            <div class="col productImageCol">
-                <div class="productImage">
+                <div class="col productImageCol">
+                    <div class="productImage">
 
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div id="titreDesc" class="py-3">
-        <div class="row mx-3">
-            <label class="px-0" for="titreAnn" style="color: white;">Titre de l'annonce</label>
-            <br>
-            <input class="px-0" type="text" id="titreAnn" placeholder="Ex : carottes de mon jardin"/>
+        <div id="titreDesc" class="py-3">
+            <div class="row mx-3">
+                <label class="px-0" for="titreAnn" style="color: white;">Titre de l'annonce</label>
+                <br>
+                <input class="px-0" type="text" id="titreAnn" placeholder="Ex : carottes de mon jardin"/>
+            </div>
+            <hr class="mx-3" style="color: white; opacity: 1;">
+            <div class="row mx-3">
+                <label class="px-0" for="descAnn" style="color: white;">Description du produit</label>
+                <br>
+                <textarea class="px-0" type="text" id="descAnn" placeholder="Ex : cultivées sans pesticides..."></textarea>
+            </div>
         </div>
-        <hr class="mx-3" style="color: white; opacity: 1;">
-        <div class="row mx-3">
-            <label class="px-0" for="descAnn" style="color: white;">Description du produit</label>
-            <br>
-            <textarea class="px-0" type="text" id="descAnn" placeholder="Ex : cultivées sans pesticides..."></textarea>
+        <div id="btnAjout" class="my-3">
+            <button class="btn btnModifProfil" onclick="fAddProduct()" style="justify-content: center">Ajouter un produit</button>
         </div>
-    </div>
-    <div id="btnAjout" class="my-3">
-        <button class="btn btnModifProfil" onclick="fAddProduct()" style="justify-content: center">Ajouter un produit</button>
     </div>
 
     <!-- Ecran de chargement -->
@@ -262,7 +264,7 @@
                                 '</div>' +
                             '</a>';
                     }
-                    $("#ecranChargement").fadeOut();
+                    fFinChargement();
                 });
             }
         }

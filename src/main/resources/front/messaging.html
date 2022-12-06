@@ -14,9 +14,6 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
         <style>
-            body {
-                background-color: #E94E1B;
-            }
             .imgMessage {
                 width: 80px;
                 border-radius: 50px;
@@ -42,23 +39,25 @@
         </style>
     </head>
     <body>
-        <div id="head-section-bis">
-            <div class="row m-1">
-                <div class="col">
-                    <a href="home.html"><i class="material-icons whiteIcon">keyboard_backspace</i></a>
+        <div class="allContent">
+            <div id="head-section-bis">
+                <div class="row m-1">
+                    <div class="col">
+                        <a href="home.html"><i class="material-icons whiteIcon">keyboard_backspace</i></a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div style="height: 60px"></div>
-        <div class="row m-3">
-            <input type="text" class="form-control" id="searchBar" onkeyup="searchUser()" placeholder="Rechercher un freegonaute..."/>
-        </div>
-        <!-- Tous les messages de l'utilisateur -->
-        <div class="messages"></div>
+            <div style="height: 60px"></div>
+            <div class="row m-3">
+                <input type="text" class="form-control" id="searchBar" onkeyup="searchUser()" placeholder="Rechercher un freegonaute..."/>
+            </div>
+            <!-- Tous les messages de l'utilisateur -->
+            <div class="messages"></div>
 
-        <!-- Nav bar basse -->
-        <div id="footNavBar"></div>
-        <div style="height:50px"></div>
+            <!-- Nav bar basse -->
+            <div id="footNavBar"></div>
+            <div style="height:50px"></div>
+        </div>
 
         <!-- Ecran de chargement -->
         <div id="ecranChargement"></div>
@@ -102,7 +101,8 @@
                                     "</a>";
                             }
                         }
-                        $("#ecranChargement").fadeOut();
+                        document.body.style.backgroundColor = "#E94E1B";
+                        fFinChargement();
                     });
                 }
             }

@@ -59,33 +59,35 @@
         </style>
     </head>
     <body>
-        <div id="head-section-bis">
-            <div class="row m-1 enTete">
-                <div class="col-auto">
-                    <a href="javascript:void(0)" onclick="location.href = sessionStorage.getItem('lastUrl');"><i class="material-icons orangeIcon">keyboard_backspace</i></a>
+        <div class="allContent">
+            <div id="head-section-bis">
+                <div class="row m-1 enTete">
+                    <div class="col-auto">
+                        <a href="javascript:void(0)" onclick="location.href = sessionStorage.getItem('lastUrl');"><i class="material-icons orangeIcon">keyboard_backspace</i></a>
+                    </div>
+                    <div class="col-auto">
+                        <img class="userImage" src="images/person_profile.png"/>
+                    </div>
+                    <div class="col">
+                        <h6 id="prenomNom"></h6>
+                    </div>
                 </div>
-                <div class="col-auto">
-                    <img class="userImage" src="images/person_profile.png"/>
-                </div>
+            </div>
+            <div style="height: 60px;"></div>
+            <div id="messageContainer" class="container"></div>
+            <div id="messageAction" class="row m-3">
                 <div class="col">
-                    <h6 id="prenomNom"></h6>
+                    <input id="messageInput" type="text" class="form-control"/>
+                </div>
+                <div class="col-auto p-0">
+                    <button class="btn" onclick="fSendMessage()"><i class="material-icons sendMessage">send</i></button>
                 </div>
             </div>
-        </div>
-        <div style="height: 60px;"></div>
-        <div id="messageContainer" class="container"></div>
-        <div id="messageAction" class="row m-3">
-            <div class="col">
-                <input id="messageInput" type="text" class="form-control"/>
-            </div>
-            <div class="col-auto p-0">
-                <button class="btn" onclick="fSendMessage()"><i class="material-icons sendMessage">send</i></button>
-            </div>
-        </div>
 
-        <!-- Nav bar basse -->
-        <div id="footNavBar"></div>
-        <div style="height:50px"></div>
+            <!-- Nav bar basse -->
+            <div id="footNavBar"></div>
+            <div style="height:50px"></div>
+        </div>
 
         <!-- Ecran de chargement -->
         <div id="ecranChargement"></div>
@@ -154,7 +156,7 @@
                                 '</div>' +
                             '</div>';
                     }
-                    $("#ecranChargement").fadeOut();
+                    fFinChargement();
                     //document.querySelector("#prenomNom").innerHTML = user.first_name + " " + user.last_name;
                 });
             }

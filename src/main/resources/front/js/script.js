@@ -88,3 +88,8 @@ function fChoixEtat(item) {
 	document.querySelector("#etat").innerHTML = "Etat : " + item.querySelector("div").innerHTML;
 	document.querySelector("#etatSelect").style.display = 'none';
 }
+
+function fFinChargement() {
+	document.querySelector(".allContent").style.visibility = "visible";
+	$("#ecranChargement").fadeOut();
+}

@@ -159,3 +159,7 @@ h3, h6 {
     height: 100%;
     display: none;
 }
+
+.allContent {
+    visibility: hidden;
+}
