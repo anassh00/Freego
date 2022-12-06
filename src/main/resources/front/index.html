@@ -20,7 +20,11 @@
         </div>
         <script>
             window.setTimeout(function () {
-                location.href = "connexion.html";
+                if(sessionStorage.getItem('userID') == null) {
+                    location.href = "connexion.html";
+                } else {
+                    location.href = "home.html";
+                }
             }, 3000);
         </script>
     </body>
