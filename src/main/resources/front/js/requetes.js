@@ -43,7 +43,7 @@ function inscription(username, mdp, email, phone, first_name, last_name, address
     });
 }
 
-function saveProduct(desc, name, qte, categoryId) {
+function saveProduct(desc, name, etat, categoryId) {
     const settings = {
         "url": "http://localhost:8080/api/product/save?category_id="+categoryId,
         "method": "POST",
@@ -55,7 +55,8 @@ function saveProduct(desc, name, qte, categoryId) {
         "data": JSON.stringify({
             "description": desc,
             "name": name,
-            "quantity_stock" : qte,
+            "quantity_stock" : 1,
+            "etat": etat,
         }),
     };
 
@@ -77,8 +78,8 @@ function getProductById(productId) {
     };
 }
 
-function getProductByUserId(userId){
-    var settings = {
+function getProductsByUserId(userId){
+    return {
         "url": "http://localhost:8080/api/product/getProductsByUserId?id="+userId,
         "method": "GET",
         "timeout": 0,
@@ -86,12 +87,7 @@ function getProductByUserId(userId){
             "Authorization": "Bearer " + sessionStorage.getItem("userToken"),
           "Content-Type": "application/json"
         },
-        "data": JSON.stringify({}),
       };
-      
-      $.ajax(settings).done(function (response) {
-        console.log(response);
-      });
 }
 
 function getAllProduct(){
@@ -144,6 +140,7 @@ function addProduct(categoryId, etat, nom, description) {
             "Content-Type": "application/json"
         },
         "data": JSON.stringify({
+            "etat": etat,
             "name": nom,
             "description": description
         }),
@@ -175,9 +172,9 @@ function getProductsByCategory(id_category){
       };
 }
 
-function updateUserInfo(id_user,phone,first_name,last_name,biographie,address,longitude,latitude){
+function updateUserInfo(id_user, pseudo, first_name, last_name, email, phone, biographie, address, longitude, latitude, password){
     // NB : si un attribut est envoyé comme null le backend va garder l'ancienne valeur enregistrée sur la base
-    var settings = {
+    return {
         "url": "http://localhost:8080/api/user/update?id="+id_user,
         "method": "POST",
         "timeout": 0,
@@ -185,12 +182,19 @@ function updateUserInfo(id_user,phone,first_name,last_name,biographie,address,lo
             "Authorization": "Bearer " + sessionStorage.getItem("userToken"),
             "Content-Type": "application/json"
         },
-        "data": JSON.stringify({"phone": phone, "first_name": first_name, "last_name": last_name, "biographie": biographie,"address": address,"longitude": longitude,"latitude": latitude}),
+        "data": JSON.stringify({
+            "username": pseudo,
+            "first_name": first_name,
+            "last_name": last_name,
+            "email": email,
+            "phone": phone,
+            "address": address,
+            "longitude": longitude,
+            "latitude": latitude,
+            "biographie": biographie,
+            "password": password
+        }),
       };
-      
-      $.ajax(settings).done(function (response) {
-        console.log(response);
-      });
 }
 
 function getDiscussion(idReceiver){
@@ -245,4 +249,16 @@ function reserveProduct(productId){
       $.ajax(settings).done(function (response) {
         console.log(response);
       });
+}
+
+function getCategoryById(id) {
+    return {
+        "url": "http://localhost:8080/api/category/getCategory?id=" + id,
+        "method": "GET",
+        "timeout": 0,
+        "headers": {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + sessionStorage.getItem("userToken"),
+        },
+    };
 }

@@ -83,13 +83,13 @@
           </div>
         </div>
         <div class="col-auto" style="display: flex; align-items: center">
-          <button class="btn_submit" style="width: fit-content">Envoyer un message</button>
+          <button class="btn_submit" onclick="fSendMessage()" style="width: fit-content">Envoyer un message</button>
         </div>
       </div>
     </div>
     <div id="produitContainer" class="m-3">
       <h3></h3>
-      <h6>Cueillis hier - fraiches</h6>
+      <h6 id="etatProduit"></h6>
       <div id="btnReserv" class="my-3">
         <button class="btn btnModifProfil" style="justify-content: center">Réserver</button>
       </div>
@@ -113,6 +113,8 @@
     <script src="js/jQuery.js"></script>
 
     <script>
+      let userId = -1;
+
       function fChangePhoto(item) {
         const images = ['images/carottes.png', 'images/conserves.jpg', 'images/aliments.jpg'];
         const imageContainer = document.querySelector("#imageContainer");
@@ -137,6 +139,10 @@
         })
       }
 
+      function fSendMessage() {
+        location.href = 'message.html?userID=' + userId;
+      }
+
       onload = function() {
         if(sessionStorage.getItem('userID') == null) {
           location.href = "connexion.html";
@@ -147,11 +153,12 @@
           if(search_params.has('productID')) {
             const productID = search_params.get('productID');
             $.ajax(getProductById(productID)).done(function (product) {
+              userId = product.user.id;
               document.querySelector("#prenomNom").innerHTML = product.user.first_name + " " + product.user.last_name;
               const produitContainer = document.querySelector("#produitContainer");
               produitContainer.querySelector("h3").innerHTML = product.name;
+              produitContainer.querySelector("#etatProduit").innerHTML = product.etat;
               produitContainer.querySelector("p").innerHTML = product.description;
-              console.log(product);
             });
           }
 
