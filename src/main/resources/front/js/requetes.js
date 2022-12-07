@@ -43,7 +43,7 @@ function inscription(username, mdp, email, phone, first_name, last_name, address
     });
 }
 
-function saveProduct(desc, name, qte, categoryId) {
+function saveProduct(desc, name, etat, categoryId) {
     const settings = {
         "url": "http://localhost:8080/api/product/save?category_id="+categoryId,
         "method": "POST",
@@ -55,7 +55,8 @@ function saveProduct(desc, name, qte, categoryId) {
         "data": JSON.stringify({
             "description": desc,
             "name": name,
-            "quantity_stock" : qte,
+            "quantity_stock" : 1,
+            "etat": etat,
         }),
     };
 
@@ -139,6 +140,7 @@ function addProduct(categoryId, etat, nom, description) {
             "Content-Type": "application/json"
         },
         "data": JSON.stringify({
+            "etat": etat,
             "name": nom,
             "description": description
         }),
@@ -223,4 +225,16 @@ function getDiscussionContactList(){
           "Authorization": "Bearer " + sessionStorage.getItem("userToken"),
         },
       };
+}
+
+function getCategoryById(id) {
+    return {
+        "url": "http://localhost:8080/api/category/getCategory?id=" + id,
+        "method": "GET",
+        "timeout": 0,
+        "headers": {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + sessionStorage.getItem("userToken"),
+        },
+    };
 }

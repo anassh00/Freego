@@ -17,7 +17,7 @@
     <title>Accueil - Freego</title>
 
     <style>
-      .head-section row {
+      #head-section .row {
         height: 100%;
       }
       .menuIcon {
@@ -168,34 +168,26 @@
               rayons.innerHTML +=
                 '<span>' + response[i].name + '</span><br>';
               $.ajax(getProductsByCategory(response[i].id)).done(function (products) {
-                /*let tmpContain = "";
-                for(let j = 0; j < products.length; j++) {
-                  tmpContain +=
-                    '<div class="col-auto productContainer">' +
-                      '<div class="row imgContainer"></div>' +
-                      '<div class="row titleProduct">' +
-                        products[j].name +
-                      '</div>' +
-                      '<div class="row buttonProduct">' +
-                        '<button onClick="location.href=\'product.html?productID=' + products[j].id_product + '\';">J\'y go !</button>' +
-                      '</div>' +
-                    '</div>';
+                const productsNotMe = [];
+                for(let i = 0; i < products.length; i++) {
+                  if(products[i].user.id != sessionStorage.getItem('userID')) {
+                    productsNotMe.push(products[i]);
+                  }
                 }
-                rayons.innerHTML += '<div class="row">' + tmpContain + '</div>';*/
-                const nbLignes = Math.ceil(products.length / 3);
+                const nbLignes = Math.ceil(productsNotMe.length / 3);
                 let index = 0;
                 for(let i = 0; i < nbLignes; i++) {
                   let tmpContain = "";
                   for(let j = 0; j < 3; j++) {
-                    if(index != products.length) {
+                    if(index != productsNotMe.length) {
                       tmpContain +=
                         '<div class="col productContainer">' +
                           '<div class="row imgContainer"></div>' +
                           '<div class="row titleProduct">' +
-                            products[index].name +
+                              productsNotMe[index].name +
                           '</div>' +
                           '<div class="row buttonProduct">' +
-                            '<button onClick="location.href=\'product.html?productID=' + products[index].id_product + '\';">J\'y go !</button>' +
+                            '<button onClick="location.href=\'product.html?productID=' + productsNotMe[index].id_product + '\';">J\'y go !</button>' +
                           '</div>' +
                         '</div>';
                       index++;

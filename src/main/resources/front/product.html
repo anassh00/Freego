@@ -89,7 +89,7 @@
     </div>
     <div id="produitContainer" class="m-3">
       <h3></h3>
-      <h6>Cueillis hier - fraiches</h6>
+      <h6 id="etatProduit"></h6>
       <div id="btnReserv" class="my-3">
         <button class="btn btnModifProfil" style="justify-content: center">Réserver</button>
       </div>
@@ -150,6 +150,7 @@
               document.querySelector("#prenomNom").innerHTML = product.user.first_name + " " + product.user.last_name;
               const produitContainer = document.querySelector("#produitContainer");
               produitContainer.querySelector("h3").innerHTML = product.name;
+              produitContainer.querySelector("#etatProduit").innerHTML = product.etat;
               produitContainer.querySelector("p").innerHTML = product.description;
               console.log(product);
             });
