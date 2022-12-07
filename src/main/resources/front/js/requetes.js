@@ -77,6 +77,23 @@ function getProductById(productId) {
     };
 }
 
+function getProductByUserId(userId){
+    var settings = {
+        "url": "http://localhost:8080/api/product/getProductsByUserId?id="+userId,
+        "method": "GET",
+        "timeout": 0,
+        "headers": {
+            "Authorization": "Bearer " + sessionStorage.getItem("userToken"),
+          "Content-Type": "application/json"
+        },
+        "data": JSON.stringify({}),
+      };
+      
+      $.ajax(settings).done(function (response) {
+        console.log(response);
+      });
+}
+
 function getAllProduct(){
     const settings = {
         "url": "http://localhost:8080/api/product/listProduct",

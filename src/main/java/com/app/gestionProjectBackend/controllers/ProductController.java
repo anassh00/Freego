@@ -107,4 +107,15 @@ public class ProductController {
 		}
 	}
 	
+	@RequestMapping(value = "/getProductsByUserId", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<?> findProductsByUser(@RequestParam Long id) {
+		try {
+			List<Product> products = productService.findByUser(id).get();
+			return new ResponseEntity<List<Product>>(products, HttpStatus.OK);
+		}catch(Exception e){
+	        e.printStackTrace(); 
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: An internal error has occurred");
+		}
+	}
 }

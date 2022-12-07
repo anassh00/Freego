@@ -91,4 +91,8 @@ public class ProductService {
 	public Optional<List<Product>> findByCategory(Long id) {
 		return productRepository.findByCategory_Id(id);
 	}
+	
+	public Optional<List<Product>> findByUser(Long id) {
+		return productRepository.findByUserId(id);
+	}
 }
