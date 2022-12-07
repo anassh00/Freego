@@ -77,8 +77,8 @@ function getProductById(productId) {
     };
 }
 
-function getProductByUserId(userId){
-    var settings = {
+function getProductsByUserId(userId){
+    return {
         "url": "http://localhost:8080/api/product/getProductsByUserId?id="+userId,
         "method": "GET",
         "timeout": 0,
@@ -86,12 +86,7 @@ function getProductByUserId(userId){
             "Authorization": "Bearer " + sessionStorage.getItem("userToken"),
           "Content-Type": "application/json"
         },
-        "data": JSON.stringify({}),
       };
-      
-      $.ajax(settings).done(function (response) {
-        console.log(response);
-      });
 }
 
 function getAllProduct(){
