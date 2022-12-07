@@ -172,9 +172,9 @@ function getProductsByCategory(id_category){
       };
 }
 
-function updateUserInfo(id_user,phone,first_name,last_name,biographie,address,longitude,latitude){
+function updateUserInfo(id_user, pseudo, first_name, last_name, email, phone, biographie, address, longitude, latitude, password){
     // NB : si un attribut est envoyé comme null le backend va garder l'ancienne valeur enregistrée sur la base
-    var settings = {
+    return {
         "url": "http://localhost:8080/api/user/update?id="+id_user,
         "method": "POST",
         "timeout": 0,
@@ -182,12 +182,19 @@ function updateUserInfo(id_user,phone,first_name,last_name,biographie,address,lo
             "Authorization": "Bearer " + sessionStorage.getItem("userToken"),
             "Content-Type": "application/json"
         },
-        "data": JSON.stringify({"phone": phone, "first_name": first_name, "last_name": last_name, "biographie": biographie,"address": address,"longitude": longitude,"latitude": latitude}),
+        "data": JSON.stringify({
+            "username": pseudo,
+            "first_name": first_name,
+            "last_name": last_name,
+            "email": email,
+            "phone": phone,
+            "address": address,
+            "longitude": longitude,
+            "latitude": latitude,
+            "biographie": biographie,
+            "password": password
+        }),
       };
-      
-      $.ajax(settings).done(function (response) {
-        console.log(response);
-      });
 }
 
 function getDiscussion(idReceiver){

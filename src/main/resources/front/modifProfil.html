@@ -23,12 +23,12 @@
       width: 100px;
       border-radius: 100px;
     }
-    #infoContainer input {
+    #infoContainer input, #infoContainer textarea {
       background-color: transparent;
       border: none;
       color: white;
     }
-    #infoContainer input:focus {
+    #infoContainer input:focus, #infoContainer textarea:focus {
       outline: none !important;
     }
     #arrowBack a i {
@@ -38,7 +38,7 @@
   </style>
 </head>
 <body>
-  <div class="allContent">
+  <div class="allContent pb-3">
     <div id="arrowBack" class="row m-1">
       <a href="javascript:void(0)" onclick="location.href='profil.html?userID=' + sessionStorage.getItem('userID');"><i class="material-icons">keyboard_backspace</i></a>
     </div>
@@ -53,21 +53,33 @@
       </div>
       <hr class="mx-3" style="color: white; opacity: 1;">
       <div class="row mx-3">
-        <label for="nom" style="color: white;">Nom</label>
-        <br>
-        <input type="text" id="nom"/>
-      </div>
-      <hr class="mx-3" style="color: white; opacity: 1;">
-      <div class="row mx-3">
         <label for="prenom" style="color: white;">Prénom</label>
         <br>
         <input type="text" id="prenom"/>
       </div>
       <hr class="mx-3" style="color: white; opacity: 1;">
       <div class="row mx-3">
+        <label for="nom" style="color: white;">Nom</label>
+        <br>
+        <input type="text" id="nom"/>
+      </div>
+      <hr class="mx-3" style="color: white; opacity: 1;">
+      <div class="row mx-3">
         <label for="email" style="color: white;">Email</label>
         <br>
         <input type="email" id="email"/>
+      </div>
+      <hr class="mx-3" style="color: white; opacity: 1;">
+      <div class="row mx-3">
+        <label for="phone" style="color: white;">Téléphone</label>
+        <br>
+        <input type="phone" id="phone"/>
+      </div>
+      <hr class="mx-3" style="color: white; opacity: 1;">
+      <div class="row mx-3">
+        <label for="biographie" style="color: white;">Biographie</label>
+        <br>
+        <textarea type="text" id="biographie"></textarea>
       </div>
       <hr class="mx-3" style="color: white; opacity: 1;">
       <div class="row mx-3">
@@ -78,7 +90,7 @@
       </div>
       <hr class="mx-3" style="color: white; opacity: 1;">
       <div class="row mx-3" style="display: flex; justify-content: center;">
-        <button class="btn_submit" onclick="sendInformation()" style="width: 50%; height: 40px;">Sauvegarder</button>
+        <button class="btn_submit" onclick="fSendInformation()" style="width: 50%; height: 40px;">Sauvegarder</button>
       </div>
     </div>
   </div>
@@ -104,10 +116,13 @@
         location.href = "connexion.html";
       } else {
         $.ajax(getUserById(sessionStorage.getItem('userID'))).done(function (response) {
+          console.log(response);
           document.querySelector("#pseudo").value = response.username;
-          document.querySelector("#nom").value = response.last_name;
           document.querySelector("#prenom").value = response.first_name;
+          document.querySelector("#nom").value = response.last_name;
           document.querySelector("#email").value = response.email;
+          document.querySelector("#phone").value = response.phone;
+          document.querySelector("#biographie").value = response.biographie;
           // Fin du chargement des données
           document.body.style.backgroundColor = "#E94E1B";
           fFinChargement();
@@ -115,19 +130,17 @@
       }
     }
 
-    function sendInformation() {
+    function fSendInformation() {
       const pseudo = document.querySelector("#pseudo").value;
+      const prenom = document.querySelector("#prenom").value;
       const nom = document.querySelector("#nom").value;
       const email = document.querySelector("#email").value;
+      const phone = document.querySelector("#phone").value;
+      const biographie = document.querySelector("#biographie").value;
       const motDePasse = document.querySelector("#motDePasse").value;
-      // Modification du mot de passe
-      if(motDePasse != "") {
-
-      }
-      // Conservation de l'ancien mot de passe
-      else {
-
-      }
+      $.ajax(updateUserInfo(sessionStorage.getItem('userID'), pseudo, prenom, nom, email, phone, biographie, "", "", "", (motDePasse != "" ? motDePasse : null) )).done(function (response) {
+        console.log(response);
+      });
     }
   </script>
 </body>

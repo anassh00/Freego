@@ -46,7 +46,7 @@
           </div>
         </div>
         <div class="row">
-          <p>Toujours à la recherche d’expériences gustatives détonnantes, il m’arrive d’acheter des produits que je n’utilise pas au final ou des produits que je n’aime pas finalement, a contrario je suis curieuse de découvrir des produits que je ne connais pas si vous ne les utilisez pas</p>
+          <p id="biographie">Toujours à la recherche d’expériences gustatives détonnantes, il m’arrive d’acheter des produits que je n’utilise pas au final ou des produits que je n’aime pas finalement, a contrario je suis curieuse de découvrir des produits que je ne connais pas si vous ne les utilisez pas</p>
         </div>
         <hr>
         <div id="freegoContainer">
@@ -95,6 +95,7 @@
             if(userID == sessionStorage.getItem('userID')) {
               $.ajax(getUserById(sessionStorage.getItem('userID'))).done(function (response) {
                 document.querySelector("#prenomNom").innerHTML = "<b>" + response.first_name + " " + response.last_name + "</b>";
+                document.querySelector("#biographie").innerHTML = response.biographie == null || response.biographie == "" ? "Vous n'avez pas encore de biographie !" : response.biographie;
                 document.querySelector("#freegoContainer").querySelector("h6").innerHTML = "Mon freego";
                 document.querySelector("#favorisContainer").style.display = 'block';
                 document.querySelector("#modifProfilContainer").style.display = 'flex';
@@ -102,6 +103,7 @@
             } else {
               $.ajax(getUserById(userID)).done(function (response) {
                 document.querySelector("#prenomNom").innerHTML = "<b>" + response.first_name + " " + response.last_name + "</b>";
+                document.querySelector("#biographie").innerHTML = response.biographie == null || response.biographie == "" ? "Cet utilisateur n'a pas encore de biographie !" : response.biographie;
                 document.querySelector("#freegoContainer").querySelector("h6").innerHTML = "Freego de " + response.first_name;
                 document.querySelector("#messageContainer").style.display = 'flex';
                 document.querySelector("#messageContainer").querySelector("button").onclick = function() {
