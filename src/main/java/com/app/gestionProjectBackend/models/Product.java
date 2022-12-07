@@ -38,6 +38,7 @@ public class Product implements Serializable{
 	
 	private String name;
 	private String description;
+	private String etat;
 	private int quantity_stock;
 	
 	@Enumerated(EnumType.STRING)
@@ -91,6 +92,13 @@ public class Product implements Serializable{
 		return id_product;
 	}
 
+	public String getEtat() {
+		return etat;
+	}
+
+	public void setEtat(String etat) {
+		this.etat = etat;
+	}
 
 	public void setId_product(long id_product) {
 		this.id_product = id_product;

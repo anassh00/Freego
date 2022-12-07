@@ -65,6 +65,9 @@ public class ProductService {
 		if(categoryId != 0) {
 			productOld.setCategory(categoryService.findById(categoryId).get());
 		}
+		if(product.getEtat() != null) {
+			productOld.setEtat(product.getEtat());
+		}
 		Product productToUpdate = productRepository.save(productOld);
 		return productToUpdate;
 	}
