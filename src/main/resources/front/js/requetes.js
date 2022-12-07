@@ -229,3 +229,20 @@ function getDiscussionContactList(){
         },
       };
 }
+
+function reserveProduct(productId){
+    var settings = {
+        "url": "http://localhost:8080/api/order/save",
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + sessionStorage.getItem("userToken")
+        },
+        "data": JSON.stringify({"address":"address","productList":[{"productId": productId,"quantity":1}]}),
+      };
+      
+      $.ajax(settings).done(function (response) {
+        console.log(response);
+      });
+}
