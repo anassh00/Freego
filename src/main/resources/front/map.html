@@ -131,17 +131,17 @@
       $.ajax(getUserById(sessionStorage.getItem('userID'))).done(function (user) {
         console.log(user);
         if(user.longitude == 0 && user.latitude == 0) {
-          user.longitude = 45.72177;
-          user.latitude = 4.91582;
+          user.latitude = 45.72177;
+          user.longitude = 4.91582;
         }
-        const map = L.map('map').setView([user.longitude, user.latitude], 13);
+        const map = L.map('map').setView([user.latitude, user.longitude], 13);
         map.on('click', function() {
           document.querySelector("#detailMap").style.visibility = 'hidden';
         });
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
           attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
-        L.marker([user.longitude, user.latitude]).addTo(map).bindPopup('Vous êtes ici !');
+        L.marker([user.latitude, user.longitude]).addTo(map).bindPopup('Vous êtes ici !');
 
         function onMarkerClick(product) {
           document.querySelector("#nomProduit").innerHTML = product.name;

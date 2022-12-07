@@ -44,6 +44,32 @@
       button:disabled {
         opacity: 0.65;
       }
+      #head-section .row {
+        height: 100%;
+      }
+      .menuIcon {
+        color: white;
+        font-size: 40px;
+      }
+      #burgerMenu {
+        position: absolute;
+        background-color: #FE835A;
+        top: 50px;
+        right: 10px;
+        width: 150px;
+        z-index: 1;
+      }
+      #burgerMenu a {
+        text-decoration: none;
+        color: white;
+        margin-right: 0px;
+      }
+      #burgerMenu a .row {
+        display: flex;
+        justify-content: center;
+        border-bottom: 1px solid white;
+        margin: 0;
+      }
     </style>
 
     <title>Profil - Freego</title>
@@ -55,8 +81,38 @@
           <div class="col-auto">
             <img class="mx-3" src="images/logo_long.png"/>
           </div>
-          <div class="col btn-don">
-            <button class="btn_submit mx-3" onclick="location.href = 'don.html';">Je donne</button>
+          <div class="col-auto btn-don">
+            <button class="btn_submit" onclick="location.href = 'don.html';">Je donne</button>
+          </div>
+          <div class="col-auto menu">
+            <a href="javascript:void(0)" onclick="fDisplayUnderMenu('#burgerMenu')"><i class="material-icons menuIcon">menu</i></a>
+            <div id="burgerMenu" style="display: none">
+              <a href="javascript:void(0)" onclick="location.href='profil.html?userID=' + sessionStorage.getItem('userID');">
+                <div class="row p-3">
+                  Mon freego
+                </div>
+              </a>
+              <a href="messaging.html">
+                <div class="row p-3">
+                  Messagerie
+                </div>
+              </a>
+              <a href="javascript:void(0)">
+                <div class="row p-3">
+                  Map
+                </div>
+              </a>
+              <a href="rayons.html">
+                <div class="row p-3">
+                  Rayons
+                </div>
+              </a>
+              <a href="javascript:void(0)" onclick="sessionStorage.removeItem('userID'); location.href='connexion.html';">
+                <div class="row p-3">
+                  Déconnexion
+                </div>
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -135,6 +191,7 @@
             const userID = search_params.get('userID');
             if(userID == sessionStorage.getItem('userID')) {
               $.ajax(getUserById(sessionStorage.getItem('userID'))).done(function (response) {
+                console.log(response);
                 document.querySelector("#prenomNom").innerHTML = "<b>" + response.first_name + " " + response.last_name + "</b>";
                 document.querySelector("#biographie").innerHTML = response.biographie == null || response.biographie == "" ? "<i>Vous n'avez pas encore de biographie !</i>" : response.biographie;
                 document.querySelector("#freegoContainer").querySelector("h6").innerHTML = "Mon freego";

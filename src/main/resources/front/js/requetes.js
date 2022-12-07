@@ -146,7 +146,7 @@ function getProductsByCategory(id_category){
       };
 }
 
-function updateUserInfo(id_user, pseudo, first_name, last_name, email, phone, biographie, address, longitude, latitude, password){
+function updateUserInfo(id_user, pseudo, first_name, last_name, email, phone, biographie, latitude, longitude, password){
     // NB : si un attribut est envoyé comme null le backend va garder l'ancienne valeur enregistrée sur la base
     return {
         "url": "http://localhost:8080/api/user/update?id="+id_user,
@@ -162,10 +162,9 @@ function updateUserInfo(id_user, pseudo, first_name, last_name, email, phone, bi
             "last_name": last_name,
             "email": email,
             "phone": phone,
-            "address": address,
-            "longitude": longitude,
-            "latitude": latitude,
             "biographie": biographie,
+            "latitude": latitude,
+            "longitude": longitude,
             "password": password
         }),
       };
