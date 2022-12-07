@@ -43,28 +43,6 @@ function inscription(username, mdp, email, phone, first_name, last_name, address
     });
 }
 
-function saveProduct(desc, name, etat, categoryId) {
-    const settings = {
-        "url": "http://localhost:8080/api/product/save?category_id="+categoryId,
-        "method": "POST",
-        "timeout": 0,
-        "headers": {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer " + sessionStorage.getItem("userToken"),
-        },
-        "data": JSON.stringify({
-            "description": desc,
-            "name": name,
-            "quantity_stock" : 1,
-            "etat": etat,
-        }),
-    };
-
-    $.ajax(settings).done(function (response) {
-       console.log(response);
-    });
-}
-
 function getProductById(productId) {
     return {
         "url": "http://localhost:8080/api/product/getProduct?id="+productId,
@@ -91,7 +69,7 @@ function getProductsByUserId(userId){
 }
 
 function getAllProduct(){
-    const settings = {
+    return {
         "url": "http://localhost:8080/api/product/listProduct",
         "method": "GET",
         "timeout": 0,
@@ -100,10 +78,6 @@ function getAllProduct(){
             "Authorization": "Bearer " + sessionStorage.getItem("userToken"),
         },
     };
-
-    $.ajax(settings).done(function (response) {
-       console.log(response);
-    });    
 }
 
 function getUserById(id) {
@@ -172,7 +146,7 @@ function getProductsByCategory(id_category){
       };
 }
 
-function updateUserInfo(id_user, pseudo, first_name, last_name, email, phone, biographie, address, longitude, latitude, password){
+function updateUserInfo(id_user, pseudo, first_name, last_name, email, phone, biographie, latitude, longitude, password){
     // NB : si un attribut est envoyé comme null le backend va garder l'ancienne valeur enregistrée sur la base
     return {
         "url": "http://localhost:8080/api/user/update?id="+id_user,
@@ -188,10 +162,9 @@ function updateUserInfo(id_user, pseudo, first_name, last_name, email, phone, bi
             "last_name": last_name,
             "email": email,
             "phone": phone,
-            "address": address,
-            "longitude": longitude,
-            "latitude": latitude,
             "biographie": biographie,
+            "latitude": latitude,
+            "longitude": longitude,
             "password": password
         }),
       };
@@ -235,7 +208,7 @@ function getDiscussionContactList(){
 }
 
 function reserveProduct(productId){
-    var settings = {
+    return {
         "url": "http://localhost:8080/api/order/save",
         "method": "POST",
         "timeout": 0,
@@ -245,10 +218,6 @@ function reserveProduct(productId){
         },
         "data": JSON.stringify({"address":"address","productList":[{"productId": productId,"quantity":1}]}),
       };
-      
-      $.ajax(settings).done(function (response) {
-        console.log(response);
-      });
 }
 
 function getCategoryById(id) {

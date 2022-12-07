@@ -33,14 +33,33 @@
         border-radius: 20px;
         width: fit-content;
       }
-      .rayonProduct span {
+      .donneur {
+        display: flex;
+        align-items: center;
+        justify-content: right;
+      }
+      .donneur span {
         color: #345DA8;
         font-size: 14px;
         text-align: right;
-        padding-right: 1.8rem;
+        width: 100%;
       }
       .rayonProduct > .row > .col > .row {
         height: 33%;
+      }
+      .distance {
+        display: flex;
+        align-items: center;
+      }
+      .distance i {
+        color: #345DA8;
+      }
+      .distance span {
+        color: #E94E1B;
+        padding-right: 0;
+      }
+      .productTitle {
+        margin-bottom: 0;
       }
     </style>
   </head>
@@ -112,14 +131,21 @@
                         '<h6 class="productTitle">' + products[i].name + '</h6>' +
                       '</div>' +
                       '<div class="row">' +
-                        '<span>par ' + products[i].user.first_name + ' ' + products[i].user.last_name + '</span>' +
+                        '<div class="col-auto distance">' +
+                          '<i class="material-icons">location_on</i>' +
+                          '<span>.. km</span>'+
+                        '</div>' +
+                        '<div class="col donneur">' +
+                          '<span>par ' + products[i].user.first_name + ' ' + products[i].user.last_name + '</span>' +
+                        '</div>' +
                       '</div>' +
                       '<div class="row">' +
-                        '<div class="col-auto">' +
-                          '<button onclick="location.href = \'message.html?userID=' + products[i].user.id + '\';">Message</button>' +
-                        '</div>' +
                         '<div class="col">' +
-                          '<button onclick="location.href = \'profil.html?userID=' + products[i].user.id + '\';">Voir le freego</button>' +
+                          '<button class="px-1" onclick="location.href = \'message.html?userID=' + products[i].user.id + '\';">Message</button>' +
+                        '</div>' +
+                        '<div class="col-auto">' +
+                          '<button class="px-1" onclick="location.href = \'profil.html?userID=' + products[i].user.id + '\';">Voir le freego</button>' +
+                        '</div>' +
                         '</div>' +
                       '</div>' +
                     '</div>' +

@@ -35,6 +35,16 @@
       font-size: 46px;
       color: white;
     }
+    #geolocalise {
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+    }
+    #geolocalise i {
+      font-size: 20px;
+    }
   </style>
 </head>
 <body>
@@ -83,6 +93,21 @@
       </div>
       <hr class="mx-3" style="color: white; opacity: 1;">
       <div class="row mx-3">
+        <label for="phone" style="color: white;">Adresse (latitude)</label>
+        <br>
+        <input type="number" id="latitude" min="-90" max="+90"/>
+      </div>
+      <hr class="mx-3" style="color: white; opacity: 1;">
+      <div class="row mx-3">
+        <label for="phone" style="color: white;">Adresse (longitude)</label>
+        <br>
+        <input type="number" id="longitude" min="-180" max="+180"/>
+      </div>
+      <div class="row mx-3" style="display: flex; justify-content: center; margin-top: 10px;">
+        <button class="btn btn_submit mx-3" id="geolocalise" onclick="fGetLocation()"><i class="material-icons">my_location</i> Me géolocaliser</button>
+      </div>
+      <hr class="mx-3" style="color: white; opacity: 1;">
+      <div class="row mx-3">
         <label for="motDePasse" style="color: white;">Mot de passe</label>
         <br>
         <input type="password" id="motDePasse"/>
@@ -123,6 +148,8 @@
           document.querySelector("#email").value = response.email;
           document.querySelector("#phone").value = response.phone;
           document.querySelector("#biographie").value = response.biographie;
+          document.querySelector("#latitude").value = response.latitude;
+          document.querySelector("#longitude").value = response.longitude;
           // Fin du chargement des données
           document.body.style.backgroundColor = "#E94E1B";
           fFinChargement();
@@ -137,10 +164,23 @@
       const email = document.querySelector("#email").value;
       const phone = document.querySelector("#phone").value;
       const biographie = document.querySelector("#biographie").value;
+      const latitude = document.querySelector("#latitude").value;
+      const longitude = document.querySelector("#longitude").value;
       const motDePasse = document.querySelector("#motDePasse").value;
-      $.ajax(updateUserInfo(sessionStorage.getItem('userID'), pseudo, prenom, nom, email, phone, biographie, "", "", "", (motDePasse != "" ? motDePasse : null) )).done(function (response) {
+      $.ajax(updateUserInfo(sessionStorage.getItem('userID'), pseudo, prenom, nom, email, phone, biographie, latitude, longitude, (motDePasse != "" ? motDePasse : null) )).done(function (response) {
         console.log(response);
       });
+    }
+
+    function fGetLocation() {
+      navigator.geolocation.getCurrentPosition(
+              function(pos) {
+                document.querySelector("#latitude").value = pos.coords.latitude;
+                document.querySelector("#longitude").value = pos.coords.longitude;
+              },
+              function(err) {
+                alert("Erreur : " + err.message);
+              });
     }
   </script>
 </body>
