@@ -78,6 +78,7 @@ function fChoixCateg(item) {
 	if(categChoisie.toString() == "Produits laitiers") {
 		document.querySelector("#modalContainer").style.display = 'block';
 	}
+	item.querySelector("div").querySelector("span").setAttribute("id", item.id);
 	document.querySelector("#categorie").innerHTML = "Catégorie : " + item.querySelector("div").innerHTML;
 	document.querySelector("#categSelect").style.display = 'none';
 }
@@ -86,4 +87,9 @@ function fChoixEtat(item) {
 	const etatChoisi = item.querySelector("span").innerHTML;
 	document.querySelector("#etat").innerHTML = "Etat : " + item.querySelector("div").innerHTML;
 	document.querySelector("#etatSelect").style.display = 'none';
+}
+
+function fFinChargement() {
+	document.querySelector(".allContent").style.visibility = "visible";
+	$("#ecranChargement").fadeOut();
 }

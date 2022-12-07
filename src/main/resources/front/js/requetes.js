@@ -117,9 +117,9 @@ function getAllUsers() {
     };
 }
 
-function addProduct(nom, description) {
+function addProduct(categoryId, etat, nom, description) {
     return {
-        "url": "http://localhost:8080/api/product/save",
+        "url": "http://localhost:8080/api/product/save?category_id=" + categoryId,
         "method": "POST",
         "timeout": 0,
         "headers": {

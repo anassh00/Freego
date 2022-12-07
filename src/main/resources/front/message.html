@@ -59,33 +59,38 @@
         </style>
     </head>
     <body>
-        <div id="head-section-bis">
-            <div class="row m-1 enTete">
-                <div class="col-auto">
-                    <a href="javascript:void(0)" onclick="location.href = sessionStorage.getItem('lastUrl');"><i class="material-icons orangeIcon">keyboard_backspace</i></a>
+        <div class="allContent">
+            <div id="head-section-bis">
+                <div class="row m-1 enTete">
+                    <div class="col-auto">
+                        <a href="javascript:void(0)" onclick="location.href = sessionStorage.getItem('lastUrl');"><i class="material-icons orangeIcon">keyboard_backspace</i></a>
+                    </div>
+                    <div class="col-auto">
+                        <img class="userImage" src="images/person_profile.png"/>
+                    </div>
+                    <div class="col">
+                        <h6 id="prenomNom"></h6>
+                    </div>
                 </div>
-                <div class="col-auto">
-                    <img class="userImage" src="images/person_profile.png"/>
-                </div>
+            </div>
+            <div style="height: 60px;"></div>
+            <div id="messageContainer" class="container"></div>
+            <div id="messageAction" class="row m-3">
                 <div class="col">
-                    <h6 id="prenomNom"></h6>
+                    <input id="messageInput" type="text" class="form-control"/>
+                </div>
+                <div class="col-auto p-0">
+                    <button class="btn" onclick="fSendMessage()"><i class="material-icons sendMessage">send</i></button>
                 </div>
             </div>
-        </div>
-        <div style="height: 60px;"></div>
-        <div id="messageContainer" class="container"></div>
-        <div id="messageAction" class="row m-3">
-            <div class="col">
-                <input id="messageInput" type="text" class="form-control"/>
-            </div>
-            <div class="col-auto p-0">
-                <button class="btn" onclick="fSendMessage()"><i class="material-icons sendMessage">send</i></button>
-            </div>
+
+            <!-- Nav bar basse -->
+            <div id="footNavBar"></div>
+            <div style="height:50px"></div>
         </div>
 
-        <!-- Nav bar basse -->
-        <div id="footNavBar"></div>
-        <div style="height:50px"></div>
+        <!-- Ecran de chargement -->
+        <div id="ecranChargement"></div>
 
         <!-- Bootstrap Script -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
@@ -93,9 +98,11 @@
         <script src="js/script.js"></script>
         <script src="js/requetes.js"></script>
         <!-- jQuery -->
-        <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+        <script src="js/jQuery.js"></script>
         <script>
             $(function(){
+                $("#ecranChargement").load("ecranChargement.html");
+                $("#ecranChargement").fadeIn();
                 $("#footNavBar").load("footNavBar.html");
             });
             let userID = null;
@@ -128,7 +135,9 @@
             }
 
             function fGetDiscussion() {
-                $.ajax(getDiscussion(userID)).done(function (messages) {
+                $.ajax(getDiscussion(userID)).done(function (messagesA) {
+                    let messages = messagesA.sort(
+                        (p1, p2) => (p1.creation_date_timestamp > p2.creation_date_timestamp) ? 1 : (p1.creation_date_timestamp < p2.creation_date_timestamp) ? -1 : 0);
                     const messageContainer = document.querySelector("#messageContainer");
                     messageContainer.innerHTML = "";
                     for(let i = 0; i < messages.length; i++) {
@@ -147,7 +156,7 @@
                                 '</div>' +
                             '</div>';
                     }
-                    console.log(messages);
+                    fFinChargement();
                     //document.querySelector("#prenomNom").innerHTML = user.first_name + " " + user.last_name;
                 });
             }
