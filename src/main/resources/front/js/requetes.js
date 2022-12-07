@@ -69,7 +69,7 @@ function getProductsByUserId(userId){
 }
 
 function getAllProduct(){
-    const settings = {
+    return {
         "url": "http://localhost:8080/api/product/listProduct",
         "method": "GET",
         "timeout": 0,
@@ -78,10 +78,6 @@ function getAllProduct(){
             "Authorization": "Bearer " + sessionStorage.getItem("userToken"),
         },
     };
-
-    $.ajax(settings).done(function (response) {
-       console.log(response);
-    });    
 }
 
 function getUserById(id) {
@@ -213,7 +209,7 @@ function getDiscussionContactList(){
 }
 
 function reserveProduct(productId){
-    var settings = {
+    return {
         "url": "http://localhost:8080/api/order/save",
         "method": "POST",
         "timeout": 0,
@@ -223,10 +219,6 @@ function reserveProduct(productId){
         },
         "data": JSON.stringify({"address":"address","productList":[{"productId": productId,"quantity":1}]}),
       };
-      
-      $.ajax(settings).done(function (response) {
-        console.log(response);
-      });
 }
 
 function getCategoryById(id) {

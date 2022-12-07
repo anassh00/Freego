@@ -157,7 +157,9 @@
                 document.querySelector("#sendMessageContainer").style.display = 'flex';
                 document.querySelector("#btnResMod").innerHTML = 'Réserver';
                 document.querySelector("#btnResMod").onclick = function() {
-
+                  $.ajax(reserveProduct(productID)).done(function () {
+                    location.href = "message.html?userID=" + product.user.id;
+                  });
                 }
               } else {
                 document.querySelector("#btnResMod").innerHTML = 'Modifier';
