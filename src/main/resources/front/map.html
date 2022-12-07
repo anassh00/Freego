@@ -21,30 +21,86 @@
       color: white;
       font-size: 46px;
     }
-    h5, span {
+    h6 {
       color: white;
     }
-
     a {
       text-decoration: none;
     }
-    #map {
-      height: calc(100% - 120px);
+    .allContent {
+      height: calc(100vh - 110px)
     }
+    #map {
+      height: 100%;
+      z-index: 1;
+    }
+    .leaflet-popup-content-wrapper, .leaflet-popup-tip {
+      background-color: #E94E1B;
+      color: white;
+    }
+    #detailMap {
+      position: absolute;
+      top: 70px;
+      right: 10px;
+      background-color: #E94E1B;
+      width: 82%;
+      height: 80px;
+      z-index: 10;
+      border-radius: 10px;
+      visibility: hidden;
+    }
+    #detailMap .row {
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+    #sendMessageBtn, #profilBtn {
+      color: #E94E1B;
+      background-color: white;
+      border: 1px solid #E94E1B;
+      border-radius: 20px;
+      width: fit-content;
+      font-size: 12px;
+    }
+    #nomProduit {
+      margin-bottom: 0;
+    }
+    #prenomNomDon {
+      color: white;
+      font-size: 10px;
+    }
+
   </style>
 </head>
 <body>
-<div class="allContent" style="height: 100vh">
+<div class="allContent">
   <div id="head-section-bis">
-    <div class="row m-1">
+    <div class="row mx-1">
       <div class="col">
         <a href="home.html"><i class="material-icons whiteIcon">keyboard_backspace</i></a>
+      </div>
+      <div class="col-auto">
+        <img src="images/logo_long.png"/>
       </div>
     </div>
   </div>
   <div style="height: 60px"></div>
   <!-- Map -->
   <div id="map"></div>
+  <div id="detailMap">
+    <div class="row">
+      <div class="col" style="padding-left: 2rem;">
+        <h6 id="nomProduit"></h6>
+        <span id="prenomNomDon"></span>
+      </div>
+      <div class="col-auto" style="padding: 0;">
+        <button id="sendMessageBtn">Message</button>
+      </div>
+      <div class="col-auto" style="padding-right: 2rem;">
+        <button id="profilBtn">Voir le freego</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Nav bar basse -->
   <div id="footNavBar"></div>
@@ -63,6 +119,8 @@
 <script src="js/jQuery.js"></script>
 <script>
   $(function(){
+    $("#ecranChargement").load("ecranChargement.html");
+    $("#ecranChargement").fadeIn();
     $("#footNavBar").load("footNavBar.html");
   });
 
@@ -77,24 +135,44 @@
           user.latitude = 4.91582;
         }
         const map = L.map('map').setView([user.longitude, user.latitude], 13);
+        map.on('click', function() {
+          document.querySelector("#detailMap").style.visibility = 'hidden';
+        });
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+        L.marker([user.longitude, user.latitude]).addTo(map).bindPopup('Vous êtes ici !');
+
+        function onMarkerClick(product) {
+          document.querySelector("#nomProduit").innerHTML = product.name;
+          document.querySelector("#prenomNomDon").innerHTML = "par " + product.user.first_name + " " + product.user.last_name;
+          document.querySelector("#sendMessageBtn").onclick = function() {
+            sessionStorage.setItem('lastUrl', location.href);
+            location.href = "message.html?userID=" + product.user.id;
+          };
+          document.querySelector("#profilBtn").onclick = function() {
+            location.href = "profil.html?userID=" + product.user.id;
+          };
+          document.querySelector("#detailMap").style.visibility = 'visible';
+        }
+
         $.ajax(getAllProduct()).done(function (products) {
-          console.log(products);
-          L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          }).addTo(map);
+          const productsNotMe = [];
           for(let i = 0; i < products.length; i++) {
+            if(products[i].user.id != sessionStorage.getItem('userID')) {
+              productsNotMe.push(products[i]);
+            }
+          }
+          for(let i = 0; i < productsNotMe.length; i++) {
             const longitude = (Math.random() / 2) + 45.75;
             const latitude = (Math.random() / 2) + 4.75;
-            L.marker([longitude, latitude]).addTo(map)
-                    .bindPopup('<a href="product.html?productID=' + products[i].id_product + '" style="text-align: center"><h6>' + products[i].name + '</h6> par ' + products[i].user.first_name + ' ' + products[i].user.last_name + '</a>');
+            L.marker([longitude, latitude]).addTo(map).on('click', function() { onMarkerClick(productsNotMe[i]) });
           }
-
-          L.marker([45.72, 4.91582]).addTo(map)
-                  .bindPopup('<a href="javascript:void(0)">A pretty CSS3 popup.<br> Easily customizable.</a>');
+          // Fin de chargement des données
+          document.body.style.backgroundColor = "#E94E1B";
+          fFinChargement()
         });
       });
-      fFinChargement()
-
     }
   }
 </script>
