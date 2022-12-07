@@ -23,6 +23,27 @@
         color: gray;
         font-size: 14px;
       }
+      #modalContainer {
+        background-color:rgba(0, 0, 0, 0.3);
+        position:absolute;
+        width:100%;
+        height:100%;
+        top:0px;
+        left:0px;
+        z-index:10000;
+      }
+      #modal {
+        position: relative;
+        width: 90%;
+        height: fit-content;
+        background-color: #345DA8;
+        left: 5%;
+        top: 20%;
+        border-radius: 20px;
+      }
+      button:disabled {
+        opacity: 0.65;
+      }
     </style>
 
     <title>Profil - Freego</title>
@@ -69,7 +90,18 @@
           <button class="btn btnModifProfil" style="display: flex; justify-content: center;">Envoyer un message</button>
         </div>
         <div id="lienSignalementContainer" class="p-3" style="display: none; justify-content: center">
-          <a href="javascript:void(0)" id="lienSignalement">Signaler cet utilisateur</a>
+          <a href="javascript:void(0)" id="lienSignalement" onclick="fReport(0)">Signaler cet utilisateur</a>
+        </div>
+        <div id="modalContainer" style="display: none">
+          <div id="modal" class="p-3">
+            <div style="display: flex; justify-content: center;"><i class="material-icons" style="font-size: 60px; color: white">report</i></div>
+            <div class="mx-4">
+              <p style="text-align: center; color: white;"></p>
+            </div>
+            <div class="my-3" style="display: flex; justify-content: center">
+              <button class="btn_submit"></button>
+            </div>
+          </div>
         </div>
       </div>
       <div id="footNavBar"></div>
@@ -155,6 +187,54 @@
             });
           }
         }
+      }
+
+      function fReport(num) {
+        document.querySelector("#modalContainer").style.display = 'block';
+        switch (num) {
+          case 0:
+            document.querySelector("#modal").querySelector("button").innerHTML = "J'ai compris";
+            document.querySelector("#modal").querySelector("p").innerHTML = "Tout signalement abusif sera sanctionné !";
+            document.querySelector("#modal").querySelector("button").onclick = function() {
+              fReport(1);
+            }
+            break;
+          case 1:
+            document.querySelector("#modal").querySelector("button").innerHTML = "Suivant";
+            document.querySelector("#modal").querySelector("button").onclick = function() {
+              if(document.getElementsByName("report")[0].checked) {
+                fReport(2);
+              } else {
+                fReport(3);
+              }
+            }
+            fHideButton(true);
+            document.querySelector("#modal").querySelector("p").innerHTML =
+              'Vous voulez signaler : <br>' +
+              '<input class="my-3" type="radio" name="report" onclick="fHideButton(false)"/> Un produit<br>' +
+              '<input type="radio" name="report" onclick="fHideButton(false)"/> Un utilisateur';
+            break;
+          case 2:
+            document.querySelector("#modal").querySelector("button").innerHTML = "Fermer";
+            document.querySelector("#modal").querySelector("p").innerHTML = "<b>Votre demande de signalement a bien été prise en compte.</b><br>" +
+                    "Nous allons examiner le produit et nous prendrons des mesures en fonction de la légitimé de la demande.";
+            document.querySelector("#modal").querySelector("button").onclick = function() {
+              document.querySelector('#modalContainer').style.display = 'none';
+            }
+            break;
+          case 3:
+            document.querySelector("#modal").querySelector("button").innerHTML = "Fermer";
+            document.querySelector("#modal").querySelector("p").innerHTML = "<b>Votre demande de signalement a bien été prise en compte.</b><br>" +
+                    "Nous allons examiner l'utilisateur et nous prendrons des mesures en fonction de la légitimé de la demande.";
+            document.querySelector("#modal").querySelector("button").onclick = function() {
+              document.querySelector('#modalContainer').style.display = 'none';
+            }
+            break;
+        }
+      }
+
+      function fHideButton(desactiver) {
+        document.querySelector("#modal").querySelector("button").disabled = desactiver;
       }
     </script>
   </body>
