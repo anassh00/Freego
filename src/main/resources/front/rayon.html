@@ -92,28 +92,34 @@
               document.querySelector("#rayonTitle").innerHTML = '<b>' + response.name + '</b>';
             });
             $.ajax(getProductsByCategory(catID)).done(function (response) {
-              const rayon = document.querySelector(".rayonProduct");
+              const products = [];
               for(let i = 0; i < response.length; i++) {
+                if(response[i].user.id != sessionStorage.getItem('userID')) {
+                  products.push(response[i]);
+                }
+              }
+              const rayon = document.querySelector(".rayonProduct");
+              for(let i = 0; i < products.length; i++) {
                 rayon.innerHTML +=
-                  '<div class="row mb-1">' +
+                  '<div class="row mb-3">' +
                     '<div class="col-auto">' +
-                      '<a href="product.html">' +
+                      '<a href="product.html?productID=' + products[i].id_product + '">' +
                         '<div class="imgProduit"></div>' +
                       '</a>' +
                     '</div>' +
                     '<div class="col">' +
                       '<div class="row">' +
-                        '<h6>' + response[i].name + '</h6>' +
+                        '<h6 class="productTitle">' + products[i].name + '</h6>' +
                       '</div>' +
                       '<div class="row">' +
-                        '<span>par ' + response[i].user.first_name + ' ' + response[i].user.last_name + '</span>' +
+                        '<span>par ' + products[i].user.first_name + ' ' + products[i].user.last_name + '</span>' +
                       '</div>' +
                       '<div class="row">' +
                         '<div class="col-auto">' +
-                          '<button>Message</button>' +
+                          '<button onclick="location.href = \'message.html?userID=' + products[i].user.id + '\';">Message</button>' +
                         '</div>' +
                         '<div class="col">' +
-                          '<button>Voir le freego</button>' +
+                          '<button onclick="location.href = \'profil.html?userID=' + products[i].user.id + '\';">Voir le freego</button>' +
                         '</div>' +
                       '</div>' +
                     '</div>' +

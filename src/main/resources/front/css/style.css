@@ -79,20 +79,39 @@ h3, h6 {
     overflow: hidden;
 }
 
-#fruitsLegumes {
+#rayonNum1 {
     background-image: url("../images/aliments.jpg");
 }
 
-#produitsLaitiers {
-    background-image: url("../images/produits_laitiers.jpg");
+#rayonNum2 {
+    background-image: url("../images/rayons/produits_laitiers.jpg");
 }
 
-#conserves {
-    background-image: url("../images/conserves.jpg");
+#rayonNum3 {
+    background-image: url("../images/rayons/conserves.jpg");
 }
 
-#produitsSecs {
-    background-image: url("../images/produits_secs.jpg");
+#rayonNum4 {
+    background-image: url("../images/rayons/produits_secs.jpg");
+}
+
+#rayonNum5 {
+    background-image: url("../images/rayons/hygiene.png");
+    background-position: center;
+}
+
+#rayonNum6 {
+    background-image: url("../images/rayons/produits_entretien.png");
+    background-position: center;
+}
+
+#rayonNum7 {
+    background-image: url("../images/rayons/animalerie.jpeg");
+    background-position: center;
+}
+
+#rayonNum8 {
+    background-image: url("../images/rayons/boissons_non_alcool.png");
 }
 
 .rayon .image {

@@ -1,29 +1,13 @@
-function searchProduct() {
-	let input = document.getElementById("searchBar").value.toLowerCase();
-	let products = document.getElementsByClassName('product');
-	for (let i = 0; i < products.length; i++) {
-		if (!products[i].getElementsByClassName("card-title")[0].innerHTML.toLowerCase().includes(input)) {
-			products[i].classList.add("noSearch");
-			products[i].style.visibility = "hidden";
-		}
-		else {
-			products[i].classList.remove("noSearch");
-			products[i].style.visibility = "visible";
-		}
-	}
-}
-
 function searchRayon() {
 	let input = document.getElementById("searchBar").value.toLowerCase();
-	let products = document.getElementsByClassName('rayon');
-	for (let i = 0; i < products.length; i++) {
-		if (!products[i].querySelector("h6").innerHTML.toLowerCase().includes(input)) {
-			products[i].classList.add("noSearch");
-			products[i].style.visibility = "hidden";
+	let productsTmp = document.getElementsByClassName('productTitle');
+	for (let i = 0; i < productsTmp.length; i++) {
+		const productContainer = productsTmp[i].parentElement.parentElement.parentElement;
+		if (!productsTmp[i].innerHTML.toLowerCase().includes(input)) {
+			productContainer.classList.add("noSearch");
 		}
 		else {
-			products[i].classList.remove("noSearch");
-			products[i].style.visibility = "visible";
+			productContainer.classList.remove("noSearch");
 		}
 	}
 }
@@ -43,33 +27,13 @@ function searchUser() {
 	}
 }
 
-function fBurgerMenu() {
-	const burgerMenu = document.querySelector("#burgerMenu");
-	if (burgerMenu.style.display == 'none') {
-		burgerMenu.style.display = 'block';
+function fDisplayUnderMenu(id) {
+	const underMenu = document.querySelector(id);
+	if (underMenu.style.display == 'none') {
+		underMenu.style.display = 'block';
 	}
 	else {
-		burgerMenu.style.display = 'none';
-	}
-}
-
-function fCategSelect() {
-	const categSelect = document.querySelector("#categSelect");
-	if (categSelect.style.display == 'none') {
-		categSelect.style.display = 'block';
-	}
-	else {
-		categSelect.style.display = 'none';
-	}
-}
-
-function fEtatSelect() {
-	const etatSelect = document.querySelector("#etatSelect");
-	if (etatSelect.style.display == 'none') {
-		etatSelect.style.display = 'block';
-	}
-	else {
-		etatSelect.style.display = 'none';
+		underMenu.style.display = 'none';
 	}
 }
 

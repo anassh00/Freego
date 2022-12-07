@@ -34,43 +34,13 @@
       </div>
     </div>
     <div style="height: 60px"></div>
-    <div class="section m-3">
-      <div class="form-group">
-        <input class="my-3" type="text form-control" onkeyup="searchRayon()" id="searchBar" placeholder="Rechercher un rayon..."/>
-        <i class="material-icons" id="searchBarLogo">search</i>
-      </div>
-      <div class="rayons">
+    <div class="m-3">
+      <div class="rayons mt-3">
         <h3 id="rayonTitle"><b>Rayons</b></h3>
-        <a href="rayon.html">
-          <div id="fruitsLegumes" class="rayon">
-            <div class="row" style="height:75%;"></div>
-            <div class="row title">
-              <h6 class="mx-3">Fruits et légumes</h6>
-            </div>
-          </div>
-        </a>
-        <div id="produitsLaitiers" class="rayon">
-          <div class="row" style="height:75%;"></div>
-          <div class="row title">
-            <h6 class="mx-3">Produits laitiers</h6>
-          </div>
-        </div>
-        <div id="conserves" class="rayon">
-          <div class="row" style="height:75%;"></div>
-          <div class="row title">
-            <h6 class="mx-3">Conserves</h6>
-          </div>
-        </div>
-        <div id="produitsSecs" class="rayon">
-          <div class="row" style="height:75%;"></div>
-          <div class="row title">
-            <h6 class="mx-3">Produits secs</h6>
-          </div>
-        </div>
       </div>
     </div>  
     
-    <div style="height:50px"></div>
+    <div style="height:60px"></div>
     <div id="footNavBar"></div>
 
     <!-- Bootstrap Script -->
@@ -94,7 +64,7 @@
             for(let i = 0; i < response.length; i++) {
               rayons.innerHTML += '' +
                 '<a href="rayon.html?catID=' + response[i].id + '">' +
-                  '<div class="rayon">' +
+                  '<div id="rayonNum' + response[i].id + '" class="rayon">' +
                     '<div class="row" style="height:75%;"></div>' +
                     '<div class="row title">' +
                       '<h6 class="mx-3">' + response[i].name + '</h6>' +
