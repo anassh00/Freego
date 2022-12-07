@@ -1,4 +1,4 @@
 Manifest-Version: 1.0
-Main-Class: com.app.gestionProjectBackend
+Main-Class: com.app.gestionProjectBackend.GestionProjectBackendApplication
 Class-Path: 
 
