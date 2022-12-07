@@ -45,6 +45,9 @@
     #geolocalise i {
       font-size: 20px;
     }
+    #latitude, #longitude {
+      width: 100%;
+    }
   </style>
 </head>
 <body>
@@ -93,15 +96,19 @@
       </div>
       <hr class="mx-3" style="color: white; opacity: 1;">
       <div class="row mx-3">
-        <label for="phone" style="color: white;">Adresse (latitude)</label>
-        <br>
-        <input type="number" id="latitude" min="-90" max="+90"/>
-      </div>
-      <hr class="mx-3" style="color: white; opacity: 1;">
-      <div class="row mx-3">
-        <label for="phone" style="color: white;">Adresse (longitude)</label>
-        <br>
-        <input type="number" id="longitude" min="-180" max="+180"/>
+        <div class="row">
+          <label style="color: white;">Adresse</label>
+        </div>
+        <div class="col" style="border-right: 1px solid white">
+          <label for="latitude" style="color: white; font-size: 12px;">Latitude</label>
+          <br>
+          <input type="text" id="latitude"/>
+        </div>
+        <div class="col">
+          <label for="longitude" style="color: white; font-size: 12px;">Longitude</label>
+          <br>
+          <input type="text" id="longitude"/>
+        </div>
       </div>
       <div class="row mx-3" style="display: flex; justify-content: center; margin-top: 10px;">
         <button class="btn btn_submit mx-3" id="geolocalise" onclick="fGetLocation()"><i class="material-icons">my_location</i> Me géolocaliser</button>

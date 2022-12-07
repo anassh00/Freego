@@ -108,23 +108,32 @@
             </span>
         </div>
         <br>
-        <div class="field field_v1">
-            <label for="latitude" class="ha-screen-reader">Adresse (latitude)</label>
-            <input type="text" id="latitude" class="field__input" placeholder="">
-            <span class="field__label-wrap" aria-hidden="true">
-                <span class="field__label">Adresse (latitude)</span>
-            </span>
+        <div class="row">
+            <div class="row">
+                <span style="color: white; margin-left: calc(20% + 16px);">Adresse</span>
+            </div>
+            <div class="row" style="margin: 0">
+                <div class="col" style="display: flex; justify-content: right">
+                    <div class="field field_v1" style="margin-right: 0;">
+                        <label for="latitude" class="ha-screen-reader">Latitude</label>
+                        <input type="text" id="latitude" class="field__input" placeholder="">
+                        <span class="field__label-wrap" aria-hidden="true">
+                            <span class="field__label" style="font-size: 12px">Latitude</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="field field_v1" style="margin-left: 0;">
+                        <label for="longitude" class="ha-screen-reader">Longitude</label>
+                        <input type="text" id="longitude" class="field__input" placeholder="">
+                        <span class="field__label-wrap" aria-hidden="true">
+                        <span class="field__label" style="font-size: 12px">Longitude</span>
+                    </span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <br>
-        <div class="field field_v1">
-            <label for="longitude" class="ha-screen-reader">Adresse (longitude)</label>
-            <input type="text" id="longitude" class="field__input" placeholder="">
-            <span class="field__label-wrap" aria-hidden="true">
-                <span class="field__label">Adresse (longitude)</span>
-            </span>
-        </div>
-        <br>
-        <div style="display: flex; justify-content: center; margin-top: 10px;">
+        <div style="display: flex; justify-content: center;">
             <button class="btn btn_submit mx-3" id="geolocalise" onclick="fGetLocation()"><i class="material-icons">my_location</i> Me géolocaliser</button>
         </div>
         <div class="field field_v1">

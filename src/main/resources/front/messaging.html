@@ -85,6 +85,7 @@
                         console.log(response);
                         for(let i = 0; i < response.length; i++) {
                             if(response[i].id != sessionStorage.getItem('userID')) {
+                                const date = new Date();
                                 messages.innerHTML += "" +
                                     "<a href=\"javascript:void(0)\" onclick=\"sessionStorage.setItem('lastUrl', location.href); location.href='message.html?userID=" + response[i].id + "';\">" +
                                     "   <div class=\"row message\">" +
@@ -95,7 +96,7 @@
                                     "            <h5>" + response[i].first_name + " " + response[i].last_name + "</h5>" +
                                     "       </div>" +
                                     "       <div class=\"col-auto\">" +
-                                    "           <span>Heure</span>" +
+                                    "           <span>" + date.getHours() + ":" + date.getMinutes() + "</span>" +
                                     "       </div>" +
                                     "    </div>" +
                                     "</a>";
