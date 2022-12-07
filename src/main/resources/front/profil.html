@@ -19,6 +19,10 @@
         width: 100px;
         border-radius: 50px;
       }
+      #lienSignalement {
+        color: gray;
+        font-size: 14px;
+      }
     </style>
 
     <title>Profil - Freego</title>
@@ -46,21 +50,26 @@
           </div>
         </div>
         <div class="row">
-          <p id="biographie">Toujours à la recherche d’expériences gustatives détonnantes, il m’arrive d’acheter des produits que je n’utilise pas au final ou des produits que je n’aime pas finalement, a contrario je suis curieuse de découvrir des produits que je ne connais pas si vous ne les utilisez pas</p>
+          <p id="biographie"></p>
         </div>
         <hr>
         <div id="freegoContainer">
           <h6></h6>
         </div>
         <hr>
+        <!--
         <div id="favorisContainer" class="row" style="display: none;">
           <h6>Mes favoris</h6>
         </div>
+        -->
         <div id="modifProfilContainer" class="row" style="display: none; justify-content: center">
           <button class="btn btnModifProfil" onclick="location.href='modifProfil.html'"><i class="material-icons iconButton">edit</i>Modifier mon profil</button>
         </div>
         <div id="messageContainer" class="row" style="display: none; justify-content: center">
           <button class="btn btnModifProfil" style="display: flex; justify-content: center;">Envoyer un message</button>
+        </div>
+        <div id="lienSignalementContainer" class="p-3" style="display: none; justify-content: center">
+          <a href="javascript:void(0)" id="lienSignalement">Signaler cet utilisateur</a>
         </div>
       </div>
       <div id="footNavBar"></div>
@@ -95,22 +104,22 @@
             if(userID == sessionStorage.getItem('userID')) {
               $.ajax(getUserById(sessionStorage.getItem('userID'))).done(function (response) {
                 document.querySelector("#prenomNom").innerHTML = "<b>" + response.first_name + " " + response.last_name + "</b>";
-                document.querySelector("#biographie").innerHTML = response.biographie == null || response.biographie == "" ? "Vous n'avez pas encore de biographie !" : response.biographie;
+                document.querySelector("#biographie").innerHTML = response.biographie == null || response.biographie == "" ? "<i>Vous n'avez pas encore de biographie !</i>" : response.biographie;
                 document.querySelector("#freegoContainer").querySelector("h6").innerHTML = "Mon freego";
-                document.querySelector("#favorisContainer").style.display = 'block';
+                // document.querySelector("#favorisContainer").style.display = 'block';
                 document.querySelector("#modifProfilContainer").style.display = 'flex';
               });
             } else {
               $.ajax(getUserById(userID)).done(function (response) {
                 document.querySelector("#prenomNom").innerHTML = "<b>" + response.first_name + " " + response.last_name + "</b>";
-                document.querySelector("#biographie").innerHTML = response.biographie == null || response.biographie == "" ? "Cet utilisateur n'a pas encore de biographie !" : response.biographie;
+                document.querySelector("#biographie").innerHTML = response.biographie == null || response.biographie == "" ? "<i>Cet utilisateur n'a pas encore de biographie !</i>" : response.biographie;
                 document.querySelector("#freegoContainer").querySelector("h6").innerHTML = "Freego de " + response.first_name;
                 document.querySelector("#messageContainer").style.display = 'flex';
                 document.querySelector("#messageContainer").querySelector("button").onclick = function() {
                   sessionStorage.setItem('lastUrl', location.href);
                   location.href = "message.html?userID=" + response.id;
                 };
-
+                document.querySelector("#lienSignalementContainer").style.display = 'flex';
               });
             }
             $.ajax(getProductsByUserId(userID)).done(function (response) {

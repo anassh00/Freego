@@ -43,28 +43,6 @@ function inscription(username, mdp, email, phone, first_name, last_name, address
     });
 }
 
-function saveProduct(desc, name, etat, categoryId) {
-    const settings = {
-        "url": "http://localhost:8080/api/product/save?category_id="+categoryId,
-        "method": "POST",
-        "timeout": 0,
-        "headers": {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer " + sessionStorage.getItem("userToken"),
-        },
-        "data": JSON.stringify({
-            "description": desc,
-            "name": name,
-            "quantity_stock" : 1,
-            "etat": etat,
-        }),
-    };
-
-    $.ajax(settings).done(function (response) {
-       console.log(response);
-    });
-}
-
 function getProductById(productId) {
     return {
         "url": "http://localhost:8080/api/product/getProduct?id="+productId,

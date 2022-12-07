@@ -76,13 +76,15 @@
         <div class="col-auto">
           <img class="userImage" src="images/person_profile.png"/>
         </div>
-        <div class="col">
+        <div class="col" style="display: flex; align-items: center;">
           <div id="prenomNom" class="row"></div>
+          <!--
           <div class="row">
             Notation
           </div>
+          -->
         </div>
-        <div class="col-auto" style="display: flex; align-items: center">
+        <div id="sendMessageContainer" class="col-auto" style="display: none; align-items: center">
           <button class="btn_submit" onclick="fSendMessage()" style="width: fit-content">Envoyer un message</button>
         </div>
       </div>
@@ -91,18 +93,11 @@
       <h3></h3>
       <h6 id="etatProduit"></h6>
       <div id="btnReserv" class="my-3">
-        <button class="btn btnModifProfil" style="justify-content: center">Réserver</button>
+        <button id="btnResMod" class="btn btnModifProfil" style="justify-content: center">Réserver</button>
       </div>
       <h6>Description du produit</h6>
       <p></p>
     </div>
-    <!--
-    <div class="row m-3">
-      <h2>Emplacement</h2>
-      <div id="map"></div>
-      <span id="coord"></span>
-    </div>
-    -->
 
     <!-- Bootstrap Script -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
@@ -147,7 +142,6 @@
         if(sessionStorage.getItem('userID') == null) {
           location.href = "connexion.html";
         } else {
-          //initMap();
           const url = new URL(location.href);
           const search_params = new URLSearchParams(url.search);
           if(search_params.has('productID')) {
@@ -159,36 +153,22 @@
               produitContainer.querySelector("h3").innerHTML = product.name;
               produitContainer.querySelector("#etatProduit").innerHTML = product.etat;
               produitContainer.querySelector("p").innerHTML = product.description;
+              if(product.user.id != sessionStorage.getItem('userID')) {
+                document.querySelector("#sendMessageContainer").style.display = 'flex';
+                document.querySelector("#btnResMod").innerHTML = 'Réserver';
+                document.querySelector("#btnResMod").onclick = function() {
+
+                }
+              } else {
+                document.querySelector("#btnResMod").innerHTML = 'Modifier';
+                document.querySelector("#btnResMod").onclick = function() {
+                  location.href = "modifProduit.html?productID=" + productID;
+                }
+              }
             });
           }
-
         }
       }
     </script>
-    <!--
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcoRMlVkWxBqcTTQ25AorH_PQCpZA_Wfc" defer></script>
-
-    <script>
-      // Initialize and add the map
-      function initMap() {
-        // The location of Uluru
-        const uluru = { lat: 45.7235113, lng: 4.893547 };
-        // The map, centered at Uluru
-        const map = new google.maps.Map(document.getElementById("map"), {
-          zoom: 12,
-          center: uluru,
-        });
-        // The marker, positioned at Uluru
-        const marker = new google.maps.Marker({
-          position: uluru,
-          map: map,
-        });
-        document.querySelector("#coord").innerHTML = "<b>Latitude</b> : " + uluru.lat + "<br> <b>Longitude</b> : " + uluru.lng;
-      }
-
-      window.initMap = initMap;
-
-    </script>
-    -->
   </body>
 </html>
