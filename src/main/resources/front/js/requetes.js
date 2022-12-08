@@ -166,6 +166,22 @@ function updateUserInfo(id_user, pseudo, first_name, last_name, biographie, lati
       };
 }
 
+function updateUserImage(id_user, entity_name) {
+    // NB : si un attribut est envoyé comme null le backend va garder l'ancienne valeur enregistrée sur la base
+    return {
+        "url": urlBack + "user/update?id="+id_user,
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+            "Authorization": "Bearer " + sessionStorage.getItem("userToken"),
+            "Content-Type": "application/json"
+        },
+        "data": JSON.stringify({
+            "entity_name": entity_name,
+        }),
+    };
+}
+
 function getDiscussion(idReceiver){
     return {
         "url": urlBack + "message/getDiscussion?idReceiver="+idReceiver,
@@ -229,8 +245,8 @@ function getCategoryById(id) {
 }
 
 function getUserImage(userId){
-    var settings = {
-        "url": "http://localhost:8080/api/get/image/user/"+userId,
+    return {
+        "url": urlBack + "get/image/user/"+userId,
         "method": "GET",
         "timeout": 0,
         "headers": {
@@ -238,16 +254,12 @@ function getUserImage(userId){
           "Authorization": "Bearer " + sessionStorage.getItem("userToken")
         },
       };
-      
-      $.ajax(settings).done(function (response) {
-        console.log(response);
-      });
 }
 
 
 function getUserProduct(productId){
     var settings = {
-        "url": "http://localhost:8080/api/get/image/product/"+productId,
+        "url": urlBack + "get/image/product/"+productId,
         "method": "GET",
         "timeout": 0,
         "headers": {
@@ -263,11 +275,10 @@ function getUserProduct(productId){
 
 function saveImage(formData){
     return {
-      "url": "http://localhost:8080/api/upload/image",
+      "url": urlBack + "upload/image",
       "method": "POST",
       "timeout": 0,
       "headers": {
-        "Content-Type": "application/json",
         "Authorization": "Bearer " + sessionStorage.getItem("userToken")
       },
       "processData": false,
