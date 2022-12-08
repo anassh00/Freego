@@ -102,6 +102,7 @@
         <div class="row" style="text-align: center;">
             <span style="color: white; font-size: 10px;">Si non renseigné, il sera de la forme <i>prénom.nom</i></span>
         </div>
+        <!--
         <div class="field field_v1">
             <label for="email" class="ha-screen-reader">Email</label>
             <input type="email" id="email" class="field__input" placeholder="">
@@ -117,6 +118,7 @@
                 <span class="field__label">Téléphone</span>
             </span>
         </div>
+        -->
         <br>
         <div class="row">
             <div class="row">
@@ -184,14 +186,14 @@
                 } else {
                     pseudo = document.querySelector("#pseudo").value;
                 }
-                let email = document.querySelector("#email").value;
-                let tel = document.querySelector("#phone").value;
+                //let email = document.querySelector("#email").value;
+                //let tel = document.querySelector("#phone").value;
                 let latitude = document.querySelector("#latitude").value;
                 let longitude = document.querySelector("#longitude").value;
                 let mdp = document.querySelector("#password").value;
                 let confMdp = document.querySelector("#confirm-password").value;
                 if(mdp == confMdp) {
-                    $.ajax(inscription(firstname, name, pseudo, email, tel, latitude, longitude, mdp)).done(function (response) {
+                    $.ajax(inscription(firstname, name, pseudo, latitude, longitude, mdp)).done(function (response) {
                         if(response.message == "User registered successfully!") {
                             window.location.href = "connexion.html";
                         }

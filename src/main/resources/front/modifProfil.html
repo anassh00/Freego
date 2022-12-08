@@ -80,6 +80,7 @@
         <input type="text" id="nom"/>
       </div>
       <hr class="mx-3" style="color: white; opacity: 1;">
+      <!--
       <div class="row mx-3">
         <label for="email" style="color: white;">Email</label>
         <br>
@@ -92,6 +93,7 @@
         <input type="phone" id="phone"/>
       </div>
       <hr class="mx-3" style="color: white; opacity: 1;">
+      -->
       <div class="row mx-3">
         <label for="biographie" style="color: white;">Biographie</label>
         <br>
@@ -155,8 +157,8 @@
           document.querySelector("#pseudo").value = response.username;
           document.querySelector("#prenom").value = response.first_name;
           document.querySelector("#nom").value = response.last_name;
-          document.querySelector("#email").value = response.email;
-          document.querySelector("#phone").value = response.phone;
+          //document.querySelector("#email").value = response.email;
+          //document.querySelector("#phone").value = response.phone;
           document.querySelector("#biographie").value = response.biographie;
           document.querySelector("#latitude").value = response.latitude;
           document.querySelector("#longitude").value = response.longitude;
@@ -171,13 +173,13 @@
       const pseudo = document.querySelector("#pseudo").value;
       const prenom = document.querySelector("#prenom").value;
       const nom = document.querySelector("#nom").value;
-      const email = document.querySelector("#email").value;
-      const phone = document.querySelector("#phone").value;
+      //const email = document.querySelector("#email").value;
+      //const phone = document.querySelector("#phone").value;
       const biographie = document.querySelector("#biographie").value;
       const latitude = document.querySelector("#latitude").value;
       const longitude = document.querySelector("#longitude").value;
       const motDePasse = document.querySelector("#motDePasse").value;
-      $.ajax(updateUserInfo(sessionStorage.getItem('userID'), pseudo, prenom, nom, email, phone, biographie, latitude, longitude, (motDePasse != "" ? motDePasse : null) )).done(function (response) {
+      $.ajax(updateUserInfo(sessionStorage.getItem('userID'), pseudo, prenom, nom, biographie, latitude, longitude, (motDePasse != "" ? motDePasse : null) )).done(function (response) {
         console.log(response);
       });
     }

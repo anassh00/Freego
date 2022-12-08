@@ -15,7 +15,7 @@ function connexion(pseudo, mdp) {
     };
 }
 
-function inscription(first_name, last_name, username, email, phone, latitude, longitude, mdp) {
+function inscription(first_name, last_name, username, latitude, longitude, mdp) {
     return {
         "url": urlBack + "auth/signup",
         "method": "POST",
@@ -27,8 +27,8 @@ function inscription(first_name, last_name, username, email, phone, latitude, lo
             "first_name" : first_name,
             "last_name" : last_name,
             "username": username,
-            "email" : email,
-            "phone" : phone,
+            "email" : "",
+            "phone" : "",
             "latitude" : latitude,
             "longitude" : longitude,
             "password": mdp,
@@ -140,7 +140,7 @@ function getProductsByCategory(id_category){
       };
 }
 
-function updateUserInfo(id_user, pseudo, first_name, last_name, email, phone, biographie, latitude, longitude, password){
+function updateUserInfo(id_user, pseudo, first_name, last_name, biographie, latitude, longitude, password){
     // NB : si un attribut est envoyé comme null le backend va garder l'ancienne valeur enregistrée sur la base
     return {
         "url": urlBack + "user/update?id="+id_user,
@@ -154,8 +154,8 @@ function updateUserInfo(id_user, pseudo, first_name, last_name, email, phone, bi
             "username": pseudo,
             "first_name": first_name,
             "last_name": last_name,
-            "email": email,
-            "phone": phone,
+            "email": "",
+            "phone": "",
             "biographie": biographie,
             "latitude": latitude,
             "longitude": longitude,
