@@ -1,6 +1,8 @@
 package com.app.gestionProjectBackend.controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,15 +66,33 @@ public class ImageController {
   }
   
   @GetMapping(path = {"/api/get/image/product/{id}"})
-  public Image getImageProduct(@PathVariable("id") Long id) throws IOException {
+  public List<Image> getImageProduct(@PathVariable("id") Long id) throws IOException {
 
 	  Product p = productRepository.findById(id).get();
       final Optional<Image> dbImage = imageRepository.findByEntity_name(p.getEntity_name());
+      Image img = Image.builder()
+      .name(dbImage.get().getName())
+      .type(dbImage.get().getType())
+      .image(ImageUtility.decompressImage(dbImage.get().getImage())).build();
+      
+      final Optional<Image> dbImage1 = imageRepository.findByEntity_name(p.getEntity_name_1());
+      Image img1 = Image.builder()
+      .name(dbImage1.get().getName())
+      .type(dbImage1.get().getType())
+      .image(ImageUtility.decompressImage(dbImage1.get().getImage())).build();
 
-      return Image.builder()
-              .name(dbImage.get().getName())
-              .type(dbImage.get().getType())
-              .image(ImageUtility.decompressImage(dbImage.get().getImage())).build();
+      final Optional<Image> dbImage2 = imageRepository.findByEntity_name(p.getEntity_name_2());
+      Image img2 = Image.builder()
+      .name(dbImage2.get().getName())
+      .type(dbImage2.get().getType())
+      .image(ImageUtility.decompressImage(dbImage2.get().getImage())).build();
+      
+      List<Image> list = new ArrayList<>();
+      list.add(img);
+      list.add(img1);
+      list.add(img2);
+      
+      return list;
   }
   
   @GetMapping(path = {"/api/get/image/user/{id}"})

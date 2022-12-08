@@ -118,11 +118,11 @@ public class AuthController {
 						.body(new MessageResponse("Error: Username is already taken!"));
 			}
 	
-			if (userRepository.existsByEmail(userDto.getEmail())) {
-				return ResponseEntity
-						.badRequest()
-						.body(new MessageResponse("Error: Email is already in use!"));
-			}
+//			if (userRepository.existsByEmail(userDto.getEmail())) {
+//				return ResponseEntity
+//						.badRequest()
+//						.body(new MessageResponse("Error: Email is already in use!"));
+//			}
 			User user = new User();
 			user.setUsername(userDto.getUsername());
 			user.setEmail(userDto.getEmail());

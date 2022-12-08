@@ -41,7 +41,25 @@ public class Product implements Serializable{
 	private String etat;
 	private int quantity_stock;
 	private String entity_name;
+	private String entity_name_1;
+	private String entity_name_2;
 	
+	public String getEntity_name_1() {
+		return entity_name_1;
+	}
+
+	public void setEntity_name_1(String entity_name_1) {
+		this.entity_name_1 = entity_name_1;
+	}
+
+	public String getEntity_name_2() {
+		return entity_name_2;
+	}
+
+	public void setEntity_name_2(String entity_name_2) {
+		this.entity_name_2 = entity_name_2;
+	}
+
 	@Enumerated(EnumType.STRING)
 	@Column(length = 20) 
 	private EProductStatus status;
