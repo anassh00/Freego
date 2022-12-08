@@ -125,7 +125,7 @@ public class AuthController {
 //			}
 			User user = new User();
 			user.setUsername(userDto.getUsername());
-			user.setEmail(userDto.getEmail());
+			user.setEmail(userDto.getUsername());
 			user.setAddress(userDto.getAddress());
 			user.setFirst_name(userDto.getFirst_name());
 			user.setLast_name(userDto.getLast_name());
