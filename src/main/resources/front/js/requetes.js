@@ -1,7 +1,7 @@
 const urlBack = "http://localhost:8080/api/"
 
 function connexion(pseudo, mdp) {
-    const settings = {
+    return {
         "url": urlBack + "auth/login",
         "method": "POST",
         "timeout": 0,
@@ -13,14 +13,10 @@ function connexion(pseudo, mdp) {
             "password": mdp
         }),
     };
-
-    $.ajax(settings).done(function (response) {
-       console.log(response);
-    });
 }
 
-function inscription(username, mdp, email, phone, first_name, last_name, address, longitude, latitude) {
-    const settings = {
+function inscription(first_name, last_name, username, email, phone, latitude, longitude, mdp) {
+    return {
         "url": urlBack + "auth/signup",
         "method": "POST",
         "timeout": 0,
@@ -28,21 +24,17 @@ function inscription(username, mdp, email, phone, first_name, last_name, address
             "Content-Type": "application/json"
         },
         "data": JSON.stringify({
-            "username": username,
-            "password": mdp,
-            "email" : email,
-            "phone" : phone,
             "first_name" : first_name,
             "last_name" : last_name,
-            "address" : address,
+            "username": username,
+            "email" : email,
+            "phone" : phone,
+            "latitude" : latitude,
             "longitude" : longitude,
-            "latitude" : latitude
+            "password": mdp,
+            "roles": ["user"]
         }),
     };
-
-    $.ajax(settings).done(function (response) {
-       console.log(response);
-    });
 }
 
 function getProductById(productId) {
