@@ -77,6 +77,14 @@
         </div>
         <h1 class="m-3" style="text-align: center">Bienvenue</h1>
         <div class="field field_v1">
+            <label for="first-name" class="ha-screen-reader">Prénom</label>
+            <input id="first-name" class="field__input" placeholder="">
+            <span class="field__label-wrap" aria-hidden="true">
+                <span class="field__label">Prénom</span>
+            </span>
+        </div>
+        <br>
+        <div class="field field_v1">
             <label for="last-name" class="ha-screen-reader">Nom</label>
             <input id="last-name" class="field__input" placeholder="">
             <span class="field__label-wrap" aria-hidden="true">
@@ -85,13 +93,14 @@
         </div>
         <br>
         <div class="field field_v1">
-            <label for="first-name" class="ha-screen-reader">Prénom</label>
-            <input id="first-name" class="field__input" placeholder="">
+            <label for="pseudo" class="ha-screen-reader">Pseudo</label>
+            <input id="pseudo" class="field__input" placeholder="">
             <span class="field__label-wrap" aria-hidden="true">
-                <span class="field__label">Prénom</span>
+                <span class="field__label">Pseudo</span>
             </span>
         </div>
         <br>
+        <span>Si non renseigné, il sera de la forme <i>prénom.nom</i></span>
         <div class="field field_v1">
             <label for="email" class="ha-screen-reader">Email</label>
             <input type="email" id="email" class="field__input" placeholder="">
@@ -164,33 +173,22 @@
         <script src="js/jQuery.js"></script>
         <script>
             function sendForm() {
-                let name = document.querySelector("#last-name").value;
                 let firstname = document.querySelector("#first-name").value;
+                let name = document.querySelector("#last-name").value;
+                let pseudo;
+                if(document.querySelector("#pseudo").value == "") {
+                    pseudo = firstname.toLowerCase() + "." + name.toLowerCase();
+                } else {
+                    pseudo = document.querySelector("#pseudo").value;
+                }
                 let email = document.querySelector("#email").value;
                 let tel = document.querySelector("#phone").value;
-
+                let latitude = document.querySelector("#latitude").value;
+                let longitude = document.querySelector("#longitude").value;
                 let mdp = document.querySelector("#password").value;
                 let confMdp = document.querySelector("#confirm-password").value;
                 if(mdp == confMdp) {
-                    const settings = {
-                        "url": "http://localhost:8080/api/auth/signup",
-                        "method": "POST",
-                        "timeout": 0,
-                        "headers": {
-                            "Content-Type": "application/json"
-                        },
-                        "data": JSON.stringify({
-                            "username": firstname.toLowerCase() + "." + name.toLowerCase(),
-                            "first_name": firstname,
-                            "last_name": name,
-                            "email": email,
-                            "password": mdp,
-                            "phone": tel,
-                            "roles": ["user"]
-                        }),
-                    };
-
-                    $.ajax(settings).done(function (response) {
+                    $.ajax(inscription(firstname, name, pseudo, email, tel, latitude, longitude, mdp)).done(function (response) {
                         if(response.message == "User registered successfully!") {
                             window.location.href = "connexion.html";
                         }

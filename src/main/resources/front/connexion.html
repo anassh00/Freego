@@ -83,20 +83,7 @@
             function sendForm() {
                 let pseudo = document.querySelector("#pseudo").value;
                 let mdp = document.querySelector("#password").value;
-                const settings = {
-                    "url": "http://localhost:8080/api/auth/login",
-                    "method": "POST",
-                    "timeout": 0,
-                    "headers": {
-                        "Content-Type": "application/json"
-                    },
-                    "data": JSON.stringify({
-                        "username": pseudo,
-                        "password": mdp
-                    }),
-                };
-
-                $.ajax(settings).done(function (response) {
+                $.ajax(connexion(pseudo, mdp)).done(function (response) {
                     sessionStorage.setItem('userID', response.id);
                     sessionStorage.setItem('userToken', response.token);
                     window.location.href = "home.html";
