@@ -63,6 +63,9 @@
       #btnModSupp {
         display: none;
       }
+      #btnModSupp button {
+        width: 100%;
+      }
     </style>
   </head>
   <body>
@@ -81,7 +84,7 @@
       <div id="profilContainer" class="p-3">
         <div class="row">
           <div class="col-auto">
-            <img class="userImage" src="images/person_profile.png"/>
+            <img id="profilImage" class="userImage" src="images/person_profile.png"/>
           </div>
           <div class="col" style="display: flex; align-items: center;">
             <div id="prenomNom" class="row"></div>
@@ -172,8 +175,10 @@
           if(search_params.has('productID')) {
             const productID = search_params.get('productID');
             $.ajax(getProductById(productID)).done(function (product) {
-              console.log(product);
               userId = product.user.id;
+              $.ajax(getUserImage(userId)).done(function (response) {
+                document.querySelector("#profilImage").src = "data:image/png;base64," + response.image;
+              });
               document.querySelector("#prenomNom").innerHTML = product.user.first_name + " " + product.user.last_name;
               const produitContainer = document.querySelector("#produitContainer");
               produitContainer.querySelector("h3").innerHTML = product.name;

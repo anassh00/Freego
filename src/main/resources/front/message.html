@@ -66,7 +66,7 @@
                         <a href="javascript:void(0)" onclick="location.href = sessionStorage.getItem('lastUrl');"><i class="material-icons orangeIcon">keyboard_backspace</i></a>
                     </div>
                     <div class="col-auto">
-                        <img class="userImage" src="images/person_profile.png"/>
+                        <img id="profilImage" class="userImage" src="images/person_profile.png"/>
                     </div>
                     <div class="col">
                         <h6 id="prenomNom"></h6>
@@ -114,6 +114,9 @@
                     const search_params = new URLSearchParams(url.search);
                     if(search_params.has('userID')) {
                         userID = search_params.get('userID');
+                        $.ajax(getUserImage(userID)).done(function (response) {
+                            document.querySelector("#profilImage").src = "data:image/png;base64," + response.image;
+                        });
                         $.ajax(getUserById(userID)).done(function (user) {
                             document.querySelector("#prenomNom").innerHTML = user.first_name + " " + user.last_name;
                         });
