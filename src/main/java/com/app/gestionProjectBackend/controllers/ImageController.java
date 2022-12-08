@@ -64,27 +64,27 @@ public class ImageController {
   }
   
   @GetMapping(path = {"/api/get/image/product/{id}"})
-  public ResponseEntity<byte[]> getImageProduct(@PathVariable("id") Long id) throws IOException {
+  public Image getImageProduct(@PathVariable("id") Long id) throws IOException {
 
 	  Product p = productRepository.findById(id).get();
       final Optional<Image> dbImage = imageRepository.findByEntity_name(p.getEntity_name());
 
-      return ResponseEntity
-              .ok()
-              .contentType(MediaType.valueOf(dbImage.get().getType()))
-              .body(ImageUtility.decompressImage(dbImage.get().getImage()));
+      return Image.builder()
+              .name(dbImage.get().getName())
+              .type(dbImage.get().getType())
+              .image(ImageUtility.decompressImage(dbImage.get().getImage())).build();
   }
   
   @GetMapping(path = {"/api/get/image/user/{id}"})
-  public ResponseEntity<byte[]> getImageUser(@PathVariable("id") Long id) throws IOException {
+  public Image getImageUser(@PathVariable("id") Long id) throws IOException {
 
 	  User p = userRepository.findById(id).get();
       final Optional<Image> dbImage = imageRepository.findByEntity_name(p.getEntity_name());
-      
-      return ResponseEntity
-              .ok()
-              .contentType(MediaType.valueOf(dbImage.get().getType()))
-              .body(ImageUtility.decompressImage(dbImage.get().getImage()));
+
+      return Image.builder()
+              .name(dbImage.get().getName())
+              .type(dbImage.get().getType())
+              .image(ImageUtility.decompressImage(dbImage.get().getImage())).build();
   }
 
   @GetMapping(path = {"/api/get/image/{name}"})
