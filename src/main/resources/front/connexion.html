@@ -83,11 +83,12 @@
             function sendForm() {
                 let pseudo = document.querySelector("#pseudo").value;
                 let mdp = document.querySelector("#password").value;
-                $.ajax(connexion(pseudo, mdp)).done(function (response) {
-                    sessionStorage.setItem('userID', response.id);
-                    sessionStorage.setItem('userToken', response.token);
-                    window.location.href = "home.html";
-                });
+                $.ajax(connexion(pseudo, mdp))
+                    .done(function (response) {
+                        sessionStorage.setItem('userID', response.id);
+                        sessionStorage.setItem('userToken', response.token);
+                        window.location.href = "home.html";
+                    });
             }
         </script>
 </body>
