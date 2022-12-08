@@ -261,27 +261,23 @@ function getUserProduct(productId){
       });
 }
 
-function saveImage(name){
+function saveImage(formData){
     // name : le meme a envoyer dans entity_name pour produit/user
 var form = new FormData();
 form.append("image", fileInput.files[0], "/C:/Users/habia/Desktop/Il-parait-que-le-client-est-toujours-roi-FGRC-1536x864.jpg");
 form.append("name", name);
 
-var settings = {
-  "url": "http://localhost:8080/api/upload/image",
-  "method": "POST",
-  "timeout": 0,
-  "headers": {
-    "Content-Type": "application/json",
-    "Authorization": "Bearer " + sessionStorage.getItem("userToken")
-  },
-  "processData": false,
-  "mimeType": "multipart/form-data",
-  "contentType": false,
-  "data": form
-};
-
-$.ajax(settings).done(function (response) {
-  console.log(response);
-});
+    return {
+      "url": "http://localhost:8080/api/upload/image",
+      "method": "POST",
+      "timeout": 0,
+      "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + sessionStorage.getItem("userToken")
+      },
+      "processData": false,
+      "mimeType": "multipart/form-data",
+      "contentType": false,
+      "data": formData
+    };
 }

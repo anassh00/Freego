@@ -66,52 +66,57 @@
     </style>
   </head>
   <body>
-    <div id="imageContainer">
-      <div class="row mx-1" style="height: 5%";>
-        <a href="home.html"><i class="material-icons backArrow">keyboard_backspace</i></a>
-      </div>
-      <div class="row" style="height: 85%;"></div>
-      <div class="row" style="display: flex; justify-content: center">
-        <a href="javascript:void(0)" id="photo1" onclick="fChangePhoto(this);"><i class="material-icons">radio_button_checked</i></a>
-        <a href="javascript:void(0)" id="photo2" onclick="fChangePhoto(this);"><i class="material-icons">radio_button_unchecked</i></a>
-        <a href="javascript:void(0)" id="photo3" onclick="fChangePhoto(this);"><i class="material-icons">radio_button_unchecked</i></a>
-      </div>
-    </div>
-    <div id="profilContainer" class="p-3">
-      <div class="row">
-        <div class="col-auto">
-          <img class="userImage" src="images/person_profile.png"/>
+    <div class="allContent">
+      <div id="imageContainer">
+        <div class="row mx-1" style="height: 5%";>
+          <a href="home.html"><i class="material-icons backArrow">keyboard_backspace</i></a>
         </div>
-        <div class="col" style="display: flex; align-items: center;">
-          <div id="prenomNom" class="row"></div>
-          <!--
-          <div class="row">
-            Notation
+        <div class="row" style="height: 85%;"></div>
+        <div class="row" style="display: flex; justify-content: center">
+          <a href="javascript:void(0)" id="photo1" onclick="fChangePhoto(this);"><i class="material-icons">radio_button_checked</i></a>
+          <a href="javascript:void(0)" id="photo2" onclick="fChangePhoto(this);"><i class="material-icons">radio_button_unchecked</i></a>
+          <a href="javascript:void(0)" id="photo3" onclick="fChangePhoto(this);"><i class="material-icons">radio_button_unchecked</i></a>
+        </div>
+      </div>
+      <div id="profilContainer" class="p-3">
+        <div class="row">
+          <div class="col-auto">
+            <img class="userImage" src="images/person_profile.png"/>
           </div>
-          -->
+          <div class="col" style="display: flex; align-items: center;">
+            <div id="prenomNom" class="row"></div>
+            <!--
+            <div class="row">
+              Notation
+            </div>
+            -->
+          </div>
+          <div id="sendMessageContainer" class="col-auto" style="display: none; align-items: center">
+            <button class="btn_submit" onclick="fSendMessage()" style="width: fit-content">Envoyer un message</button>
+          </div>
         </div>
-        <div id="sendMessageContainer" class="col-auto" style="display: none; align-items: center">
-          <button class="btn_submit" onclick="fSendMessage()" style="width: fit-content">Envoyer un message</button>
+      </div>
+      <div id="produitContainer" class="m-3">
+        <h3></h3>
+        <h6 id="etatProduit"></h6>
+        <div id="btnReserv" class="my-3">
+          <button id="btnRes" class="btn btnModifProfil" style="justify-content: center">Réserver</button>
         </div>
+        <div id="btnModSupp" class="row">
+          <div class="col">
+            <button id="btnMod" class="btn btnModifProfil" style="justify-content: center">Modifier</button>
+          </div>
+          <div class="col">
+            <button id="btnSupp" class="btn btnModifProfil" style="justify-content: center">Supprimer</button>
+          </div>
+        </div>
+        <h6>Description du produit</h6>
+        <p></p>
       </div>
     </div>
-    <div id="produitContainer" class="m-3">
-      <h3></h3>
-      <h6 id="etatProduit"></h6>
-      <div id="btnReserv" class="my-3">
-        <button id="btnRes" class="btn btnModifProfil" style="justify-content: center">Réserver</button>
-      </div>
-      <div id="btnModSupp" class="row">
-        <div class="col">
-          <button id="btnMod" class="btn btnModifProfil" style="justify-content: center">Modifier</button>
-        </div>
-        <div class="col">
-          <button id="btnSupp" class="btn btnModifProfil" style="justify-content: center">Supprimer</button>
-        </div>
-      </div>
-      <h6>Description du produit</h6>
-      <p></p>
-    </div>
+
+    <!-- Ecran de chargement -->
+    <div id="ecranChargement"></div>
 
     <!-- Bootstrap Script -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
@@ -122,6 +127,11 @@
     <script src="js/jQuery.js"></script>
 
     <script>
+      $(function(){
+        $("#ecranChargement").load("ecranChargement.html");
+        $("#ecranChargement").fadeIn();
+      });
+
       let userId = -1;
 
       function fChangePhoto(item) {
@@ -181,6 +191,7 @@
                   location.href = "modifProduit.html?productID=" + productID;
                 }
               }
+              fFinChargement();
             });
           }
         }
