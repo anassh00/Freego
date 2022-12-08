@@ -1,6 +1,8 @@
+const urlBack = "http://localhost:8080/api/"
+
 function connexion(pseudo, mdp) {
     const settings = {
-        "url": "http://localhost:8080/api/auth/login",
+        "url": urlBack + "auth/login",
         "method": "POST",
         "timeout": 0,
         "headers": {
@@ -19,7 +21,7 @@ function connexion(pseudo, mdp) {
 
 function inscription(username, mdp, email, phone, first_name, last_name, address, longitude, latitude) {
     const settings = {
-        "url": "http://localhost:8080/api/auth/signup",
+        "url": urlBack + "auth/signup",
         "method": "POST",
         "timeout": 0,
         "headers": {
@@ -45,7 +47,7 @@ function inscription(username, mdp, email, phone, first_name, last_name, address
 
 function getProductById(productId) {
     return {
-        "url": "http://localhost:8080/api/product/getProduct?id="+productId,
+        "url": urlBack + "product/getProduct?id="+productId,
         "method": "GET",
         "timeout": 0,
         "async": false,
@@ -58,7 +60,7 @@ function getProductById(productId) {
 
 function getProductsByUserId(userId){
     return {
-        "url": "http://localhost:8080/api/product/getProductsByUserId?id="+userId,
+        "url": urlBack + "product/getProductsByUserId?id="+userId,
         "method": "GET",
         "timeout": 0,
         "headers": {
@@ -70,7 +72,7 @@ function getProductsByUserId(userId){
 
 function getAllProduct(){
     return {
-        "url": "http://localhost:8080/api/product/listProduct",
+        "url": urlBack + "product/listProduct",
         "method": "GET",
         "timeout": 0,
         "headers": {
@@ -82,7 +84,7 @@ function getAllProduct(){
 
 function getUserById(id) {
     return {
-        "url": "http://localhost:8080/api/user/getUser?id=" + id,
+        "url": urlBack + "user/getUser?id=" + id,
         "method": "GET",
         "timeout": 0,
         "headers": {
@@ -94,7 +96,7 @@ function getUserById(id) {
 
 function getAllUsers() {
     return {
-        "url": "http://localhost:8080/api/user/listUser",
+        "url": urlBack + "user/listUser",
         "method": "GET",
         "timeout": 0,
         "headers": {
@@ -106,7 +108,7 @@ function getAllUsers() {
 
 function addProduct(categoryId, etat, nom, description) {
     return {
-        "url": "http://localhost:8080/api/product/save?category_id=" + categoryId,
+        "url": urlBack + "product/save?category_id=" + categoryId,
         "method": "POST",
         "timeout": 0,
         "headers": {
@@ -123,7 +125,7 @@ function addProduct(categoryId, etat, nom, description) {
 
 function getAllCategory(){
     return {
-        "url": "http://localhost:8080/api/category/listCategory",
+        "url": urlBack + "category/listCategory",
         "method": "GET",
         "timeout": 0,
         "headers": {
@@ -135,7 +137,7 @@ function getAllCategory(){
 
 function getProductsByCategory(id_category){
     return {
-        "url": "http://localhost:8080/api/product/getProductsByCategory?id="+id_category,
+        "url": urlBack + "product/getProductsByCategory?id="+id_category,
         "method": "GET",
         "timeout": 0,
         "async": false,
@@ -149,7 +151,7 @@ function getProductsByCategory(id_category){
 function updateUserInfo(id_user, pseudo, first_name, last_name, email, phone, biographie, latitude, longitude, password){
     // NB : si un attribut est envoyé comme null le backend va garder l'ancienne valeur enregistrée sur la base
     return {
-        "url": "http://localhost:8080/api/user/update?id="+id_user,
+        "url": urlBack + "user/update?id="+id_user,
         "method": "POST",
         "timeout": 0,
         "headers": {
@@ -172,7 +174,7 @@ function updateUserInfo(id_user, pseudo, first_name, last_name, email, phone, bi
 
 function getDiscussion(idReceiver){
     return {
-        "url": "http://localhost:8080/api/message/getDiscussion?idReceiver="+idReceiver,
+        "url": urlBack + "message/getDiscussion?idReceiver="+idReceiver,
         "method": "GET",
         "timeout": 0,
         "headers": {
@@ -184,7 +186,7 @@ function getDiscussion(idReceiver){
 
 function sendMessage(idReceiver, message){
     return {
-        "url": "http://localhost:8080/api/message/saveMessage",
+        "url": urlBack + "message/saveMessage",
         "method": "POST",
         "timeout": 0,
         "headers": {
@@ -197,7 +199,7 @@ function sendMessage(idReceiver, message){
 
 function getDiscussionContactList(){
     return {
-        "url": "http://localhost:8080/api/message/getListOfContact",
+        "url": urlBack + "message/getListOfContact",
         "method": "GET",
         "timeout": 0,
         "headers": {
@@ -209,7 +211,7 @@ function getDiscussionContactList(){
 
 function reserveProduct(productId){
     return {
-        "url": "http://localhost:8080/api/order/save",
+        "url": urlBack + "order/save",
         "method": "POST",
         "timeout": 0,
         "headers": {
@@ -222,7 +224,7 @@ function reserveProduct(productId){
 
 function getCategoryById(id) {
     return {
-        "url": "http://localhost:8080/api/category/getCategory?id=" + id,
+        "url": urlBack + "category/getCategory?id=" + id,
         "method": "GET",
         "timeout": 0,
         "headers": {
