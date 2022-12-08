@@ -57,6 +57,12 @@
         font-weight: bold;
         font-size: 14px;
       }
+      #btnReserv {
+        display: none;
+      }
+      #btnModSupp {
+        display: none;
+      }
     </style>
   </head>
   <body>
@@ -93,7 +99,15 @@
       <h3></h3>
       <h6 id="etatProduit"></h6>
       <div id="btnReserv" class="my-3">
-        <button id="btnResMod" class="btn btnModifProfil" style="justify-content: center">Réserver</button>
+        <button id="btnRes" class="btn btnModifProfil" style="justify-content: center">Réserver</button>
+      </div>
+      <div id="btnModSupp" class="row">
+        <div class="col">
+          <button id="btnMod" class="btn btnModifProfil" style="justify-content: center">Modifier</button>
+        </div>
+        <div class="col">
+          <button id="btnSupp" class="btn btnModifProfil" style="justify-content: center">Supprimer</button>
+        </div>
       </div>
       <h6>Description du produit</h6>
       <p></p>
@@ -155,15 +169,15 @@
               produitContainer.querySelector("p").innerHTML = product.description;
               if(product.user.id != sessionStorage.getItem('userID')) {
                 document.querySelector("#sendMessageContainer").style.display = 'flex';
-                document.querySelector("#btnResMod").innerHTML = 'Réserver';
-                document.querySelector("#btnResMod").onclick = function() {
+                document.querySelector("#btnReserv").style.display = 'flex';
+                document.querySelector("#btnRes").onclick = function() {
                   $.ajax(reserveProduct(productID)).done(function () {
                     location.href = "message.html?userID=" + product.user.id;
                   });
                 }
               } else {
-                document.querySelector("#btnResMod").innerHTML = 'Modifier';
-                document.querySelector("#btnResMod").onclick = function() {
+                document.querySelector("#btnModSupp").style.display = 'flex';
+                document.querySelector("#btnMod").onclick = function() {
                   location.href = "modifProduit.html?productID=" + productID;
                 }
               }
