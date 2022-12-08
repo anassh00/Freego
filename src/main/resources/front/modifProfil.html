@@ -59,23 +59,24 @@
       <a href="javascript:void(0)" onclick="fUploadImage()" style="display: flex; justify-content: center; width: fit-content">
         <img id="profilImage" src="images/person_profile.png"/>
       </a>
-      <input type="file" id="uploaderImage" hidden/>
+      <input type="file" id="uploaderImage" accept="image/*" hidden/>
     </div>
     <div id="infoContainer">
       <div class="row mx-3">
         <label for="pseudo" style="color: white;">Pseudo</label>
         <br>
         <input type="text" id="pseudo"/>
+        <span style="font-size: 10px; color: white;">Si non renseigné, il sera de la forme <i>prénom.nom</i>.</span>
       </div>
       <hr class="mx-3" style="color: white; opacity: 1;">
       <div class="row mx-3">
-        <label for="prenom" style="color: white;">Prénom</label>
+        <label for="prenom" style="color: white;">Prénom*</label>
         <br>
         <input type="text" id="prenom"/>
       </div>
       <hr class="mx-3" style="color: white; opacity: 1;">
       <div class="row mx-3">
-        <label for="nom" style="color: white;">Nom</label>
+        <label for="nom" style="color: white;">Nom*</label>
         <br>
         <input type="text" id="nom"/>
       </div>
@@ -91,12 +92,12 @@
           <label style="color: white;">Adresse</label>
         </div>
         <div class="col" style="border-right: 1px solid white">
-          <label for="latitude" style="color: white; font-size: 12px;">Latitude</label>
+          <label for="latitude" style="color: white; font-size: 12px;">Latitude*</label>
           <br>
           <input type="text" id="latitude"/>
         </div>
         <div class="col">
-          <label for="longitude" style="color: white; font-size: 12px;">Longitude</label>
+          <label for="longitude" style="color: white; font-size: 12px;">Longitude*</label>
           <br>
           <input type="text" id="longitude"/>
         </div>
@@ -109,7 +110,7 @@
         <label for="motDePasse" style="color: white;">Mot de passe</label>
         <br>
         <input type="password" id="motDePasse"/>
-        <span style="font-size: 10px; color: white;">Si vous laissez le champ vide, le mot de passe ne sera pas modifié !</span>
+        <span style="font-size: 10px; color: white;">Si vous laissez le champ vide, le mot de passe ne sera pas modifié.</span>
       </div>
       <hr class="mx-3" style="color: white; opacity: 1;">
       <div class="row mx-3" style="display: flex; justify-content: center;">
@@ -154,16 +155,25 @@
     }
 
     function fSendInformation() {
-      const pseudo = document.querySelector("#pseudo").value;
-      const prenom = document.querySelector("#prenom").value;
-      const nom = document.querySelector("#nom").value;
+      const firstName = document.querySelector("#prenom").value;
+      const lastName = document.querySelector("#nom").value;
+      let pseudo;
+      if(document.querySelector("#pseudo").value == "") {
+        pseudo = firstName.toLowerCase() + "." + lastName.toLowerCase();
+      } else {
+        pseudo = document.querySelector("#pseudo").value;
+      }
+      document.querySelector("#pseudo").value;
       const biographie = document.querySelector("#biographie").value;
       const latitude = document.querySelector("#latitude").value;
       const longitude = document.querySelector("#longitude").value;
       const motDePasse = document.querySelector("#motDePasse").value;
-      $.ajax(updateUserInfo(sessionStorage.getItem('userID'), pseudo, prenom, nom, biographie, latitude, longitude, (motDePasse != "" ? motDePasse : null) )).done(function (response) {
-        console.log(response);
-      });
+
+      if(firstName != "" && lastName != "" && latitude != "" && longitude != "") {
+        $.ajax(updateUserInfo(sessionStorage.getItem('userID'), pseudo, firstName, lastName, biographie, latitude, longitude, (motDePasse != "" ? motDePasse : null) )).done(function () {
+          location.href = 'profil.html?userID=' + sessionStorage.getItem('userID');
+        });
+      }
     }
 
     function fGetLocation() {
@@ -184,13 +194,15 @@
     const uploaderImage = document.querySelector("#uploaderImage");
     uploaderImage.addEventListener("change", handleFiles, false);
     function handleFiles() {
+      const files = this.files;
       const fr = new FileReader();
-      fr.readAsDataURL(this.files[0]);
+      fr.readAsDataURL(files[0]);
       fr.onload = function() {
         document.querySelector("#profilImage").src = this.result;
+        console.log(files[0])
         const formData = new FormData();
-        formData.append("image", this.files[0], "/C:/Users/habia/Desktop/Il-parait-que-le-client-est-toujours-roi-FGRC-1536x864.jpg");
-        formData.append("name", name);
+        formData.append("image", files[0], "");
+        formData.append("name", 'user_' + new Date() + '_' + sessionStorage.getItem('userID'));
         $.ajax(saveImage(formData)).done(function (response) {
           console.log(response);
         });

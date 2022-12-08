@@ -148,7 +148,7 @@
                       '</div>' +
                       '<div class="row">' +
                         '<div class="col">' +
-                          '<button class="px-1" onclick="location.href = \'message.html?userID=' + products[i].user.id + '\';">Message</button>' +
+                          '<button class="px-1" onclick="sessionStorage.setItem(\'lastUrl\', location.href); location.href = \'message.html?userID=' + products[i].user.id + '\';">Message</button>' +
                         '</div>' +
                         '<div class="col-auto">' +
                           '<button class="px-1" onclick="location.href = \'profil.html?userID=' + products[i].user.id + '\';">Voir le freego</button>' +

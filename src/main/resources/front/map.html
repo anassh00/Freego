@@ -163,15 +163,8 @@
             }
           }
           for(let i = 0; i < productsNotMe.length; i++) {
-            let latitude;
-            let longitude;
-            if(productsNotMe[i].user.latitude == 0 && productsNotMe[i].user.longitude == 0) {
-              latitude = (Math.random() / 4) + 45.75;
-              longitude = (Math.random() / 4) + 4.75;
-            } else {
-              latitude = productsNotMe[i].user.latitude;
-              longitude = productsNotMe[i].user.longitude;
-            }
+            const latitude = productsNotMe[i].user.latitude;
+            const longitude = productsNotMe[i].user.longitude;
             L.marker([latitude, longitude]).addTo(map).on('click', function() { onMarkerClick(productsNotMe[i]) });
           }
           // Fin de chargement des données

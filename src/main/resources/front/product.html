@@ -159,6 +159,7 @@
       }
 
       function fSendMessage() {
+        sessionStorage.setItem('lastUrl', location.href);
         location.href = 'message.html?userID=' + userId;
       }
 
@@ -171,6 +172,7 @@
           if(search_params.has('productID')) {
             const productID = search_params.get('productID');
             $.ajax(getProductById(productID)).done(function (product) {
+              console.log(product);
               userId = product.user.id;
               document.querySelector("#prenomNom").innerHTML = product.user.first_name + " " + product.user.last_name;
               const produitContainer = document.querySelector("#produitContainer");
@@ -182,6 +184,7 @@
                 document.querySelector("#btnReserv").style.display = 'flex';
                 document.querySelector("#btnRes").onclick = function() {
                   $.ajax(reserveProduct(productID)).done(function () {
+                    sessionStorage.setItem('lastUrl', 'messaging.html');
                     location.href = "message.html?userID=" + product.user.id;
                   });
                 }
