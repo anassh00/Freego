@@ -56,7 +56,10 @@
       <a href="javascript:void(0)" onclick="location.href='profil.html?userID=' + sessionStorage.getItem('userID');"><i class="material-icons">keyboard_backspace</i></a>
     </div>
     <div id="imgContainer" class="row p-3">
-      <img id="profilImage" src="images/person_profile.png"/>
+      <a href="javascript:void(0)" onclick="fUploadImage()" style="display: flex; justify-content: center; width: fit-content">
+        <img id="profilImage" src="images/person_profile.png"/>
+      </a>
+      <input type="file" id="uploaderImage" hidden/>
     </div>
     <div id="infoContainer">
       <div class="row mx-3">
@@ -188,6 +191,10 @@
               function(err) {
                 alert("Erreur : " + err.message);
               });
+    }
+
+    function fUploadImage() {
+      document.querySelector("#uploaderImage").click();
     }
   </script>
 </body>
