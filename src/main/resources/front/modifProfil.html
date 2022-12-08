@@ -140,7 +140,9 @@
         location.href = "connexion.html";
       } else {
         $.ajax(getUserById(sessionStorage.getItem('userID'))).done(function (response) {
-          console.log(response);
+          $.ajax(getUserImage(sessionStorage.getItem('userID'))).done(function (response) {
+            document.querySelector("#profilImage").src = "data:image/png;base64," + response.image;
+          });
           document.querySelector("#pseudo").value = response.username;
           document.querySelector("#prenom").value = response.first_name;
           document.querySelector("#nom").value = response.last_name;

@@ -192,8 +192,7 @@
             if(userID == sessionStorage.getItem('userID')) {
               $.ajax(getUserById(sessionStorage.getItem('userID'))).done(function (response) {
                 $.ajax(getUserImage(sessionStorage.getItem('userID'))).done(function (response) {
-                  document.querySelector("#profilImage").src = response;
-                  console.log(typeof response);
+                  document.querySelector("#profilImage").src = "data:image/png;base64," + response.image;
                 });
                 document.querySelector("#prenomNom").innerHTML = "<b>" + response.first_name + " " + response.last_name + "</b>";
                 document.querySelector("#biographie").innerHTML = response.biographie == null || response.biographie == "" ? "<i>Vous n'avez pas encore de biographie !</i>" : response.biographie;
