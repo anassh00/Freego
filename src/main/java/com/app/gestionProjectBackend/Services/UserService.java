@@ -41,6 +41,9 @@ public class UserService {
 //		if(user.getUsername() != null) {
 //			userOld.setUsername(user.getUsername());
 //		}
+		if(user.getEntity_name() != null) {
+			userOld.setEntity_name(user.getEntity_name());
+		}
 		return userRepository.save(userOld);
 	}
 	

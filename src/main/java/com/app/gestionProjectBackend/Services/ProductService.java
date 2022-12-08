@@ -83,6 +83,9 @@ public class ProductService {
 		if(product.getEtat() != null) {
 			productOld.setEtat(product.getEtat());
 		}
+		if(product.getEntity_name() != null) {
+			productOld.setEntity_name(product.getEntity_name());
+		}
 		Product productToUpdate = productRepository.save(productOld);
 		return productToUpdate;
 	}
