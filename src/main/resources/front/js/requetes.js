@@ -15,7 +15,7 @@ function connexion(pseudo, mdp) {
     };
 }
 
-function inscription(first_name, last_name, username, latitude, longitude, mdp) {
+function inscription(first_name, last_name, username, latitude, longitude, mdp, entity_name) {
     return {
         "url": urlBack + "auth/signup",
         "method": "POST",
@@ -32,6 +32,7 @@ function inscription(first_name, last_name, username, latitude, longitude, mdp) 
             "latitude" : latitude,
             "longitude" : longitude,
             "password": mdp,
+            "entity_name" : entity_name,
             "roles": ["user"]
         }),
     };
@@ -98,7 +99,7 @@ function getAllUsers() {
     };
 }
 
-function addProduct(categoryId, etat, nom, description) {
+function addProduct(categoryId, etat, nom, description, entity_name) {
     return {
         "url": urlBack + "product/save?category_id=" + categoryId,
         "method": "POST",
@@ -110,7 +111,8 @@ function addProduct(categoryId, etat, nom, description) {
         "data": JSON.stringify({
             "etat": etat,
             "name": nom,
-            "description": description
+            "description": description,
+            "entity_name" : entity_name
         }),
     };
 }
@@ -224,4 +226,62 @@ function getCategoryById(id) {
             "Authorization": "Bearer " + sessionStorage.getItem("userToken"),
         },
     };
+}
+
+function getUserImage(userId){
+    var settings = {
+        "url": "http://localhost:8080/api/get/image/user/"+userId,
+        "method": "GET",
+        "timeout": 0,
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + sessionStorage.getItem("userToken")
+        },
+      };
+      
+      $.ajax(settings).done(function (response) {
+        console.log(response);
+      });
+}
+
+
+function getUserProduct(productId){
+    var settings = {
+        "url": "http://localhost:8080/api/get/image/product/"+productId,
+        "method": "GET",
+        "timeout": 0,
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + sessionStorage.getItem("userToken")
+        },
+      };
+      
+      $.ajax(settings).done(function (response) {
+        console.log(response);
+      });
+}
+
+function saveImage(name){
+    // name : le meme a envoyer dans entity_name pour produit/user
+var form = new FormData();
+form.append("image", fileInput.files[0], "/C:/Users/habia/Desktop/Il-parait-que-le-client-est-toujours-roi-FGRC-1536x864.jpg");
+form.append("name", name);
+
+var settings = {
+  "url": "http://localhost:8080/api/upload/image",
+  "method": "POST",
+  "timeout": 0,
+  "headers": {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer " + sessionStorage.getItem("userToken")
+  },
+  "processData": false,
+  "mimeType": "multipart/form-data",
+  "contentType": false,
+  "data": form
+};
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
 }

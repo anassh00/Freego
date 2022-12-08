@@ -40,6 +40,21 @@ public class ProductService {
 	}
 	
 	@Transactional
+	public Product add(Product product,Long categoryId, String entity_name) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();	
+		product.setUser(userService.findById(userDetails.getId()).get());
+		if(categoryId != 0 && categoryId != null) {
+			product.setCategory(categoryService.findById(categoryId).get());
+		}
+		if(entity_name != null) {
+			product.setEntity_name(entity_name);
+		}
+		Product newProduct = productRepository.save(product);
+		return newProduct;
+	}
+	
+	@Transactional
 	public Product update(Long id, Product product) {
 		return update(id, product, 0L);
 	}

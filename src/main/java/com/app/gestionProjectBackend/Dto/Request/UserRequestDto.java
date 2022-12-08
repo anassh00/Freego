@@ -19,8 +19,17 @@ public class UserRequestDto {
 	private String address;
 	private double longitude;
 	private double latitude;
+	private String entity_name;
 	
 	private Set<String> roles = new HashSet<>();
+
+	public String getEntity_name() {
+		return entity_name;
+	}
+
+	public void setEntity_name(String entity_name) {
+		this.entity_name = entity_name;
+	}
 
 	public double getLongitude() {
 		return longitude;

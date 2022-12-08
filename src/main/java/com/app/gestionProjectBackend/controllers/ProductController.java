@@ -30,10 +30,10 @@ public class ProductController {
 	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<?> saveProduct(@RequestBody Product product, @RequestParam(required = false) Long category_id) {
+	public ResponseEntity<?> saveProduct(@RequestBody Product product, @RequestParam(required = false) Long category_id, @RequestParam(required = false) String entity_name) {
 		try {
 			product.setStatus(EProductStatus.ACTIVE);
-			Product p = productService.add(product,category_id);
+			Product p = productService.add(product,category_id,entity_name);
 			return new ResponseEntity<>(p, HttpStatus.OK);
 		}catch(Exception e){
 	        e.printStackTrace(); 
