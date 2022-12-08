@@ -81,18 +81,6 @@
       </div>
       <hr class="mx-3" style="color: white; opacity: 1;">
       <div class="row mx-3">
-        <label for="email" style="color: white;">Email</label>
-        <br>
-        <input type="email" id="email"/>
-      </div>
-      <hr class="mx-3" style="color: white; opacity: 1;">
-      <div class="row mx-3">
-        <label for="phone" style="color: white;">Téléphone</label>
-        <br>
-        <input type="phone" id="phone"/>
-      </div>
-      <hr class="mx-3" style="color: white; opacity: 1;">
-      <div class="row mx-3">
         <label for="biographie" style="color: white;">Biographie</label>
         <br>
         <textarea type="text" id="biographie"></textarea>
@@ -155,8 +143,6 @@
           document.querySelector("#pseudo").value = response.username;
           document.querySelector("#prenom").value = response.first_name;
           document.querySelector("#nom").value = response.last_name;
-          document.querySelector("#email").value = response.email;
-          document.querySelector("#phone").value = response.phone;
           document.querySelector("#biographie").value = response.biographie;
           document.querySelector("#latitude").value = response.latitude;
           document.querySelector("#longitude").value = response.longitude;
@@ -171,13 +157,11 @@
       const pseudo = document.querySelector("#pseudo").value;
       const prenom = document.querySelector("#prenom").value;
       const nom = document.querySelector("#nom").value;
-      const email = document.querySelector("#email").value;
-      const phone = document.querySelector("#phone").value;
       const biographie = document.querySelector("#biographie").value;
       const latitude = document.querySelector("#latitude").value;
       const longitude = document.querySelector("#longitude").value;
       const motDePasse = document.querySelector("#motDePasse").value;
-      $.ajax(updateUserInfo(sessionStorage.getItem('userID'), pseudo, prenom, nom, email, phone, biographie, latitude, longitude, (motDePasse != "" ? motDePasse : null) )).done(function (response) {
+      $.ajax(updateUserInfo(sessionStorage.getItem('userID'), pseudo, prenom, nom, biographie, latitude, longitude, (motDePasse != "" ? motDePasse : null) )).done(function (response) {
         console.log(response);
       });
     }
@@ -196,6 +180,23 @@
     function fUploadImage() {
       document.querySelector("#uploaderImage").click();
     }
+
+    const uploaderImage = document.querySelector("#uploaderImage");
+    uploaderImage.addEventListener("change", handleFiles, false);
+    function handleFiles() {
+      const fr = new FileReader();
+      fr.readAsDataURL(this.files[0]);
+      fr.onload = function() {
+        document.querySelector("#profilImage").src = this.result;
+        const formData = new FormData();
+        formData.append("image", this.files[0], "/C:/Users/habia/Desktop/Il-parait-que-le-client-est-toujours-roi-FGRC-1536x864.jpg");
+        formData.append("name", name);
+        $.ajax(saveImage(formData)).done(function (response) {
+          console.log(response);
+        });
+      }
+    }
+
   </script>
 </body>
 </html>

@@ -23,25 +23,31 @@
     </style>
   </head>
   <body>
-    <div id="head-section-bis">
-      <div class="row m-1">
-        <div class="col-auto">
-          <a href="home.html"><i class="material-icons orangeIcon">keyboard_backspace</i></a>
-        </div>
-        <div class="col" style="display: flex; justify-content: right;">
-          <img src="images/logo_orange.png"/>
+    <div class="allContent">
+      <div id="head-section-bis">
+        <div class="row m-1">
+          <div class="col-auto">
+            <a href="home.html"><i class="material-icons orangeIcon">keyboard_backspace</i></a>
+          </div>
+          <div class="col" style="display: flex; justify-content: right;">
+            <img src="images/logo_orange.png"/>
+          </div>
         </div>
       </div>
+      <div style="height: 60px"></div>
+      <div class="m-3">
+        <div class="rayons mt-3">
+          <h3 id="rayonTitle"><b>Rayons</b></h3>
+        </div>
+      </div>
+
+      <div style="height:60px"></div>
+      <div id="footNavBar"></div>
     </div>
-    <div style="height: 60px"></div>
-    <div class="m-3">
-      <div class="rayons mt-3">
-        <h3 id="rayonTitle"><b>Rayons</b></h3>
-      </div>
-    </div>  
-    
-    <div style="height:60px"></div>
-    <div id="footNavBar"></div>
+
+    <!-- Ecran de chargement -->
+    <div id="ecranChargement"></div>
+
 
     <!-- Bootstrap Script -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
@@ -52,6 +58,8 @@
     <script src="js/jQuery.js"></script>
     <script>
       $(function(){
+        $("#ecranChargement").load("ecranChargement.html");
+        $("#ecranChargement").fadeIn();
         $("#footNavBar").load("footNavBar.html");
       });
 
@@ -72,6 +80,7 @@
                   '</div>' +
                 '</a>';
             }
+            fFinChargement();
           });
         }
       }

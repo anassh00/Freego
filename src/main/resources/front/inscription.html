@@ -77,45 +77,30 @@
         </div>
         <h1 class="m-3" style="text-align: center">Bienvenue</h1>
         <div class="field field_v1">
-            <label for="first-name" class="ha-screen-reader">Prénom</label>
+            <label for="first-name" class="ha-screen-reader">Prénom*</label>
             <input id="first-name" class="field__input" placeholder="">
             <span class="field__label-wrap" aria-hidden="true">
-                <span class="field__label">Prénom</span>
+                <span class="field__label">Prénom*</span>
             </span>
         </div>
         <br>
         <div class="field field_v1">
-            <label for="last-name" class="ha-screen-reader">Nom</label>
+            <label for="last-name" class="ha-screen-reader">Nom*</label>
             <input id="last-name" class="field__input" placeholder="">
             <span class="field__label-wrap" aria-hidden="true">
-                <span class="field__label">Nom</span>
+                <span class="field__label">Nom*</span>
             </span>
         </div>
         <br>
         <div class="field field_v1">
-            <label for="pseudo" class="ha-screen-reader">Pseudo</label>
+            <label for="pseudo" class="ha-screen-reader">Pseudonyme*</label>
             <input id="pseudo" class="field__input" placeholder="">
             <span class="field__label-wrap" aria-hidden="true">
-                <span class="field__label">Pseudo</span>
+                <span class="field__label">Pseudonyme*</span>
             </span>
         </div>
         <div class="row" style="text-align: center;">
             <span style="color: white; font-size: 10px;">Si non renseigné, il sera de la forme <i>prénom.nom</i></span>
-        </div>
-        <div class="field field_v1">
-            <label for="email" class="ha-screen-reader">Email</label>
-            <input type="email" id="email" class="field__input" placeholder="">
-            <span class="field__label-wrap" aria-hidden="true">
-                <span class="field__label">Email</span>
-            </span>
-        </div>
-        <br>
-        <div class="field field_v1">
-            <label for="phone" class="ha-screen-reader">Téléphone</label>
-            <input type="tel" id="phone" class="field__input" placeholder="">
-            <span class="field__label-wrap" aria-hidden="true">
-                <span class="field__label">Téléphone</span>
-            </span>
         </div>
         <br>
         <div class="row">
@@ -125,19 +110,19 @@
             <div class="row" style="margin: 0">
                 <div class="col" style="display: flex; justify-content: right">
                     <div class="field field_v1" style="margin-right: 0;">
-                        <label for="latitude" class="ha-screen-reader">Latitude</label>
+                        <label for="latitude" class="ha-screen-reader">Latitude*</label>
                         <input type="text" id="latitude" class="field__input" placeholder="">
                         <span class="field__label-wrap" aria-hidden="true">
-                            <span class="field__label" style="font-size: 12px">Latitude</span>
+                            <span class="field__label" style="font-size: 12px">Latitude*</span>
                         </span>
                     </div>
                 </div>
                 <div class="col">
                     <div class="field field_v1" style="margin-left: 0;">
-                        <label for="longitude" class="ha-screen-reader">Longitude</label>
+                        <label for="longitude" class="ha-screen-reader">Longitude*</label>
                         <input type="text" id="longitude" class="field__input" placeholder="">
                         <span class="field__label-wrap" aria-hidden="true">
-                        <span class="field__label" style="font-size: 12px">Longitude</span>
+                        <span class="field__label" style="font-size: 12px">Longitude*</span>
                     </span>
                     </div>
                 </div>
@@ -147,18 +132,18 @@
             <button class="btn btn_submit mx-3" id="geolocalise" onclick="fGetLocation()"><i class="material-icons">my_location</i> Me géolocaliser</button>
         </div>
         <div class="field field_v1">
-            <label for="password" class="ha-screen-reader">Mot de passe</label>
+            <label for="password" class="ha-screen-reader">Mot de passe*</label>
             <input type="password" id="password" class="field__input" placeholder="">
             <span class="field__label-wrap" aria-hidden="true">
-                <span class="field__label">Mot de passe</span>
+                <span class="field__label">Mot de passe*</span>
             </span>
         </div>
         <br>
         <div class="field field_v1">
-            <label for="confirm-password" class="ha-screen-reader">Confirmer le mot de passe</label>
+            <label for="confirm-password" class="ha-screen-reader">Confirmer le mot de passe*</label>
             <input type="password" id="confirm-password" class="field__input" placeholder="">
             <span class="field__label-wrap" aria-hidden="true">
-                <span class="field__label">Confirmer le mot de passe</span>
+                <span class="field__label">Confirmer le mot de passe*</span>
             </span>
         </div>
         <br>
@@ -176,30 +161,35 @@
         <script src="js/jQuery.js"></script>
         <script>
             function sendForm() {
-                let firstname = document.querySelector("#first-name").value;
-                let name = document.querySelector("#last-name").value;
+                let firstName = document.querySelector("#first-name").value;
+                let lastName = document.querySelector("#last-name").value;
                 let pseudo;
                 if(document.querySelector("#pseudo").value == "") {
-                    pseudo = firstname.toLowerCase() + "." + name.toLowerCase();
+                    pseudo = firstName.toLowerCase() + "." + lastName.toLowerCase();
                 } else {
                     pseudo = document.querySelector("#pseudo").value;
                 }
-                let email = document.querySelector("#email").value;
-                let tel = document.querySelector("#phone").value;
                 let latitude = document.querySelector("#latitude").value;
                 let longitude = document.querySelector("#longitude").value;
                 let mdp = document.querySelector("#password").value;
                 let confMdp = document.querySelector("#confirm-password").value;
-                if(mdp == confMdp) {
-                    $.ajax(inscription(firstname, name, pseudo, email, tel, latitude, longitude, mdp)).done(function (response) {
-                        if(response.message == "User registered successfully!") {
+                if(firstName != "" && lastName != "" && latitude != "" && longitude != "" && mdp != "" && confMdp != "") {
+                    if(mdp == confMdp) {
+                        const reqAjax = $.ajax(inscription(firstName, lastName, pseudo, latitude, longitude, mdp));
+                        reqAjax.done(function (response) {
+                            document.querySelector(".textError").innerHTML = "";
                             window.location.href = "connexion.html";
-                        }
-                    });
-                    document.querySelector(".textError").innerHTML = "";
+                        });
+                        reqAjax.fail(function() {
+                            document.querySelector(".textError").innerHTML = "Une erreur s'est produite !";
+                        })
+                    } else {
+                        document.querySelector(".textError").innerHTML = "Les mots de passe doivent correspondre !";
+                    }
                 } else {
-                    document.querySelector(".textError").innerHTML = "Les mots de passe doivent correspondre !";
+                    document.querySelector(".textError").innerHTML = "Des champs requis (*) sont manquants !";
                 }
+
             }
 
             function fGetLocation() {

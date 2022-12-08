@@ -34,6 +34,12 @@
             .link:hover {
                 color: white;
             }
+            .textError {
+                color: red;
+                display: flex;
+                justify-content: center;
+                font-weight: bold;
+            }
         </style>
 
         <!-- Input form -->
@@ -48,24 +54,23 @@
             <img id="logo" src="images/logo.png"/>
         </div>
         <h1 class="m-3" style="text-align: center">Bienvenue</h1>
-        <form method="post">
-            <div class="field field_v1">
-                <label for="pseudo" class="ha-screen-reader">Pseudo</label>
-                <input type="text" id="pseudo" class="field__input" placeholder="">
-                <span class="field__label-wrap" aria-hidden="true">
-                    <span class="field__label">Pseudo</span>
-                </span>
-            </div>
-            <br>
-            <div class="field field_v1">
-                <label for="password" class="ha-screen-reader">Mot de passe</label>
-                <input type="password" id="password" class="field__input" placeholder="">
-                <span class="field__label-wrap" aria-hidden="true">
-                    <span class="field__label">Mot de passe</span>
-                </span>
-            </div>
-            <br>
-        </form>
+        <div class="field field_v1">
+            <label for="pseudo" class="ha-screen-reader">Pseudonyme*</label>
+            <input type="text" id="pseudo" class="field__input" placeholder="">
+            <span class="field__label-wrap" aria-hidden="true">
+                <span class="field__label">Pseudonyme*</span>
+            </span>
+        </div>
+        <br>
+        <div class="field field_v1">
+            <label for="password" class="ha-screen-reader">Mot de passe*</label>
+            <input type="password" id="password" class="field__input" placeholder="">
+            <span class="field__label-wrap" aria-hidden="true">
+                <span class="field__label">Mot de passe*</span>
+            </span>
+        </div>
+        <br>
+        <span class="mx-3 textError"></span>
         <div style="display: flex; justify-content: center; margin-top: 30px;">
             <button class="btn btn_submit mx-3" onclick="sendForm()">Connexion</button>
         </div>
@@ -83,12 +88,20 @@
             function sendForm() {
                 let pseudo = document.querySelector("#pseudo").value;
                 let mdp = document.querySelector("#password").value;
-                $.ajax(connexion(pseudo, mdp))
-                    .done(function (response) {
+                if(pseudo != "" && mdp != "") {
+                    const reqAjax = $.ajax(connexion(pseudo, mdp));
+                    reqAjax.done(function (response) {
                         sessionStorage.setItem('userID', response.id);
                         sessionStorage.setItem('userToken', response.token);
                         window.location.href = "home.html";
+                        document.querySelector(".textError").innerHTML = "";
                     });
+                    reqAjax.fail(function () {
+                        document.querySelector(".textError").innerHTML = "Une erreur s'est produite !";
+                    });
+                } else {
+                    document.querySelector(".textError").innerHTML = "Des champs requis (*) sont manquants !";
+                }
             }
         </script>
 </body>

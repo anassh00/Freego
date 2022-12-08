@@ -142,6 +142,7 @@
         } else {
           // Top freego
           $.ajax(getAllUsers()).done(function (response) {
+            console.log(response);
             const topFreego = document.querySelector("#topFreego");
             for(let i = 0; i < response.length; i++) {
               if(response[i].id != sessionStorage.getItem('userID')) {

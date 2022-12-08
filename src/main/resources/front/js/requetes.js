@@ -15,7 +15,7 @@ function connexion(pseudo, mdp) {
     };
 }
 
-function inscription(first_name, last_name, username, email, phone, latitude, longitude, mdp, entity_name) {
+function inscription(first_name, last_name, username, latitude, longitude, mdp, entity_name) {
     return {
         "url": urlBack + "auth/signup",
         "method": "POST",
@@ -27,8 +27,8 @@ function inscription(first_name, last_name, username, email, phone, latitude, lo
             "first_name" : first_name,
             "last_name" : last_name,
             "username": username,
-            "email" : email,
-            "phone" : phone,
+            "email" : "",
+            "phone" : "",
             "latitude" : latitude,
             "longitude" : longitude,
             "password": mdp,
@@ -142,7 +142,7 @@ function getProductsByCategory(id_category){
       };
 }
 
-function updateUserInfo(id_user, pseudo, first_name, last_name, email, phone, biographie, latitude, longitude, password){
+function updateUserInfo(id_user, pseudo, first_name, last_name, biographie, latitude, longitude, password){
     // NB : si un attribut est envoyé comme null le backend va garder l'ancienne valeur enregistrée sur la base
     return {
         "url": urlBack + "user/update?id="+id_user,
@@ -156,8 +156,8 @@ function updateUserInfo(id_user, pseudo, first_name, last_name, email, phone, bi
             "username": pseudo,
             "first_name": first_name,
             "last_name": last_name,
-            "email": email,
-            "phone": phone,
+            "email": "",
+            "phone": "",
             "biographie": biographie,
             "latitude": latitude,
             "longitude": longitude,
@@ -261,27 +261,23 @@ function getUserProduct(productId){
       });
 }
 
-function saveImage(name){
+function saveImage(formData){
     // name : le meme a envoyer dans entity_name pour produit/user
 var form = new FormData();
 form.append("image", fileInput.files[0], "/C:/Users/habia/Desktop/Il-parait-que-le-client-est-toujours-roi-FGRC-1536x864.jpg");
 form.append("name", name);
 
-var settings = {
-  "url": "http://localhost:8080/api/upload/image",
-  "method": "POST",
-  "timeout": 0,
-  "headers": {
-    "Content-Type": "application/json",
-    "Authorization": "Bearer " + sessionStorage.getItem("userToken")
-  },
-  "processData": false,
-  "mimeType": "multipart/form-data",
-  "contentType": false,
-  "data": form
-};
-
-$.ajax(settings).done(function (response) {
-  console.log(response);
-});
+    return {
+      "url": "http://localhost:8080/api/upload/image",
+      "method": "POST",
+      "timeout": 0,
+      "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + sessionStorage.getItem("userToken")
+      },
+      "processData": false,
+      "mimeType": "multipart/form-data",
+      "contentType": false,
+      "data": formData
+    };
 }
