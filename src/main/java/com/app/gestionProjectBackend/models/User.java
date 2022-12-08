@@ -32,6 +32,7 @@ public class User {
 	private String first_name;
 	private String last_name;
 	private String biographie;
+	private String entity_name;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(length = 20) 
@@ -62,6 +63,12 @@ public class User {
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		update_date_timestamp = timestamp.getTime();
 	}	
+	public String getEntity_name() {
+		return entity_name;
+	}
+	public void setEntity_name(String entity_name) {
+		this.entity_name = entity_name;
+	}
 	public String getBiographie() {
 		return biographie;
 	}
