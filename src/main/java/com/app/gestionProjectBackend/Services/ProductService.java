@@ -77,7 +77,7 @@ public class ProductService {
 		if(product.getUser() != null) {
 			productOld.setUser(product.getUser());
 		}
-		if(categoryId != null) {
+		if(categoryId != 0) {
 			productOld.setCategory(categoryService.findById(categoryId).get());
 		}
 		if(product.getEtat() != null) {

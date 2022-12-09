@@ -299,7 +299,7 @@
             const titre = document.querySelector("#titreAnn").value;
             const description = document.querySelector("#descAnn").value;
             if(categorie != null && etat != null && titre != "" && description != "") {
-                $.ajax(updateProduct(productID, sessionStorage.getItem('currentRayon'), titre, description, etat.innerHTML)).done(function (response) {
+                $.ajax(updateProduct(productID, sessionStorage.getItem('currentRayon'), titre, description, etat.innerHTML, image1, image2, image3)).done(function (response) {
                     location.href = "product.html?productID=" + productID;
                 });
             }
@@ -315,10 +315,11 @@
             fr.readAsDataURL(files[0]);
             fr.onload = function() {
                 document.querySelector("#imageProd1").src = this.result;
-                image1 = new FormData();
-                image1.append("image", files[0]);
-                const entity_name = 'user_' + new Date().getTime() + '_' + sessionStorage.getItem('userID');
-                image1.append("name", entity_name);
+                const formData = new FormData();
+                formData.append("image", files[0]);
+                image1 = 'user_' + new Date().getTime() + '_' + sessionStorage.getItem('userID');
+                formData.append("name", image1);
+                $.ajax(saveImage(formData)).done();
             }
         }
 
@@ -332,27 +333,29 @@
             fr.readAsDataURL(files[0]);
             fr.onload = function() {
                 document.querySelector("#imageProd2").src = this.result;
-                image2 = new FormData();
-                image2.append("image", files[0]);
-                const entity_name = 'user_' + new Date().getTime() + '_' + sessionStorage.getItem('userID');
-                image2.append("name", entity_name);
+                const formData = new FormData();
+                formData.append("image", files[0]);
+                image2 = 'user_' + new Date().getTime() + '_' + sessionStorage.getItem('userID');
+                formData.append("name", image2);
+                $.ajax(saveImage(formData)).done();
             }
         }
 
         function fAddImage3() {
             document.querySelector("#fileUploader3").click();
         }
-        document.querySelector("#fileUploader1").addEventListener("change", handleImage3, false);
+        document.querySelector("#fileUploader3").addEventListener("change", handleImage3, false);
         function handleImage3() {
             const files = this.files;
             const fr = new FileReader();
             fr.readAsDataURL(files[0]);
             fr.onload = function() {
                 document.querySelector("#imageProd3").src = this.result;
-                image3 = new FormData();
-                image3.append("image", files[0]);
-                const entity_name = 'user_' + new Date().getTime() + '_' + sessionStorage.getItem('userID');
-                image3.append("name", entity_name);
+                const formData = new FormData();
+                formData.append("image", files[0]);
+                image3 = 'user_' + new Date().getTime() + '_' + sessionStorage.getItem('userID');
+                formData.append("name", image3);
+                $.ajax(saveImage(formData)).done();
             }
         }
     </script>

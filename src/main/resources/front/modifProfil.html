@@ -173,7 +173,7 @@
       const motDePasse = document.querySelector("#motDePasse").value;
 
       if(firstName != "" && lastName != "" && latitude != "" && longitude != "") {
-        $.ajax(updateUserInfo(sessionStorage.getItem('userID'), pseudo, firstName, lastName, biographie, latitude, longitude, (motDePasse != "" ? motDePasse : null) )).done(function () {
+        $.ajax(updateUserInfo(sessionStorage.getItem('userID'), pseudo, firstName, lastName, biographie, latitude, longitude, (motDePasse != "" ? motDePasse : null), imageProfil)).done(function () {
           location.href = 'profil.html?userID=' + sessionStorage.getItem('userID');
         });
       }

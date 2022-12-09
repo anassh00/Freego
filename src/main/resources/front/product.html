@@ -207,10 +207,10 @@
           const url = new URL(location.href);
           const search_params = new URLSearchParams(url.search);
           if(search_params.has('productID')) {
-            productID = search_params.get('productID');
-            $.ajax(getProductById(productID)).done(function (product) {
+            productId = search_params.get('productID');
+            $.ajax(getProductById(productId)).done(function (product) {
               categoryId = product.category.id;
-              $.ajax(getProductImages(productID)).done(function (images) {
+              $.ajax(getProductImages(productId)).done(function (images) {
                 console.log(images);
                 for(let i = 0; i < images.length; i++) {
                   imagesUrl.push("data:image/png;base64," + images[i].image);
@@ -230,7 +230,7 @@
                 document.querySelector("#sendMessageContainer").style.display = 'flex';
                 document.querySelector("#btnReserv").style.display = 'flex';
                 document.querySelector("#btnRes").onclick = function() {
-                  $.ajax(reserveProduct(productID)).done(function () {
+                  $.ajax(reserveProduct(productId)).done(function () {
                     sessionStorage.setItem('lastUrl', 'messaging.html');
                     location.href = "message.html?userID=" + product.user.id;
                   });
@@ -239,7 +239,7 @@
                 sessionStorage.setItem('currentRayon', product.category.id);
                 document.querySelector("#btnModSupp").style.display = 'flex';
                 document.querySelector("#btnMod").onclick = function() {
-                  location.href = "modifProduit.html?productID=" + productID;
+                  location.href = "modifProduit.html?productID=" + productId;
                 }
                 document.querySelector("#btnSupp").onclick = function() {
                   document.querySelector("#modalContainer").style.display = 'block';
@@ -252,9 +252,7 @@
       }
 
       function fSupprProd() {
-        $.ajax(deleteProduct(productID, categoryId)).done(function (response) {
-          document.querySelector("#profilImage").src = "data:image/png;base64," + response.image;
-        });
+        $.ajax(deleteProduct(productID, categoryId)).done();
         location.href = sessionStorage.getItem('lastUrl');
       }
     </script>
