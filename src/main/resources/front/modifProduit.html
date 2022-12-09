@@ -317,7 +317,7 @@
                 document.querySelector("#imageProd1").src = this.result;
                 const formData = new FormData();
                 formData.append("image", files[0]);
-                image1 = 'user_' + new Date().getTime() + '_' + sessionStorage.getItem('userID');
+                image1 = 'product_' + new Date().getTime() + '_' + sessionStorage.getItem('userID');
                 formData.append("name", image1);
                 $.ajax(saveImage(formData)).done();
             }
@@ -335,7 +335,7 @@
                 document.querySelector("#imageProd2").src = this.result;
                 const formData = new FormData();
                 formData.append("image", files[0]);
-                image2 = 'user_' + new Date().getTime() + '_' + sessionStorage.getItem('userID');
+                image2 = 'product_' + new Date().getTime() + '_' + sessionStorage.getItem('userID');
                 formData.append("name", image2);
                 $.ajax(saveImage(formData)).done();
             }
@@ -353,7 +353,7 @@
                 document.querySelector("#imageProd3").src = this.result;
                 const formData = new FormData();
                 formData.append("image", files[0]);
-                image3 = 'user_' + new Date().getTime() + '_' + sessionStorage.getItem('userID');
+                image3 = 'product_' + new Date().getTime() + '_' + sessionStorage.getItem('userID');
                 formData.append("name", image3);
                 $.ajax(saveImage(formData)).done();
             }
