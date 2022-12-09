@@ -54,6 +54,9 @@
       align-items: center;
       height: 100%;
     }
+    #detailMap a {
+      width: fit-content;
+    }
     #sendMessageBtn, #profilBtn {
       color: #E94E1B;
       background-color: white;
@@ -89,10 +92,12 @@
   <div id="map"></div>
   <div id="detailMap">
     <div class="row">
-      <div class="col" style="padding-left: 2rem;">
-        <h6 id="nomProduit"></h6>
-        <span id="prenomNomDon"></span>
-      </div>
+      <a href="javascript:void(0)">
+        <div class="col" style="padding-left: 2rem;">
+          <h6 id="nomProduit"></h6>
+          <span id="prenomNomDon"></span>
+        </div>
+      </a>
       <div class="col-auto" style="padding: 0;">
         <button id="sendMessageBtn">Message</button>
       </div>
@@ -143,6 +148,10 @@
         L.marker([user.latitude, user.longitude]).addTo(map).bindPopup('Vous êtes ici !');
 
         function onMarkerClick(product) {
+          document.querySelector("#detailMap").querySelector("a").onclick = function() {
+            sessionStorage.setItem('lastUrl', location.href);
+            location.href = "product.html?productID=" + product.id_product;
+          }
           document.querySelector("#nomProduit").innerHTML = product.name;
           document.querySelector("#prenomNomDon").innerHTML = "par " + product.user.first_name + " " + product.user.last_name;
           document.querySelector("#sendMessageBtn").onclick = function() {
@@ -158,7 +167,7 @@
         $.ajax(getAllProduct()).done(function (products) {
           const productsNotMe = [];
           for(let i = 0; i < products.length; i++) {
-            if(products[i].user.id != sessionStorage.getItem('userID')) {
+            if(products[i].user.id != sessionStorage.getItem('userID') && products[i].quantity_stock != 0) {
               productsNotMe.push(products[i]);
             }
           }

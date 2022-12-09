@@ -155,6 +155,7 @@
         });
       }
     }
+    let imageProfil;
 
     function fSendInformation() {
       const firstName = document.querySelector("#prenom").value;
@@ -192,27 +193,18 @@
     function fUploadImage() {
       document.querySelector("#uploaderImage").click();
     }
-
-    const uploaderImage = document.querySelector("#uploaderImage");
-    uploaderImage.addEventListener("change", handleFiles, false);
+    document.querySelector("#uploaderImage").addEventListener("change", handleFiles, false);
     function handleFiles() {
       const files = this.files;
       const fr = new FileReader();
       fr.readAsDataURL(files[0]);
       fr.onload = function() {
         document.querySelector("#profilImage").src = this.result;
-        console.log(files[0]);
-        console.log(typeof this.result);
         const formData = new FormData();
         formData.append("image", files[0]);
-        const entity_name = 'user_' + new Date().getTime() + '_' + sessionStorage.getItem('userID');
-        formData.append("name", entity_name);
-        $.ajax(saveImage(formData)).done(function (response) {
-          console.log(response);
-          $.ajax(updateUserImage(sessionStorage.getItem('userID'), entity_name)).done(function (responseUser) {
-            console.log(responseUser);
-          });
-        });
+        imageProfil = 'user_' + new Date().getTime() + '_' + sessionStorage.getItem('userID');
+        formData.append("name", imageProfil);
+        $.ajax(saveImage(formData)).done();
       }
     }
 

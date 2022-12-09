@@ -42,7 +42,7 @@ function fChoixCateg(item) {
 	if(categChoisie.toString() == "Produits laitiers") {
 		document.querySelector("#modalContainer").style.display = 'block';
 	}
-	item.querySelector("div").querySelector("span").setAttribute("id", item.id);
+	sessionStorage.setItem("currentRayon", item.id.split("categNum")[1]);
 	document.querySelector("#categorie").innerHTML = "Catégorie : " + item.querySelector("div").innerHTML;
 	document.querySelector("#categSelect").style.display = 'none';
 }
@@ -80,19 +80,5 @@ function fDistance(lat1, lat2, lon1, lon2) {
 	let r = 6371;
 
 	// calculate the result
-	return(c * r);
-}
-
-function decodeBase64Image(dataString) {
-	var matches = dataString.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/),
-		response = {};
-
-	if (matches.length !== 3) {
-		return new Error('Invalid input string');
-	}
-
-	response.type = matches[1];
-	response.data = Buffer.from(matches[2], 'base64');
-
-	return response;
+	return Math.round(c * r * 100) / 100;
 }

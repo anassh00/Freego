@@ -27,8 +27,6 @@ function inscription(first_name, last_name, username, latitude, longitude, mdp, 
             "first_name" : first_name,
             "last_name" : last_name,
             "username": username,
-            "email" : "",
-            "phone" : "",
             "latitude" : latitude,
             "longitude" : longitude,
             "password": mdp,
@@ -99,7 +97,7 @@ function getAllUsers() {
     };
 }
 
-function addProduct(categoryId, etat, nom, description, entity_name) {
+function addProduct(categoryId, etat, nom, description, image1, image2, image3) {
     return {
         "url": urlBack + "product/save?category_id=" + categoryId,
         "method": "POST",
@@ -112,7 +110,10 @@ function addProduct(categoryId, etat, nom, description, entity_name) {
             "etat": etat,
             "name": nom,
             "description": description,
-            "entity_name" : entity_name
+            "entity_name": image1,
+            "entity_name_1": image2,
+            "entity_name_2": image3,
+            "quantity_stock": 1
         }),
     };
 }
@@ -142,7 +143,7 @@ function getProductsByCategory(id_category){
       };
 }
 
-function updateUserInfo(id_user, pseudo, first_name, last_name, biographie, latitude, longitude, password){
+function updateUserInfo(id_user, pseudo, first_name, last_name, biographie, latitude, longitude, password, entity_name){
     // NB : si un attribut est envoyé comme null le backend va garder l'ancienne valeur enregistrée sur la base
     return {
         "url": urlBack + "user/update?id="+id_user,
@@ -161,25 +162,10 @@ function updateUserInfo(id_user, pseudo, first_name, last_name, biographie, lati
             "biographie": biographie,
             "latitude": latitude,
             "longitude": longitude,
-            "password": password
+            "password": password,
+            "entity_name": entity_name
         }),
       };
-}
-
-function updateUserImage(id_user, entity_name) {
-    // NB : si un attribut est envoyé comme null le backend va garder l'ancienne valeur enregistrée sur la base
-    return {
-        "url": urlBack + "user/update?id="+id_user,
-        "method": "POST",
-        "timeout": 0,
-        "headers": {
-            "Authorization": "Bearer " + sessionStorage.getItem("userToken"),
-            "Content-Type": "application/json"
-        },
-        "data": JSON.stringify({
-            "entity_name": entity_name,
-        }),
-    };
 }
 
 function getDiscussion(idReceiver){
@@ -285,5 +271,54 @@ function saveImage(formData){
       "mimeType": "multipart/form-data",
       "contentType": false,
       "data": formData
+    };
+}
+
+function updateProduct(idProduct, categoryId, name, description, etat, image1, image2, image3){
+    return {
+        "url": "http://localhost:8080/api/product/update?id=" + idProduct + "&category_id=" + categoryId,
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+            "Authorization": "Bearer " + sessionStorage.getItem("userToken"),
+            "Content-Type": "application/json"
+        },
+        "data": JSON.stringify({
+            "name": name,
+            "description" : description,
+            "etat" : etat,
+            "quantity_stock" : 1,
+            "entity_name": image1,
+            "entity_name_1": image2,
+            "entity_name_2": image3,
+        }),
+    };
+}
+
+function getProductImages(productId){
+    return {
+        "url": urlBack + "get/image/product/"+productId,
+        "method": "GET",
+        "timeout": 0,
+        "async": false,
+        "headers": {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + sessionStorage.getItem("userToken")
+        },
+    };
+}
+
+function deleteProduct(idProduct, categoryId){
+    return {
+        "url": "http://localhost:8080/api/product/update?id=" + idProduct + "&category_id=" + categoryId,
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+            "Authorization": "Bearer " + sessionStorage.getItem("userToken"),
+            "Content-Type": "application/json"
+        },
+        "data": JSON.stringify({
+            "quantity_stock" : 0
+        }),
     };
 }

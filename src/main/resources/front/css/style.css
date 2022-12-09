@@ -186,8 +186,9 @@ h3, h6 {
 .imgContainer {
     width: 100%;
     height: 100px;
-    background-image: url('../images/aliments.jpg');
+    background-image: url('../images/no_image.jpg');
     background-size: cover;
+    background-position: center;
     border-radius: 10px;
     margin: 0;
 }

@@ -21,7 +21,9 @@
         width: 90px;
         height: 90px;
         border-radius: 10px;
-        background-color: #E94E1B;
+        background-image: url("images/no_image.jpg");
+        background-size: cover;
+        background-position: center;
       }
       .rayonProduct a {
         text-decoration: none;
@@ -50,13 +52,15 @@
       .distance {
         display: flex;
         align-items: center;
+        padding-right: 0;
       }
       .distance i {
         color: #345DA8;
       }
       .distance span {
         color: #E94E1B;
-        padding-right: 0;
+        padding-right: 0 !important;
+        font-size: 12px;
       }
       .productTitle {
         margin-bottom: 0;
@@ -119,49 +123,99 @@
             });
             $.ajax(getProductsByCategory(catID)).done(function (response) {
               const products = [];
+              console.log(response);
               for(let i = 0; i < response.length; i++) {
-                if(response[i].user.id != sessionStorage.getItem('userID')) {
+                if(response[i].user.id != sessionStorage.getItem('userID') && response[i].quantity_stock != 0) {
                   products.push(response[i]);
                 }
               }
               const rayon = document.querySelector(".rayonProduct");
               for(let i = 0; i < products.length; i++) {
-                rayon.innerHTML +=
-                  '<div class="row mb-3">' +
-                    '<div class="col-auto">' +
-                      '<a href="product.html?productID=' + products[i].id_product + '">' +
-                        '<div class="imgProduit"></div>' +
-                      '</a>' +
-                    '</div>' +
-                    '<div class="col">' +
-                      '<div class="row">' +
-                        '<h6 class="productTitle">' + products[i].name + '</h6>' +
-                      '</div>' +
-                      '<div class="row">' +
-                        '<div class="col-auto distance">' +
-                          '<i class="material-icons">location_on</i>' +
-                          '<span>.. km</span>'+
-                        '</div>' +
-                        '<div class="col donneur">' +
-                          '<span>par ' + products[i].user.first_name + ' ' + products[i].user.last_name + '</span>' +
-                        '</div>' +
-                      '</div>' +
-                      '<div class="row">' +
-                        '<div class="col">' +
-                          '<button class="px-1" onclick="sessionStorage.setItem(\'lastUrl\', location.href); location.href = \'message.html?userID=' + products[i].user.id + '\';">Message</button>' +
-                        '</div>' +
-                        '<div class="col-auto">' +
-                          '<button class="px-1" onclick="location.href = \'profil.html?userID=' + products[i].user.id + '\';">Voir le freego</button>' +
-                        '</div>' +
-                        '</div>' +
-                      '</div>' +
-                    '</div>' +
-                  '</div>';
+                $.ajax(getUserById(sessionStorage.getItem('userID'))).done(function (user) {
+                  const distance = fDistance(user.latitude, products[i].user.latitude, user.longitude, products[i].user.longitude);
+                  const reqAjax = $.ajax(getProductImages(products[i].id_product));
+                  reqAjax.done(function (images) {
+                    rayon.innerHTML +=
+                            '<div class="row mb-3">' +
+                            '<div class="col-auto">' +
+                            '<a href="javascript:void(0)" onclick="fClickJyGo(' + products[i].id_product + ')">' +
+                            '<div class="imgProduit" style="background-image: url(' + 'data:image/png;base64,' + images[0].image + ');"></div>' +
+                            '</a>' +
+                            '</div>' +
+                            '<div class="col">' +
+                            '<div class="row">' +
+                            '<h6 class="productTitle">' + products[i].name + '</h6>' +
+                            '</div>' +
+                            '<div class="row">' +
+                            '<div class="col-auto distance">' +
+                            '<i class="material-icons">location_on</i>' +
+                            '<span>' + distance + ' km(s)</span>' +
+                            '</div>' +
+                            '<div class="col donneur">' +
+                            '<span>par ' + products[i].user.first_name + ' ' + products[i].user.last_name + '</span>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="row">' +
+                            '<div class="col">' +
+                            '<button class="px-1" onclick="fClickMessage(' + products[i].user.id + ');">Message</button>' +
+                            '</div>' +
+                            '<div class="col-auto">' +
+                            '<button class="px-1" onclick="location.href = \'profil.html?userID=' + products[i].user.id + '\';">Voir le freego</button>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>';
+                  });
+                  reqAjax.fail(function() {
+                    rayon.innerHTML +=
+                            '<div class="row mb-3">' +
+                            '<div class="col-auto">' +
+                            '<a href="javascript:void(0)" onclick="fClickJyGo(' + products[i].id_product + ')">' +
+                            '<div class="imgProduit"></div>' +
+                            '</a>' +
+                            '</div>' +
+                            '<div class="col">' +
+                            '<div class="row">' +
+                            '<h6 class="productTitle">' + products[i].name + '</h6>' +
+                            '</div>' +
+                            '<div class="row">' +
+                            '<div class="col-auto distance">' +
+                            '<i class="material-icons">location_on</i>' +
+                            '<span>' + distance + ' km(s)</span>' +
+                            '</div>' +
+                            '<div class="col donneur">' +
+                            '<span>par ' + products[i].user.first_name + ' ' + products[i].user.last_name + '</span>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="row">' +
+                            '<div class="col">' +
+                            '<button class="px-1" onclick="fClickMessage(' + products[i].user.id + ');">Message</button>' +
+                            '</div>' +
+                            '<div class="col-auto">' +
+                            '<button class="px-1" onclick="location.href = \'profil.html?userID=' + products[i].user.id + '\';">Voir le freego</button>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>';
+                  });
+                });
               }
               fFinChargement();
             });
           }
         }
+      }
+
+      function fClickJyGo(productID) {
+        sessionStorage.setItem('lastUrl', location.href);
+        location.href = "product.html?productID=" + productID;
+      }
+
+      function fClickMessage(userID) {
+        sessionStorage.setItem('lastUrl', location.href);
+        location.href = "message.html?userID=" + userID;
       }
     </script>
   </body>

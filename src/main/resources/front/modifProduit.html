@@ -23,10 +23,10 @@
             text-align: center;
         }
         .productImage {
-            background-color: white;
             border-radius: 10px;
             height: 90px;
             width: 90px;
+            object-fit: cover;
         }
         .productImageCol {
             display: flex;
@@ -195,24 +195,27 @@
             <div class="row">
                 <span style="font-size: 12px;">(3 photos maximum)</span>
             </div>
-            <div class="row" style="display: flex; justify-content: center">
-                <button class="btn_submit my-3" style="width: fit-content;">Ajouter une ou des photo(s)</button>
+            <div class="row mb-3" style="display: flex; justify-content: center">
+                <span style="font-size: 10px;">Cliquez ci-dessous pour ajouter ou modifier une image.</span>
             </div>
             <div class="row">
                 <div class="col productImageCol">
-                    <div class="productImage">
-
-                    </div>
+                    <a href="javascript:void(0)" onclick="fAddImage1()">
+                        <img id="imageProd1" class="productImage" src="images/no_image.jpg"/>
+                    </a>
+                    <input id="fileUploader1" type="file" accept="image/*" hidden/>
                 </div>
                 <div class="col productImageCol">
-                    <div class="productImage">
-
-                    </div>
+                    <a href="javascript:void(0)" onclick="fAddImage2()">
+                        <img id="imageProd2" class="productImage" src="images/no_image.jpg"/>
+                    </a>
+                    <input id="fileUploader2" type="file" accept="image/*" hidden/>
                 </div>
                 <div class="col productImageCol">
-                    <div class="productImage">
-
-                    </div>
+                    <a href="javascript:void(0)" onclick="fAddImage3()">
+                        <img id="imageProd3" class="productImage" src="images/no_image.jpg"/>
+                    </a>
+                    <input id="fileUploader3" type="file" accept="image/*" hidden/>
                 </div>
             </div>
         </div>
@@ -230,7 +233,7 @@
             </div>
         </div>
         <div id="btnAjout" class="my-3">
-            <button class="btn btnModifProfil" onclick="fAddProduct()" style="justify-content: center">Sauvegarder</button>
+            <button class="btn btnModifProfil" onclick="fUpdateProduct()" style="justify-content: center">Sauvegarder</button>
         </div>
     </div>
 
@@ -250,6 +253,7 @@
             $("#ecranChargement").load("ecranChargement.html");
             $("#ecranChargement").fadeIn();
         });
+        let productID;
         onload = function() {
             if(sessionStorage.getItem('userID') == null) {
                 location.href = "connexion.html";
@@ -267,12 +271,17 @@
                     const url = new URL(location.href);
                     const search_params = new URLSearchParams(url.search);
                     if(search_params.has('productID')) {
-                        const productID = search_params.get('productID');
+                        productID = search_params.get('productID');
                         $.ajax(getProductById(productID)).done(function (response) {
                             document.querySelector("#categorie").innerHTML += ": <span>" + response.category.name + "</span>";
                             document.querySelector("#etat").innerHTML += ": <span>" + response.etat + "</span>";
                             document.querySelector("#titreAnn").value = response.name;
                             document.querySelector("#descAnn").value = response.description;
+                            $.ajax(getProductImages(productID)).done(function (images) {
+                                document.querySelector("#imageProd1").src = "data:image/png;base64," + images[0].image;
+                                document.querySelector("#imageProd2").src = "data:image/png;base64," + images[1].image;
+                                document.querySelector("#imageProd3").src = "data:image/png;base64," + images[2].image;
+                            });
                             fFinChargement();
                         });
                     }
@@ -280,15 +289,70 @@
                 });
             }
         }
+        let image1;
+        let image2;
+        let image3;
+
         function fUpdateProduct() {
             const categorie = document.querySelector("#categorie").querySelector("span");
             const etat = document.querySelector("#etat").querySelector("span");
             const titre = document.querySelector("#titreAnn").value;
             const description = document.querySelector("#descAnn").value;
             if(categorie != null && etat != null && titre != "" && description != "") {
-                $.ajax(addProduct(sessionStorage.getItem('currentRayon'), etat.innerHTML, titre, description)).done(function (response) {
-                    console.log(response);
+                $.ajax(updateProduct(productID, sessionStorage.getItem('currentRayon'), titre, description, etat.innerHTML)).done(function (response) {
+                    location.href = "product.html?productID=" + productID;
                 });
+            }
+        }
+
+        function fAddImage1() {
+            document.querySelector("#fileUploader1").click();
+        }
+        document.querySelector("#fileUploader1").addEventListener("change", handleImage1, false);
+        function handleImage1() {
+            const files = this.files;
+            const fr = new FileReader();
+            fr.readAsDataURL(files[0]);
+            fr.onload = function() {
+                document.querySelector("#imageProd1").src = this.result;
+                image1 = new FormData();
+                image1.append("image", files[0]);
+                const entity_name = 'user_' + new Date().getTime() + '_' + sessionStorage.getItem('userID');
+                image1.append("name", entity_name);
+            }
+        }
+
+        function fAddImage2() {
+            document.querySelector("#fileUploader2").click();
+        }
+        document.querySelector("#fileUploader2").addEventListener("change", handleImage2, false);
+        function handleImage2() {
+            const files = this.files;
+            const fr = new FileReader();
+            fr.readAsDataURL(files[0]);
+            fr.onload = function() {
+                document.querySelector("#imageProd2").src = this.result;
+                image2 = new FormData();
+                image2.append("image", files[0]);
+                const entity_name = 'user_' + new Date().getTime() + '_' + sessionStorage.getItem('userID');
+                image2.append("name", entity_name);
+            }
+        }
+
+        function fAddImage3() {
+            document.querySelector("#fileUploader3").click();
+        }
+        document.querySelector("#fileUploader1").addEventListener("change", handleImage3, false);
+        function handleImage3() {
+            const files = this.files;
+            const fr = new FileReader();
+            fr.readAsDataURL(files[0]);
+            fr.onload = function() {
+                document.querySelector("#imageProd3").src = this.result;
+                image3 = new FormData();
+                image3.append("image", files[0]);
+                const entity_name = 'user_' + new Date().getTime() + '_' + sessionStorage.getItem('userID');
+                image3.append("name", entity_name);
             }
         }
     </script>
