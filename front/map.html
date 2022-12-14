@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
   <title>Carte - Freego</title>
 
   <!-- Bootstrap CSS -->
@@ -17,6 +20,9 @@
   <script src="leaflet/leaflet.js"></script>
 
   <style>
+    body {
+      height: 100%;
+    }
     .material-icons.whiteIcon {
       color: white;
       font-size: 46px;
@@ -28,7 +34,7 @@
       text-decoration: none;
     }
     .allContent {
-      height: calc(100vh - 110px)
+      height: calc(100% - 110px)
     }
     #map {
       height: 100%;

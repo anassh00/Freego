@@ -1,4 +1,4 @@
-const urlBack = "http://localhost:8080/api/"
+const urlBack = "http://hanass@polymnie.univ-lyon2.fr:8080/api/"
 
 function connexion(pseudo, mdp) {
     return {

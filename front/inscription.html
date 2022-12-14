@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
         <title>Inscription - Freego</title>
 
         <style>
             body {
-                height: max-content;
+                min-height: 100%;
                 background: linear-gradient(#E94E1B, #345DA8);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                padding: 20% !important;
             }
 
             #logo_container {
@@ -16,13 +23,14 @@
             }
 
             #logo {
-                margin-top: 50px;
-                width: 100px;
+                width: 200px;
+                margin-bottom: 2rem;
             }
 
             h1 {
                 color: white;
-                font-weight: bold;
+                font-weight: bold !important;
+                margin-bottom: 2rem;
             }
 
             .btn_submit {
@@ -40,17 +48,25 @@
             .link:hover {
                 color: white;
             }
-        </style>
-        <!-- Input form -->
-        <link rel="stylesheet" type="text/css" href="css/input_form.css"/>
-
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="bootstrap-5.2.3-dist/css/bootstrap.css">
-
-        <!-- Google Icon -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
-        <style>
+            .inputRow {
+                color: white;
+            }
+            .inputRow > input {
+                background-color: transparent;
+                border: none;
+                color: white;
+            }
+            .inputRow > input:focus {
+                outline: none !important;
+            }
+            .btn_submit {
+                background-color: white !important;
+                color: #E94E1B !important;
+                font-weight: bold !important;
+                border-radius: 50px !important;
+                width: 100% !important;
+                height: fit-content !important;
+            }
             .textError {
                 color: red;
                 display: flex;
@@ -58,99 +74,94 @@
                 font-weight: bold;
             }
             #geolocalise {
-                font-size: 12px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                width: fit-content;
-            }
-            #geolocalise i {
-                font-size: 20px;
+                width: fit-content !important;
             }
         </style>
+
+        <!-- Style -->
+        <link rel="stylesheet" type="text/css" href="css/style.css"/>
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="bootstrap-5.2.3-dist/css/bootstrap.css">
+
+        <!-- Google Icon -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
     </head>
 
-    <body class="mb-5">
+    <body>
         <div id="logo_container">
             <img id="logo" src="images/logo.png" />
         </div>
-        <h1 class="m-3" style="text-align: center">Bienvenue</h1>
-        <div class="field field_v1">
-            <label for="first-name" class="ha-screen-reader">Prénom*</label>
-            <input id="first-name" class="field__input" placeholder="">
-            <span class="field__label-wrap" aria-hidden="true">
-                <span class="field__label">Prénom*</span>
-            </span>
+        <h1 style="text-align: center">Bienvenue</h1>
+        <div class="row inputRow">
+            <label class="px-0" for="first-name">Prénom*</label>
+            <br>
+            <input class="px-0" type="text" id="first-name"/>
+            <hr style="opacity: 1;">
         </div>
-        <br>
-        <div class="field field_v1">
-            <label for="last-name" class="ha-screen-reader">Nom*</label>
-            <input id="last-name" class="field__input" placeholder="">
-            <span class="field__label-wrap" aria-hidden="true">
-                <span class="field__label">Nom*</span>
-            </span>
+        <div class="row inputRow">
+            <label class="px-0" for="last-name">Nom*</label>
+            <br>
+            <input class="px-0" type="text" id="last-name"/>
+            <hr style="opacity: 1;">
         </div>
-        <br>
-        <div class="field field_v1">
-            <label for="pseudo" class="ha-screen-reader">Pseudonyme</label>
-            <input id="pseudo" class="field__input" placeholder="">
-            <span class="field__label-wrap" aria-hidden="true">
-                <span class="field__label">Pseudonyme</span>
-            </span>
+        <div class="row inputRow">
+            <label class="px-0" for="pseudo">Pseudonyme</label>
+            <br>
+            <input class="px-0" type="text" id="pseudo"/>
+            <hr style="opacity: 1;">
         </div>
         <div class="row" style="text-align: center;">
-            <span style="color: white; font-size: 10px;">Si non renseigné, il sera de la forme <i>prénom.nom</i>.</span>
+            <span style="color: white; font-size: 0.9em;">Si non renseigné, il sera de la forme <i>prénom.nom</i>.</span>
         </div>
         <br>
         <div class="row">
-            <div class="row">
-                <span style="color: white; margin-left: calc(20% + 16px);">Adresse</span>
+            <div class="row p-0">
+                <span style="color: white;">Adresse</span>
             </div>
-            <div class="row" style="margin: 0">
-                <div class="col" style="display: flex; justify-content: right">
-                    <div class="field field_v1" style="margin-right: 0;">
-                        <label for="latitude" class="ha-screen-reader">Latitude*</label>
-                        <input type="text" id="latitude" class="field__input" placeholder="">
-                        <span class="field__label-wrap" aria-hidden="true">
-                            <span class="field__label" style="font-size: 12px">Latitude*</span>
-                        </span>
+            <div class="row m-0">
+                <div class="col px-0">
+                    <div class="row inputRow" style="padding-right: 1em;">
+                        <label class="px-0" for="latitude" style="font-size: .9em !important;">Latitude*</label>
+                        <br>
+                        <input class="px-0" type="text" id="latitude"/>
+                        <hr style="opacity: 1;">
                     </div>
                 </div>
-                <div class="col">
-                    <div class="field field_v1" style="margin-left: 0;">
-                        <label for="longitude" class="ha-screen-reader">Longitude*</label>
-                        <input type="text" id="longitude" class="field__input" placeholder="">
-                        <span class="field__label-wrap" aria-hidden="true">
-                        <span class="field__label" style="font-size: 12px">Longitude*</span>
-                    </span>
+                <div class="col px-0">
+                    <div class="row inputRow" style="padding-left: 1em;">
+                        <label class="px-0" for="longitude" style="font-size: .9em !important;">Longitude*</label>
+                        <br>
+                        <input class="px-0" type="text" id="longitude"/>
+                        <hr style="opacity: 1;">
                     </div>
                 </div>
             </div>
         </div>
-        <div style="display: flex; justify-content: center;">
+        <div style="display: flex; justify-content: center; margin-bottom: 1em;">
             <button class="btn btn_submit mx-3" id="geolocalise" onclick="fGetLocation()"><i class="material-icons">my_location</i> Me géolocaliser</button>
         </div>
-        <div class="field field_v1">
-            <label for="password" class="ha-screen-reader">Mot de passe*</label>
-            <input type="password" id="password" class="field__input" placeholder="">
-            <span class="field__label-wrap" aria-hidden="true">
-                <span class="field__label">Mot de passe*</span>
-            </span>
+        <div class="row inputRow">
+            <label class="px-0" for="password">Mot de passe*</label>
+            <br>
+            <input class="px-0" type="password" id="password"/>
+            <hr style="opacity: 1;">
         </div>
-        <br>
-        <div class="field field_v1">
-            <label for="confirm-password" class="ha-screen-reader">Confirmer le mot de passe*</label>
-            <input type="password" id="confirm-password" class="field__input" placeholder="">
-            <span class="field__label-wrap" aria-hidden="true">
-                <span class="field__label">Confirmer le mot de passe*</span>
-            </span>
+        <div class="row inputRow">
+            <label class="px-0" for="confirm-password">Confirmer le mot de passe*</label>
+            <br>
+            <input class="px-0" type="password" id="confirm-password"/>
+            <hr style="opacity: 1;">
         </div>
-        <br>
         <span class="mx-3 textError"></span>
-        <div style="display: flex; justify-content: center; margin-top: 30px;">
+        <div style="display: flex; justify-content: center; margin-top: 1em;">
             <button class="btn btn_submit mx-3" id="btnSendForm" onclick="sendForm()">Inscription</button>
         </div>
-        <div style="display: flex; justify-content: center; margin-top: 30px;">
+        <div style="display: flex; justify-content: center; margin-top: 1em;">
             <a href="connexion.html" class="mx-3 link">Je suis déjà membre</a>
         </div>
 
