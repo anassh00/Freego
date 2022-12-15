@@ -1,234 +1,249 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="bootstrap-5.2.3-dist/css/bootstrap.css">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Style -->
-    <link rel="stylesheet" href="css/style.css">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="bootstrap-5.2.3-dist/css/bootstrap.css">
 
-    <!-- Google Icon -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <!-- Style -->
+  <link rel="stylesheet" href="css/style.css">
 
-    <title>Accueil - Freego</title>
+  <!-- Google Icon -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-    <style>
-      #head-section .row {
-        height: 100%;
-      }
-      .menuIcon {
-        color: white;
-        font-size: 40px;
-      }
-      #burgerMenu {
-        position: absolute;
-        background-color: #FE835A;
-        top: 50px;
-        right: 10px;
-        width: 150px;
-        z-index: 1;
-      }
-      #burgerMenu a {
-        text-decoration: none;
-        color: white;
-        margin-right: 0px;
-      }
-      #burgerMenu a .row {
-        display: flex;
-        justify-content: center;
-        border-bottom: 1px solid white;
-        margin: 0;
-      }
-      .topFreego {
-        width: 150px;
-        height: 170px;
-        background: url('images/freego_one.png');
-        border-radius: 20px;
-      }
-      .topFreegoButton {
-        background-color: #345DA8;
-        border-radius: 10px;
-        color: white;
-        width: 100px;
-        border: none;
-      }
-      .rayons span {
-        font-size: 14px;
-        color: #345DA8;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="allContent">
-      <div id="head-section">
-        <div class="row">
-          <div class="col-auto">
-            <img class="mx-3" src="images/logo_long.png"/>
-          </div>
-          <div class="col btn-don">
-            <button class="btn_submit" onclick="location.href = 'don.html';">Je donne</button>
-          </div>
-          <div class="col-auto menu">
-            <a href="javascript:void(0)" onclick="fDisplayUnderMenu('#burgerMenu')"><i class="material-icons menuIcon">menu</i></a>
-            <div id="burgerMenu" style="display: none">
-              <a href="javascript:void(0)" onclick="location.href='profil.html?userID=' + sessionStorage.getItem('userID');">
-                <div class="row p-3">
-                  Mon freego
-                </div>
-              </a>
-              <a href="messaging.html">
-                <div class="row p-3">
-                  Messagerie
-                </div>
-              </a>
-              <a href="map.html">
-                <div class="row p-3">
-                  Map
-                </div>
-              </a>
-              <a href="rayons.html">
-                <div class="row p-3">
-                  Rayons
-                </div>
-              </a>
-              <a href="javascript:void(0)" onclick="sessionStorage.removeItem('userID'); location.href='connexion.html';">
-                <div class="row p-3">
-                  Déconnexion
-                </div>
-              </a>
-            </div>
+  <title>Accueil - Freego</title>
+
+  <style>
+    #head-section .row {
+      height: 100%;
+    }
+
+    .menuIcon {
+      color: white;
+      font-size: 40px;
+    }
+
+    #burgerMenu {
+      position: absolute;
+      background-color: #FE835A;
+      top: 50px;
+      right: 10px;
+      width: 150px;
+      z-index: 1;
+    }
+
+    #burgerMenu a {
+      text-decoration: none;
+      color: white;
+      margin-right: 0px;
+    }
+
+    #burgerMenu a .row {
+      display: flex;
+      justify-content: center;
+      border-bottom: 1px solid white;
+      margin: 0;
+    }
+
+    .topFreego {
+      width: 150px;
+      height: 170px;
+      background: url('images/freego_one.png');
+      border-radius: 20px;
+    }
+
+    .topFreegoButton {
+      background-color: #345DA8;
+      border-radius: 10px;
+      color: white;
+      width: 100px;
+      border: none;
+    }
+
+    .rayons span {
+      font-size: 14px;
+      color: #345DA8;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="allContent">
+    <div id="head-section">
+      <div class="row">
+        <div class="col-auto">
+          <img class="mx-3" src="images/logo_long.png" />
+        </div>
+        <div class="col btn-don">
+          <button class="btn_submit" onclick="location.href = 'don.html';">Je donne</button>
+        </div>
+        <div class="col-auto menu">
+          <a href="javascript:void(0)" onclick="fDisplayUnderMenu('#burgerMenu')"><i
+              class="material-icons menuIcon">menu</i></a>
+          <div id="burgerMenu" style="display: none">
+            <a href="javascript:void(0)"
+              onclick="location.href='profil.html?userID=' + sessionStorage.getItem('userID');">
+              <div class="row p-3">
+                Mon freego
+              </div>
+            </a>
+            <a href="messaging.html">
+              <div class="row p-3">
+                Messagerie
+              </div>
+            </a>
+            <a href="map.html">
+              <div class="row p-3">
+                Map
+              </div>
+            </a>
+            <a href="rayons.html">
+              <div class="row p-3">
+                Rayons
+              </div>
+            </a>
+            <a href="javascript:void(0)" onclick="sessionStorage.removeItem('userID'); location.href='connexion.html';">
+              <div class="row p-3">
+                Déconnexion
+              </div>
+            </a>
           </div>
         </div>
       </div>
-      <div style="height: 60px"></div>
-      <div class="section m-3">
-        <div class="top-freego">
-          <h6>Freego à la une</h6>
-          <div id="topFreego" class="row pb-3" style="flex-wrap: unset; overflow: auto;"></div>
-        </div>
-        <div style="height: 30px"></div>
-        <div class="rayons">
-          <h6 class="my-3">Tous les produits par rayon</h6>
-          <hr>
-        </div>
-      </div>
-      <div style="height:50px"></div>
-      <div id="footNavBar"></div>
     </div>
+    <div style="height: 60px"></div>
+    <div class="section m-3">
+      <div class="top-freego">
+        <h6>Freego à la une</h6>
+        <div id="topFreego" class="row pb-3" style="flex-wrap: unset; overflow: auto;"></div>
+      </div>
+      <div style="height: 30px"></div>
+      <div class="rayons">
+        <h6 class="my-3">Tous les produits par rayon</h6>
+        <hr>
+      </div>
+    </div>
+    <div style="height:50px"></div>
+    <div id="footNavBar"></div>
+  </div>
 
-    <!-- Ecran de chargement -->
-    <div id="ecranChargement"></div>
+  <!-- Ecran de chargement -->
+  <div id="ecranChargement"></div>
 
-    <!-- Bootstrap Script -->
-    <script src="bootstrap-5.2.3-dist/js/bootstrap.js"></script>
-    <!-- Script -->
-    <script src="js/script.js"></script>
-    <script src="js/requetes.js"></script>
-    <!-- jQuery -->
-    <script src="js/jQuery.js"></script>
-    <script>
-      $(function(){
-        $("#ecranChargement").load("ecranChargement.html");
-        $("#ecranChargement").fadeIn();
+  <!-- Bootstrap Script -->
+  <script src="bootstrap-5.2.3-dist/js/bootstrap.js"></script>
+  <!-- Script -->
+  <script src="js/script.js"></script>
+  <script src="js/requetes.js"></script>
+  <!-- jQuery -->
+  <script src="js/jQuery.js"></script>
+  <script>
+    onload = function () {
+      if (sessionStorage.getItem('userID') == null) {
+        location.href = "connexion.html";
+      } else {
+        // Ecran de chargement
+        fDebutChargement();
+        // Barre de navigation basse
         $("#footNavBar").load("footNavBar.html");
-      });
-      onload = function() {
-        if(sessionStorage.getItem('userID') == null) {
-          location.href = "connexion.html";
-        } else {
-          // Top freego
-          $.ajax(getAllUsers()).done(function (response) {
-            console.log(response);
-            const topFreego = document.querySelector("#topFreego");
-            for(let i = 0; i < response.length; i++) {
-              if(response[i].id != sessionStorage.getItem('userID')) {
-                $.ajax(getUserById(response[i].id)).done(function (user) {
-                  topFreego.innerHTML += '' +
-                    '<div class="col mx-2">' +
+        // Top freego    
+        const topFreego = get("#topFreego");
+        getAllUsers()
+          .then((data) => {
+            for (let i = 0; i < data.length; i++) {
+              if (data[i].id != sessionStorage.getItem('userID')) {
+                getUserById(data[i].id)
+                  .then((user) => {
+                    topFreego.innerHTML += '' +
+                      '<div class="col mx-2">' +
                       '<div class="topFreego row">' +
-                        '<div style="height: 100%; border-radius: 10px; color: white; display: flex; align-items: center; justify-content: center">' +
-                          'Freego de ' + user.first_name +
-                        '</div>' +
+                      '<div style="height: 100%; border-radius: 10px; color: white; display: flex; align-items: center; justify-content: center">' +
+                      'Freego de ' + user.first_name +
+                      '</div>' +
                       '</div>' +
                       '<div class="row mt-1" style="width: 150px; display: flex; justify-content: center">' +
-                        '<button class="topFreegoButton" onclick="location.href=\'profil.html?userID=' + user.id + '\';">J\'y go !</button>' +
+                      '<button class="topFreegoButton" onclick="location.href=\'profil.html?userID=' + user.id + '\';">J\'y go !</button>' +
                       '</div>' +
-                    '</div>';
-                });
+                      '</div>';
+                  });
               }
             }
+          })
+          .catch(() => {
+            topFreego.innerHTML = "<p><i>Problème de chargement des \"Freego à la une\" !</i></p>";
           });
-          // Tous les rayons
-          $.ajax(getAllCategory()).done(function (response) {
-            const rayons = document.querySelector('.rayons');
-            for(let i = 0; i < response.length; i++) {
+        // Tous les rayons
+        const rayons = get('.rayons');
+        getAllCategory()
+          .then((data) => {
+            for (let i = 0; i < data.length; i++) {
               rayons.innerHTML +=
-                '<span>' + response[i].name + '</span><br>';
-              $.ajax(getProductsByCategory(response[i].id)).done(function (products) {
-                const productsNotMe = [];
-                for(let i = 0; i < products.length; i++) {
-                  if(products[i].user.id != sessionStorage.getItem('userID') && products[i].quantity_stock != 0) {
-                    productsNotMe.push(products[i]);
-                  }
-                }
-                const nbLignes = Math.ceil(productsNotMe.length / 3);
-                let index = 0;
-                for(let i = 0; i < nbLignes; i++) {
-                  let tmpContain = "";
-                  for(let j = 0; j < 3; j++) {
-                    if(index != productsNotMe.length) {
-                      const reqAjax = $.ajax(getProductImages(productsNotMe[index].id_product));
-                      reqAjax.done(function(images) {
-                        tmpContain +=
-                                '<div class="col productContainer">' +
-                                '<div class="row imgContainer" style="background-image: url(' + 'data:image/png;base64,' + images[0].image + ');"></div>' +
-                                '<div class="row titleProduct">' +
-                                productsNotMe[index].name +
-                                '</div>' +
-                                '<div class="row buttonProduct">' +
-                                '<button onClick="fClickJyGo(' + productsNotMe[index].id_product + ');">J\'y go !</button>' +
-                                '</div>' +
-                                '</div>';
-                      });
-                      reqAjax.fail(function() {
-                        tmpContain +=
-                                '<div class="col productContainer">' +
-                                '<div class="row imgContainer"></div>' +
-                                '<div class="row titleProduct">' +
-                                productsNotMe[index].name +
-                                '</div>' +
-                                '<div class="row buttonProduct">' +
-                                '<button onClick="fClickJyGo(' + productsNotMe[index].id_product + ');">J\'y go !</button>' +
-                                '</div>' +
-                                '</div>';
-                      });
-                      index++;
-                    } else {
-                      tmpContain +=
-                        '<div class="col productContainer"></div>';
+                '<span>' + data[i].name + '</span><br>';
+              getProductsByCategory(data[i].id)
+                .then((products) => {
+                  const productsNotMe = [];
+                  for (let i = 0; i < products.length; i++) {
+                    if (products[i].user.id != sessionStorage.getItem('userID') && products[i].quantity_stock != 0) {
+                      productsNotMe.push(products[i]);
                     }
                   }
-                  rayons.innerHTML +=
-                    '<div class="row">' +
+                  const nbLignes = Math.ceil(productsNotMe.length / 3);
+                  let index = 0;
+                  for (let i = 0; i < nbLignes; i++) {
+                    let tmpContain = "";
+                    for (let j = 0; j < 3; j++) {
+                      if (index != productsNotMe.length) {
+                        tmpContain +=
+                          '<div class="col productContainer">';
+                        // Récupération de la première photo de chaque produit
+                        getProductImages(productsNotMe[index].id_product)
+                          .then((images) => {
+                            tmpContain += '<div class="row imgContainer" style="background-image: url(' + 'data:image/png;base64,' + images[0].image + ');"></div>';
+                          })
+                          .catch(() => {
+                            tmpContain += '<div class="row imgContainer"></div>';
+                          });
+                        tmpContain +=
+                          '<div class="row titleProduct">' +
+                          productsNotMe[index].name +
+                          '</div>' +
+                          '<div class="row buttonProduct">' +
+                          '<button onClick="fClickJyGo(' + productsNotMe[index].id_product + ');">J\'y go !</button>' +
+                          '</div>' +
+                          '</div>';
+                        index++;
+                      } else {
+                        tmpContain +=
+                          '<div class="col productContainer"></div>';
+                      }
+                    }
+                    rayons.innerHTML +=
+                      '<div class="row">' +
                       tmpContain +
-                    '</div>';
-                }
-                fFinChargement();
-              });
+                      '</div>';
+                  }
+                })
+                .catch(() => {
+                  rayons.innerHTML += "<p><i>Erreur de chargement des produits dans ce rayon !</i></p>";
+                })
             }
-            fFinChargement();
+          })
+          .catch(() => {
+            rayons.innerHTML = "<p><i>Problème de chargement des rayons !</i></p>";
           });
-        }
+        fFinChargement();
       }
+    }
 
-      function fClickJyGo(productID) {
-        sessionStorage.setItem('lastUrl', location.href);
-        location.href = "product.html?productID=" + productID;
-      }
-    </script>
-  </body>
+    function fClickJyGo(productID) {
+      sessionStorage.setItem('lastUrl', location.href);
+      location.href = "product.html?productID=" + productID;
+    }
+  </script>
+</body>
+
 </html>

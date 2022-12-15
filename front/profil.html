@@ -1,326 +1,329 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="bootstrap-5.2.3-dist/css/bootstrap.css">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Style -->
-    <link rel="stylesheet" href="css/style.css">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="bootstrap-5.2.3-dist/css/bootstrap.css">
 
-    <!-- Google Icon -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <!-- Style -->
+  <link rel="stylesheet" href="css/style.css">
 
-    <style>
-      #profilImage {
-        width: 100px;
-        border-radius: 50px;
-      }
-      #lienSignalement {
-        color: gray;
-        font-size: 14px;
-      }
-      #modalContainer {
-        background-color:rgba(0, 0, 0, 0.3);
-        position:absolute;
-        width:100%;
-        height:100%;
-        top:0px;
-        left:0px;
-        z-index:10000;
-      }
-      #modal {
-        position: relative;
-        width: 90%;
-        height: fit-content;
-        background-color: #345DA8;
-        left: 5%;
-        top: 20%;
-        border-radius: 20px;
-      }
-      button:disabled {
-        opacity: 0.65;
-      }
-      #head-section .row {
-        height: 100%;
-      }
-      .menuIcon {
-        color: white;
-        font-size: 40px;
-      }
-      #burgerMenu {
-        position: absolute;
-        background-color: #FE835A;
-        top: 50px;
-        right: 10px;
-        width: 150px;
-        z-index: 1;
-      }
-      #burgerMenu a {
-        text-decoration: none;
-        color: white;
-        margin-right: 0px;
-      }
-      #burgerMenu a .row {
-        display: flex;
-        justify-content: center;
-        border-bottom: 1px solid white;
-        margin: 0;
-      }
-    </style>
+  <!-- Google Icon -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-    <title>Profil - Freego</title>
-  </head>
-  <body>
-    <div class="allContent">
-      <div id="head-section">
-        <div class="row">
-          <div class="col-auto">
-            <img class="mx-3" src="images/logo_long.png"/>
-          </div>
-          <div class="col btn-don">
-            <button class="btn_submit" onclick="location.href = 'don.html';">Je donne</button>
-          </div>
-          <div class="col-auto menu">
-            <a href="javascript:void(0)" onclick="fDisplayUnderMenu('#burgerMenu')"><i class="material-icons menuIcon">menu</i></a>
-            <div id="burgerMenu" style="display: none">
-              <a href="javascript:void(0)" onclick="location.href='profil.html?userID=' + sessionStorage.getItem('userID');">
-                <div class="row p-3">
-                  Mon freego
-                </div>
-              </a>
-              <a href="messaging.html">
-                <div class="row p-3">
-                  Messagerie
-                </div>
-              </a>
-              <a href="map.html">
-                <div class="row p-3">
-                  Map
-                </div>
-              </a>
-              <a href="rayons.html">
-                <div class="row p-3">
-                  Rayons
-                </div>
-              </a>
-              <a href="javascript:void(0)" onclick="sessionStorage.removeItem('userID'); location.href='connexion.html';">
-                <div class="row p-3">
-                  Déconnexion
-                </div>
-              </a>
-            </div>
+  <style>
+    #profilImage {
+      width: 100px;
+      border-radius: 50px;
+    }
+
+    #lienSignalement {
+      color: gray;
+      font-size: 14px;
+    }
+
+    #modalContainer {
+      background-color: rgba(0, 0, 0, 0.3);
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0px;
+      left: 0px;
+      z-index: 10000;
+    }
+
+    #modal {
+      position: relative;
+      width: 90%;
+      height: fit-content;
+      background-color: #345DA8;
+      left: 5%;
+      top: 20%;
+      border-radius: 20px;
+    }
+
+    button:disabled {
+      opacity: 0.65;
+    }
+
+    #head-section .row {
+      height: 100%;
+    }
+
+    .menuIcon {
+      color: white;
+      font-size: 40px;
+    }
+
+    #burgerMenu {
+      position: absolute;
+      background-color: #FE835A;
+      top: 50px;
+      right: 10px;
+      width: 150px;
+      z-index: 1;
+    }
+
+    #burgerMenu a {
+      text-decoration: none;
+      color: white;
+      margin-right: 0px;
+    }
+
+    #burgerMenu a .row {
+      display: flex;
+      justify-content: center;
+      border-bottom: 1px solid white;
+      margin: 0;
+    }
+  </style>
+
+  <title>Profil - Freego</title>
+</head>
+
+<body>
+  <div class="allContent">
+    <div id="head-section">
+      <div class="row">
+        <div class="col-auto">
+          <img class="mx-3" src="images/logo_long.png" />
+        </div>
+        <div class="col btn-don">
+          <button class="btn_submit" onclick="location.href = 'don.html';">Je donne</button>
+        </div>
+        <div class="col-auto menu">
+          <a href="javascript:void(0)" onclick="fDisplayUnderMenu('#burgerMenu')"><i
+              class="material-icons menuIcon">menu</i></a>
+          <div id="burgerMenu" style="display: none">
+            <a href="javascript:void(0)"
+              onclick="location.href='profil.html?userID=' + sessionStorage.getItem('userID');">
+              <div class="row p-3">
+                Mon freego
+              </div>
+            </a>
+            <a href="messaging.html">
+              <div class="row p-3">
+                Messagerie
+              </div>
+            </a>
+            <a href="map.html">
+              <div class="row p-3">
+                Map
+              </div>
+            </a>
+            <a href="rayons.html">
+              <div class="row p-3">
+                Rayons
+              </div>
+            </a>
+            <a href="javascript:void(0)" onclick="sessionStorage.removeItem('userID'); location.href='connexion.html';">
+              <div class="row p-3">
+                Déconnexion
+              </div>
+            </a>
           </div>
         </div>
       </div>
-      <div style="height: 60px"></div>
-      <div class="section m-3">
-        <div class="row">
-          <div class="col" style="display: flex; align-items: center">
-            <h3 id="prenomNom"></h3>
-          </div>
-          <div class="col-auto">
-            <img id="profilImage" src="images/person_profile.png"/>
-          </div>
-        </div>
-        <div class="row">
-          <p id="biographie"></p>
-        </div>
-        <hr>
-        <div id="freegoContainer">
-          <h6></h6>
-        </div>
-        <hr>
-        <div id="modifProfilContainer" class="row" style="display: none; justify-content: center">
-          <button class="btn btnModifProfil" onclick="location.href='modifProfil.html'"><i class="material-icons iconButton">edit</i>Modifier mon profil</button>
-        </div>
-        <div id="messageContainer" class="row" style="display: none; justify-content: center">
-          <button class="btn btnModifProfil" style="display: flex; justify-content: center;">Envoyer un message</button>
-        </div>
-        <div id="lienSignalementContainer" class="p-3" style="display: none; justify-content: center">
-          <a href="javascript:void(0)" id="lienSignalement" onclick="fReport(0)">Signaler cet utilisateur</a>
-        </div>
-        <div id="modalContainer" style="display: none">
-          <div id="modal" class="p-3">
-            <div style="display: flex; justify-content: center;"><i class="material-icons" style="font-size: 60px; color: white">report</i></div>
-            <div class="mx-4">
-              <p style="text-align: center; color: white;"></p>
-            </div>
-            <div class="my-3" style="display: flex; justify-content: center">
-              <button class="btn_submit"></button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="footNavBar"></div>
-      <div style="height:50px"></div>
     </div>
+    <div style="height: 60px"></div>
+    <div class="section m-3">
+      <div class="row">
+        <div class="col" style="display: flex; align-items: center">
+          <h3 id="prenomNom"></h3>
+        </div>
+        <div class="col-auto">
+          <img id="profilImage" src="images/person_profile.png" />
+        </div>
+      </div>
+      <div class="row">
+        <p id="biographie"></p>
+      </div>
+      <hr>
+      <div id="freegoContainer">
+        <h6></h6>
+      </div>
+      <hr>
+      <div id="modifProfilContainer" class="row" style="display: none; justify-content: center">
+        <button class="btn btnModifProfil" onclick="location.href='modifProfil.html'"><i
+            class="material-icons iconButton">edit</i>Modifier mon profil</button>
+      </div>
+      <div id="messageContainer" class="row" style="display: none; justify-content: center">
+        <button class="btn btnModifProfil" style="display: flex; justify-content: center;">Envoyer un message</button>
+      </div>
+      <div id="lienSignalementContainer" class="p-3" style="display: none; justify-content: center">
+        <a href="javascript:void(0)" id="lienSignalement" onclick="fReport(0)">Signaler cet utilisateur</a>
+      </div>
+      <div id="modalContainer" style="display: none">
+        <div id="modal" class="p-3">
+          <div style="display: flex; justify-content: center;"><i class="material-icons"
+              style="font-size: 60px; color: white">report</i></div>
+          <div class="mx-4">
+            <p style="text-align: center; color: white;"></p>
+          </div>
+          <div class="my-3" style="display: flex; justify-content: center">
+            <button class="btn_submit"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="footNavBar"></div>
+    <div style="height:50px"></div>
+  </div>
 
-    <!-- Ecran de chargement -->
-    <div id="ecranChargement"></div>
+  <!-- Ecran de chargement -->
+  <div id="ecranChargement"></div>
 
-    <!-- Bootstrap Script -->
-    <script src="bootstrap-5.2.3-dist/js/bootstrap.js"></script>
-    <!-- Script -->
-    <script src="js/script.js"></script>
-    <script src="js/requetes.js"></script>
-    <!-- jQuery -->
-    <script src="js/jQuery.js"></script>
-    <script>
-      $(function(){
-        $("#ecranChargement").load("ecranChargement.html");
-        $("#ecranChargement").fadeIn();
+  <!-- Bootstrap Script -->
+  <script src="bootstrap-5.2.3-dist/js/bootstrap.js"></script>
+  <!-- Script -->
+  <script src="js/script.js"></script>
+  <script src="js/requetes.js"></script>
+  <!-- jQuery -->
+  <script src="js/jQuery.js"></script>
+  <script>
+    onload = function () {
+      if (sessionStorage.getItem('userID') == null) {
+        location.href = "connexion.html";
+      } else {
+        // Ecran de chargement
+        fDebutChargement();
+        // Barre de navigation basse
         $("#footNavBar").load("footNavBar.html");
-      });
-
-      onload = function() {
-        if(sessionStorage.getItem('userID') == null) {
-          location.href = "connexion.html";
-        } else {
-          const url = new URL(location.href);
-          const search_params = new URLSearchParams(url.search);
-          if(search_params.has('userID')) {
-            const userID = search_params.get('userID');
-            if(userID == sessionStorage.getItem('userID')) {
-              $.ajax(getUserById(sessionStorage.getItem('userID'))).done(function (response) {
-                $.ajax(getUserImage(sessionStorage.getItem('userID'))).done(function (response) {
-                  document.querySelector("#profilImage").src = "data:image/png;base64," + response.image;
-                });
-                document.querySelector("#prenomNom").innerHTML = "<b>" + response.first_name + " " + response.last_name + "</b>";
-                document.querySelector("#biographie").innerHTML = response.biographie == null || response.biographie == "" ? "<i>Vous n'avez pas encore de biographie !</i>" : response.biographie;
-                document.querySelector("#freegoContainer").querySelector("h6").innerHTML = "Mon freego";
-                document.querySelector("#modifProfilContainer").style.display = 'flex';
-              });
-            } else {
-              $.ajax(getUserById(userID)).done(function (response) {
-                document.querySelector("#prenomNom").innerHTML = "<b>" + response.first_name + " " + response.last_name + "</b>";
-                document.querySelector("#biographie").innerHTML = response.biographie == null || response.biographie == "" ? "<i>Cet utilisateur n'a pas encore de biographie !</i>" : response.biographie;
-                document.querySelector("#freegoContainer").querySelector("h6").innerHTML = "Freego de " + response.first_name;
-                document.querySelector("#messageContainer").style.display = 'flex';
-                document.querySelector("#messageContainer").querySelector("button").onclick = function() {
+        const url = new URL(location.href);
+        const search_params = new URLSearchParams(url.search);
+        if (search_params.has('userID')) {
+          const userID = search_params.get('userID');
+          getUserById(userID)
+            .then((data) => {
+              getUserImage(userID)
+                .then((image) => {
+                  get("#profilImage").src = "data:image/png;base64," + response.image;
+                })
+              get("#prenomNom").innerHTML = "<b>" + data.first_name + " " + data.last_name + "</b>";
+              get("#biographie").innerHTML = data.biographie == null || data.biographie == "" ? "<i>Vous n'avez pas encore de biographie !</i>" : data.biographie;
+              if (userID == sessionStorage.getItem('userID')) {
+                get("#freegoContainer > h6").innerHTML = "Mon freego";
+                get("#modifProfilContainer").style.display = 'flex';
+              } else {
+                get("#freegoContainer > h6").innerHTML = "Freego de " + data.first_name;
+                get("#messageContainer").style.display = 'flex';
+                get("#messageContainer > button").onclick = function () {
                   sessionStorage.setItem('lastUrl', location.href);
                   location.href = "message.html?userID=" + response.id;
                 };
-                document.querySelector("#lienSignalementContainer").style.display = 'flex';
-              });
-            }
-            $.ajax(getProductsByUserId(userID)).done(function (response) {
+                get("#lienSignalementContainer").style.display = 'flex';
+              }
+            });
+          getProductsByUserId(userID)
+            .then((data) => {
               const products = [];
-              for(let i = 0; i < response.length; i++) {
-                if(response[i].quantity_stock != 0) {
-                  products.push(response[i]);
+              for (let i = 0; i < data.length; i++) {
+                if (data[i].quantity_stock != 0) {
+                  products.push(data[i]);
                 }
               }
-              const freegoContainer = document.querySelector("#freegoContainer");
-              if(products.length > 0) {
+              const freegoContainer = get("#freegoContainer");
+              if (products.length > 0) {
                 const nbLignes = Math.ceil(products.length / 3);
                 let index = 0;
-                for(let i = 0; i < nbLignes; i++) {
+                for (let i = 0; i < nbLignes; i++) {
                   let tmpContain = "";
-                  for(let j = 0; j < 3; j++) {
-                    if(index != products.length) {
-                      const reqAjax = $.ajax(getProductImages(products[index].id_product));
-                      reqAjax.done(function (images) {
-                        tmpContain +=
-                          '<div class="col productContainer">' +
-                            '<div class="row imgContainer" style="background-image: url(' + 'data:image/png;base64,' + images[0].image + ');"></div>' +
-                                '<div class="row titleProduct">' +
-                                products[index].name +
-                                '</div>' +
-                                '<div class="row buttonProduct">' +
-                                '<button onClick="fClickJyGo(' + products[index].id_product + ');">J\'y go !</button>' +
-                                '</div>' +
-                                '</div>';
-
-                      });
-                      reqAjax.fail(function() {
-                        tmpContain +=
-                                '<div class="col productContainer">' +
-                                '<div class="row imgContainer"></div>' +
-                                '<div class="row titleProduct">' +
-                                products[index].name +
-                                '</div>' +
-                                '<div class="row buttonProduct">' +
-                                '<button onClick="fClickJyGo(' + products[index].id_product + ');">J\'y go !</button>' +
-                                '</div>' +
-                                '</div>';
-                      });
+                  for (let j = 0; j < 3; j++) {
+                    if (index != products.length) {
+                      tmpContain += '<div class="col productContainer">';
+                      getProductImages(products[index].id_product)
+                        .then((images) => {
+                          tmpContain += '<div class="row imgContainer" style="background-image: url(' + 'data:image/png;base64,' + images[0].image + ');"></div>';
+                        })
+                        .catch(() => {
+                          tmpContain += '<div class="row imgContainer"></div>';
+                        });
+                      tmpContain +=
+                        '<div class="row titleProduct">' +
+                        products[index].name +
+                        '</div>' +
+                        '<div class="row buttonProduct">' +
+                        '<button onClick="fClickJyGo(' + products[index].id_product + ');">J\'y go !</button>' +
+                        '</div>' +
+                        '</div>';
                       index++;
-
                     } else {
                       tmpContain +=
                         '<div class="col productContainer"></div>';
                     }
                   }
                   freegoContainer.innerHTML +=
-                          '<div class="row">' +
-                          tmpContain +
-                          '</div>';
+                    '<div class="row">' +
+                      tmpContain +
+                    '</div>';
                 }
               } else {
                 freegoContainer.innerHTML += '<p><i>Le freego est vide !</i></p>';
               }
               fFinChargement();
-            });
+            })
+        }
+      }
+    }
+
+    function fReport(num) {
+      get("#modalContainer").style.display = 'block';
+      const modal = get("#modal");
+      switch (num) {
+        case 0:
+          get("#modal > button").innerHTML = "J'ai compris";
+          get("#modal > p").innerHTML = "Tout signalement abusif sera sanctionné !";
+          get("#modal > button").onclick = function () {
+            fReport(1);
           }
-        }
+          break;
+        case 1:
+          get("#modal > button").innerHTML = "Suivant";
+          get("#modal > button").onclick = function () {
+            if (document.getElementsByName("report")[0].checked) {
+              fReport(2);
+            } else {
+              fReport(3);
+            }
+          }
+          fHideButton(true);
+          get("#modal > p").innerHTML =
+            'Vous voulez signaler : <br>' +
+            '<input class="my-3" type="radio" name="report" onclick="fHideButton(false)"/> Un produit<br>' +
+            '<input type="radio" name="report" onclick="fHideButton(false)"/> Un utilisateur';
+          break;
+        case 2:
+          get("#modal > button").innerHTML = "Fermer";
+          get("#modal > p").innerHTML = "<b>Votre demande de signalement a bien été prise en compte.</b><br>" +
+            "Nous allons examiner le produit et nous prendrons des mesures en fonction de la légitimé de la demande.";
+          get("#modal > button").onclick = function () {
+            get('#modalContainer').style.display = 'none';
+          }
+          break;
+        case 3:
+          get("#modal > button").innerHTML = "Fermer";
+          get("#modal > p").innerHTML = "<b>Votre demande de signalement a bien été prise en compte.</b><br>" +
+            "Nous allons examiner l'utilisateur et nous prendrons des mesures en fonction de la légitimé de la demande.";
+          get("#modal > button").onclick = function () {
+            get('#modalContainer').style.display = 'none';
+          }
+          break;
       }
+    }
 
-      function fReport(num) {
-        document.querySelector("#modalContainer").style.display = 'block';
-        switch (num) {
-          case 0:
-            document.querySelector("#modal").querySelector("button").innerHTML = "J'ai compris";
-            document.querySelector("#modal").querySelector("p").innerHTML = "Tout signalement abusif sera sanctionné !";
-            document.querySelector("#modal").querySelector("button").onclick = function() {
-              fReport(1);
-            }
-            break;
-          case 1:
-            document.querySelector("#modal").querySelector("button").innerHTML = "Suivant";
-            document.querySelector("#modal").querySelector("button").onclick = function() {
-              if(document.getElementsByName("report")[0].checked) {
-                fReport(2);
-              } else {
-                fReport(3);
-              }
-            }
-            fHideButton(true);
-            document.querySelector("#modal").querySelector("p").innerHTML =
-              'Vous voulez signaler : <br>' +
-              '<input class="my-3" type="radio" name="report" onclick="fHideButton(false)"/> Un produit<br>' +
-              '<input type="radio" name="report" onclick="fHideButton(false)"/> Un utilisateur';
-            break;
-          case 2:
-            document.querySelector("#modal").querySelector("button").innerHTML = "Fermer";
-            document.querySelector("#modal").querySelector("p").innerHTML = "<b>Votre demande de signalement a bien été prise en compte.</b><br>" +
-                    "Nous allons examiner le produit et nous prendrons des mesures en fonction de la légitimé de la demande.";
-            document.querySelector("#modal").querySelector("button").onclick = function() {
-              document.querySelector('#modalContainer').style.display = 'none';
-            }
-            break;
-          case 3:
-            document.querySelector("#modal").querySelector("button").innerHTML = "Fermer";
-            document.querySelector("#modal").querySelector("p").innerHTML = "<b>Votre demande de signalement a bien été prise en compte.</b><br>" +
-                    "Nous allons examiner l'utilisateur et nous prendrons des mesures en fonction de la légitimé de la demande.";
-            document.querySelector("#modal").querySelector("button").onclick = function() {
-              document.querySelector('#modalContainer').style.display = 'none';
-            }
-            break;
-        }
-      }
+    function fHideButton(desactiver) {
+      get("#modal > button").disabled = desactiver;
+    }
 
-      function fHideButton(desactiver) {
-        document.querySelector("#modal").querySelector("button").disabled = desactiver;
-      }
+    function fClickJyGo(productID) {
+      sessionStorage.setItem('lastUrl', location.href);
+      location.href = "product.html?productID=" + productID;
+    }
+  </script>
+</body>
 
-      function fClickJyGo(productID) {
-        sessionStorage.setItem('lastUrl', location.href);
-        location.href = "product.html?productID=" + productID;
-      }
-    </script>
-  </body>
 </html>

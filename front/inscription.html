@@ -19,26 +19,17 @@
 
             #logo_container {
                 display: flex;
-                justify-content: center;
+                justify-content: center;  
+                margin-bottom: 2em;
             }
 
             #logo {
                 width: 200px;
-                margin-bottom: 2rem;
             }
 
             h1 {
                 color: white;
                 font-weight: bold !important;
-                margin-bottom: 2rem;
-            }
-
-            .btn_submit {
-                background-color: white !important;
-                color: #E94E1B !important;
-                font-weight: bold !important;
-                border-radius: 50px !important;
-                width: 50%;
             }
 
             .link {
@@ -48,22 +39,7 @@
             .link:hover {
                 color: white;
             }
-            .inputRow {
-                color: white;
-            }
-            .inputRow > input {
-                background-color: transparent;
-                border: none;
-                color: white;
-            }
-            .inputRow > input:focus {
-                outline: none !important;
-            }
             .btn_submit {
-                background-color: white !important;
-                color: #E94E1B !important;
-                font-weight: bold !important;
-                border-radius: 50px !important;
                 width: 100% !important;
                 height: fit-content !important;
             }
@@ -78,6 +54,15 @@
                 align-items: center;
                 justify-content: center;
                 width: fit-content !important;
+                font-size: 0.9em;
+            }
+            #geolocalise i {
+                font-size: 20px;
+                margin-right: .5em;
+            }
+            #bienvenue {
+                text-align: center;
+                margin-bottom: 1em;
             }
         </style>
 
@@ -96,7 +81,7 @@
         <div id="logo_container">
             <img id="logo" src="images/logo.png" />
         </div>
-        <h1 style="text-align: center">Bienvenue</h1>
+        <h1 id="bienvenue" style="text-align: center">Bienvenue</h1>
         <div class="row inputRow">
             <label class="px-0" for="first-name">Prénom*</label>
             <br>
@@ -116,7 +101,7 @@
             <hr style="opacity: 1;">
         </div>
         <div class="row" style="text-align: center;">
-            <span style="color: white; font-size: 0.9em;">Si non renseigné, il sera de la forme <i>prénom.nom</i>.</span>
+            <span style="color: white; font-size: 0.9em; padding: 0;">Si non renseigné, il sera de la forme <i>prénom.nom</i></span>
         </div>
         <br>
         <div class="row">
@@ -159,7 +144,7 @@
         </div>
         <span class="mx-3 textError"></span>
         <div style="display: flex; justify-content: center; margin-top: 1em;">
-            <button class="btn btn_submit mx-3" id="btnSendForm" onclick="sendForm()">Inscription</button>
+            <button class="btn btn_submit" id="btnSendForm" onclick="sendForm()">Inscription</button>
         </div>
         <div style="display: flex; justify-content: center; margin-top: 1em;">
             <a href="connexion.html" class="mx-3 link">Je suis déjà membre</a>
@@ -203,7 +188,8 @@
             }
 
             function fGetLocation() {
-                navigator.geolocation.getCurrentPosition(
+                if(navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
                     function(pos) {
                         document.querySelector("#latitude").value = pos.coords.latitude;
                         document.querySelector("#longitude").value = pos.coords.longitude;
@@ -211,6 +197,9 @@
                     function(err) {
                         alert("Erreur : " + err.message);
                     });
+                } else {
+                    alert("La géolocalisation n'est pas supportée !");
+                }
             }
         </script>
     </body>

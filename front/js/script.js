@@ -1,3 +1,7 @@
+function get(sel) {
+	return document.querySelector(sel);
+}
+
 function searchRayon() {
 	let input = document.getElementById("searchBar").value.toLowerCase();
 	let productsTmp = document.getElementsByClassName('productTitle');
@@ -52,8 +56,13 @@ function fChoixEtat(item) {
 	document.querySelector("#etatSelect").style.display = 'none';
 }
 
+function fDebutChargement() {
+	$("#ecranChargement").load("ecranChargement.html");
+	$("#ecranChargement").fadeIn();
+}
+
 function fFinChargement() {
-	document.querySelector(".allContent").style.visibility = "visible";
+	get(".allContent").style.visibility = "visible";
 	$("#ecranChargement").fadeOut();
 }
 

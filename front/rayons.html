@@ -57,31 +57,33 @@
     <!-- jQuery -->
     <script src="js/jQuery.js"></script>
     <script>
-      $(function(){
-        $("#ecranChargement").load("ecranChargement.html");
-        $("#ecranChargement").fadeIn();
-        $("#footNavBar").load("footNavBar.html");
-      });
-
       onload = function() {
         if(sessionStorage.getItem('userID') == null) {
           location.href = "connexion.html";
-        } else {
-          $.ajax(getAllCategory()).done(function (response) {
-            const rayons = document.querySelector(".rayons");
-            for(let i = 0; i < response.length; i++) {
-              rayons.innerHTML += '' +
-                '<a href="rayon.html?catID=' + response[i].id + '">' +
-                  '<div id="rayonNum' + response[i].id + '" class="rayon">' +
-                    '<div class="row" style="height:75%;"></div>' +
-                    '<div class="row title">' +
-                      '<h6 class="mx-3">' + response[i].name + '</h6>' +
+        } else { 
+          // Ecran de chargement
+          fDebutChargement();
+          // Barre de navigation basse
+          $("#footNavBar").load("footNavBar.html");
+          const rayons = get(".rayons");
+          getAllCategory()
+            .then((data) => {
+              for(let i = 0; i < data.length; i++) {
+                rayons.innerHTML += '' +
+                  '<a href="rayon.html?catID=' + data[i].id + '">' +
+                    '<div id="rayonNum' + data[i].id + '" class="rayon">' +
+                      '<div class="row" style="height:75%;"></div>' +
+                      '<div class="row title">' +
+                        '<h6 class="mx-3">' + data[i].name + '</h6>' +
+                      '</div>' +
                     '</div>' +
-                  '</div>' +
-                '</a>';
-            }
-            fFinChargement();
-          });
+                  '</a>';
+              }
+            })
+            .catch(() => {
+              rayons.innerHTML = "<p><i>Problème de chargement des rayons !</i></p>";
+            });
+          fFinChargement(); 
         }
       }
     </script>
