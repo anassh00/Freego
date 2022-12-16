@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -21,22 +22,29 @@
       display: flex;
       justify-content: center;
     }
+
     #profilImage {
       width: 100px;
       border-radius: 100px;
     }
-    #infoContainer input, #infoContainer textarea {
+
+    #infoContainer input,
+    #infoContainer textarea {
       background-color: transparent;
       border: none;
       color: white;
     }
-    #infoContainer input:focus, #infoContainer textarea:focus {
+
+    #infoContainer input:focus,
+    #infoContainer textarea:focus {
       outline: none !important;
     }
+
     #arrowBack a i {
       font-size: 46px;
       color: white;
     }
+
     #geolocalise {
       font-size: 12px;
       display: flex;
@@ -44,43 +52,49 @@
       justify-content: center;
       width: fit-content;
     }
+
     #geolocalise i {
       font-size: 20px;
     }
-    #latitude, #longitude {
+
+    #latitude,
+    #longitude {
       width: 100%;
     }
   </style>
 </head>
+
 <body>
   <div class="allContent pb-3">
     <div id="arrowBack" class="row m-1">
-      <a href="javascript:void(0)" onclick="location.href='profil.html?userID=' + sessionStorage.getItem('userID');"><i class="material-icons">keyboard_backspace</i></a>
+      <a href="javascript:void(0)" onclick="location.href='profil.html?userID=' + sessionStorage.getItem('userID');"><i
+          class="material-icons">keyboard_backspace</i></a>
     </div>
     <div id="imgContainer" class="row p-3">
-      <a href="javascript:void(0)" onclick="fUploadImage()" style="display: flex; justify-content: center; width: fit-content">
-        <img id="profilImage" src="images/person_profile.png"/>
+      <a href="javascript:void(0)" onclick="fUploadImage()"
+        style="display: flex; justify-content: center; width: fit-content">
+        <img id="profilImage" src="images/person_profile.png" />
       </a>
-      <input type="file" id="uploaderImage" accept="image/*" hidden/>
+      <input type="file" id="uploaderImage" accept="image/*" hidden />
     </div>
     <div id="infoContainer">
       <div class="row mx-3">
         <label for="pseudo" style="color: white;">Pseudo</label>
         <br>
-        <input type="text" id="pseudo"/>
+        <input type="text" id="pseudo" />
         <span style="font-size: 10px; color: white;">Si non renseigné, il sera de la forme <i>prénom.nom</i>.</span>
       </div>
       <hr class="mx-3" style="color: white; opacity: 1;">
       <div class="row mx-3">
         <label for="prenom" style="color: white;">Prénom*</label>
         <br>
-        <input type="text" id="prenom"/>
+        <input type="text" id="prenom" />
       </div>
       <hr class="mx-3" style="color: white; opacity: 1;">
       <div class="row mx-3">
         <label for="nom" style="color: white;">Nom*</label>
         <br>
-        <input type="text" id="nom"/>
+        <input type="text" id="nom" />
       </div>
       <hr class="mx-3" style="color: white; opacity: 1;">
       <div class="row mx-3">
@@ -96,23 +110,25 @@
         <div class="col" style="border-right: 1px solid white">
           <label for="latitude" style="color: white; font-size: 12px;">Latitude*</label>
           <br>
-          <input type="text" id="latitude"/>
+          <input type="text" id="latitude" />
         </div>
         <div class="col">
           <label for="longitude" style="color: white; font-size: 12px;">Longitude*</label>
           <br>
-          <input type="text" id="longitude"/>
+          <input type="text" id="longitude" />
         </div>
       </div>
       <div class="row mx-3" style="display: flex; justify-content: center; margin-top: 10px;">
-        <button class="btn btn_submit mx-3" id="geolocalise" onclick="fGetLocation()"><i class="material-icons">my_location</i> Me géolocaliser</button>
+        <button class="btn btn_submit mx-3" id="geolocalise" onclick="fGetLocation()"><i
+            class="material-icons">my_location</i> Me géolocaliser</button>
       </div>
       <hr class="mx-3" style="color: white; opacity: 1;">
       <div class="row mx-3">
         <label for="motDePasse" style="color: white;">Mot de passe</label>
         <br>
-        <input type="password" id="motDePasse"/>
-        <span style="font-size: 10px; color: white;">Si vous laissez le champ vide, le mot de passe ne sera pas modifié.</span>
+        <input type="password" id="motDePasse" />
+        <span style="font-size: 10px; color: white;">Si vous laissez le champ vide, le mot de passe ne sera pas
+          modifié.</span>
       </div>
       <hr class="mx-3" style="color: white; opacity: 1;">
       <div class="row mx-3" style="display: flex; justify-content: center;">
@@ -132,76 +148,77 @@
   <!-- jQuery -->
   <script src="js/jQuery.js"></script>
   <script>
-    $(function(){
-      $("#ecranChargement").load("ecranChargement.html");
-      $("#ecranChargement").fadeIn();
-    });
-
-    onload = function() {
-      if(sessionStorage.getItem('userID') == null) {
+    onload = function () {
+      if (sessionStorage.getItem('userID') == null) {
         location.href = "connexion.html";
       } else {
-        $.ajax(getUserById(sessionStorage.getItem('userID'))).done(function (response) {
-          $.ajax(getUserImage(sessionStorage.getItem('userID'))).done(function (response) {
-            document.querySelector("#profilImage").src = "data:image/png;base64," + response.image;
+        // Ecran de chargement
+        fDebutChargement();
+        getUserById(sessionStorage.getItem('userID'))
+          .then((data) => {
+            if (data.entity_name != null) {
+              getUserImage(sessionStorage.getItem('userID'))
+                .then((image) => {
+                  get("#profilImage").src = "data:image/png;base64," + image.image;
+                });
+            }
+            get("#pseudo").value = data.username;
+            get("#prenom").value = data.first_name;
+            get("#nom").value = data.last_name;
+            get("#biographie").value = data.biographie;
+            get("#latitude").value = data.latitude;
+            get("#longitude").value = data.longitude;
+            // Fin du chargement des données
+            document.body.style.backgroundColor = "#E94E1B";
+            fFinChargement();
           });
-          document.querySelector("#pseudo").value = response.username;
-          document.querySelector("#prenom").value = response.first_name;
-          document.querySelector("#nom").value = response.last_name;
-          document.querySelector("#biographie").value = response.biographie;
-          document.querySelector("#latitude").value = response.latitude;
-          document.querySelector("#longitude").value = response.longitude;
-          // Fin du chargement des données
-          document.body.style.backgroundColor = "#E94E1B";
-          fFinChargement();
-        });
       }
     }
     let imageProfil;
 
     function fSendInformation() {
-      const firstName = document.querySelector("#prenom").value;
-      const lastName = document.querySelector("#nom").value;
+      const firstName = get("#prenom").value;
+      const lastName = get("#nom").value;
       let pseudo;
-      if(document.querySelector("#pseudo").value == "") {
+      if (get("#pseudo").value == "") {
         pseudo = firstName.toLowerCase() + "." + lastName.toLowerCase();
       } else {
-        pseudo = document.querySelector("#pseudo").value;
+        pseudo = get("#pseudo").value;
       }
-      document.querySelector("#pseudo").value;
-      const biographie = document.querySelector("#biographie").value;
-      const latitude = document.querySelector("#latitude").value;
-      const longitude = document.querySelector("#longitude").value;
-      const motDePasse = document.querySelector("#motDePasse").value;
+      const biographie = get("#biographie").value;
+      const latitude = get("#latitude").value;
+      const longitude = get("#longitude").value;
+      const motDePasse = get("#motDePasse").value;
 
-      if(firstName != "" && lastName != "" && latitude != "" && longitude != "") {
-        $.ajax(updateUserInfo(sessionStorage.getItem('userID'), pseudo, firstName, lastName, biographie, latitude, longitude, (motDePasse != "" ? motDePasse : null), imageProfil)).done(function () {
-          location.href = 'profil.html?userID=' + sessionStorage.getItem('userID');
-        });
+      if (firstName != "" && lastName != "" && latitude != "" && longitude != "") {
+        updateUserInfo(sessionStorage.getItem('userID'), pseudo, firstName, lastName, biographie, latitude, longitude, (motDePasse != "" ? motDePasse : null), imageProfil)
+          .then(() => {
+            location.href = 'profil.html?userID=' + sessionStorage.getItem('userID');
+          });
       }
     }
 
     function fGetLocation() {
       navigator.geolocation.getCurrentPosition(
-              function(pos) {
-                document.querySelector("#latitude").value = pos.coords.latitude;
-                document.querySelector("#longitude").value = pos.coords.longitude;
-              },
-              function(err) {
-                alert("Erreur : " + err.message);
-              });
+        function (pos) {
+          get("#latitude").value = pos.coords.latitude;
+          get("#longitude").value = pos.coords.longitude;
+        },
+        function (err) {
+          alert("Erreur : " + err.message);
+        });
     }
 
     function fUploadImage() {
-      document.querySelector("#uploaderImage").click();
+      get("#uploaderImage").click();
     }
-    document.querySelector("#uploaderImage").addEventListener("change", handleFiles, false);
+    get("#uploaderImage").addEventListener("change", handleFiles, false);
     function handleFiles() {
       const files = this.files;
       const fr = new FileReader();
       fr.readAsDataURL(files[0]);
-      fr.onload = function() {
-        document.querySelector("#profilImage").src = this.result;
+      fr.onload = function () {
+        get("#profilImage").src = this.result;
         const formData = new FormData();
         formData.append("image", files[0]);
         imageProfil = 'user_' + new Date().getTime() + '_' + sessionStorage.getItem('userID');
@@ -212,4 +229,5 @@
 
   </script>
 </body>
+
 </html>

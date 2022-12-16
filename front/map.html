@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -23,30 +24,34 @@
     body {
       height: 100%;
     }
+
     .material-icons.whiteIcon {
       color: white;
       font-size: 46px;
     }
+
     h6 {
       color: white;
     }
+
     a {
       text-decoration: none;
     }
-    .allContent {
-      height: 100%;
-    }
+
     #map {
-      height: 100%;
+      height: calc(100vh - 78px - 50px - 50px);
       z-index: 1;
     }
-    .leaflet-popup-content-wrapper, .leaflet-popup-tip {
+
+    .leaflet-popup-content-wrapper,
+    .leaflet-popup-tip {
       background-color: #E94E1B;
       color: white;
     }
+
     #detailMap {
       position: absolute;
-      top: 70px;
+      top: 90px;
       right: 10px;
       background-color: #E94E1B;
       width: 82%;
@@ -55,15 +60,19 @@
       border-radius: 10px;
       visibility: hidden;
     }
+
     #detailMap .row {
       display: flex;
       align-items: center;
       height: 100%;
     }
+
     #detailMap a {
       width: fit-content;
     }
-    #sendMessageBtn, #profilBtn {
+
+    #sendMessageBtn,
+    #profilBtn {
       color: #E94E1B;
       background-color: white;
       border: 1px solid #E94E1B;
@@ -71,124 +80,138 @@
       width: fit-content;
       font-size: 12px;
     }
+
     #nomProduit {
       margin-bottom: 0;
     }
+
+    #nomProduit p {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin: 0;
+    }
+
+    #detailMap a {
+      overflow: hidden;
+    }
+
     #prenomNomDon {
       color: white;
       font-size: 10px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin: 0;
     }
-
   </style>
 </head>
+
 <body>
-<div class="allContent">
-  <div id="head-section-bis">
-    <div class="row mx-1">
-      <div class="col">
-        <a href="home.html"><i class="material-icons whiteIcon">keyboard_backspace</i></a>
-      </div>
-      <div class="col-auto">
-        <img src="images/logo_long.png"/>
-      </div>
-    </div>
-  </div>
-  <div style="height: 60px"></div>
-  <!-- Map -->
-  <div id="map"></div>
-  <div id="detailMap">
-    <div class="row">
-      <a href="javascript:void(0)">
-        <div class="col" style="padding-left: 2rem;">
-          <h6 id="nomProduit"></h6>
-          <span id="prenomNomDon"></span>
+  <div class="allContent">
+    <div id="head-section-bis" class="red">
+      <div class="row mx-1">
+        <div class="col" style="padding-left: 0;">
+          <a href="home.html"><i class="material-icons whiteIcon">keyboard_backspace</i></a>
         </div>
-      </a>
-      <div class="col-auto" style="padding: 0;">
-        <button id="sendMessageBtn">Message</button>
-      </div>
-      <div class="col-auto" style="padding-right: 2rem;">
-        <button id="profilBtn">Voir le freego</button>
+        <div class="col-auto" style="padding-right: 0;">
+          <img src="images/logo_long.png" />
+        </div>
       </div>
     </div>
+    <!-- Map -->
+    <div id="map"></div>
+    <div id="detailMap">
+      <div class="row">
+        <a class="col" href="javascript:void(0)" style="padding-left: 2rem;">
+          <h6 id="nomProduit"><p></p></h6>
+          <p id="prenomNomDon"></p>
+        </a>
+        <div class="col-auto" style="padding: 0;">
+          <button id="sendMessageBtn">Message</button>
+        </div>
+        <div class="col-auto" style="padding-right: 2rem;">
+          <button id="profilBtn">Voir le freego</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nav bar basse -->
+    <div id="footNavBar"></div>
+    <div style="height:50px"></div>
   </div>
 
-  <!-- Nav bar basse -->
-  <div id="footNavBar"></div>
-  <div style="height:50px"></div>
-</div>
+  <!-- Ecran de chargement -->
+  <div id="ecranChargement"></div>
 
-<!-- Ecran de chargement -->
-<div id="ecranChargement"></div>
-
-<!-- Bootstrap Script -->
-<script src="bootstrap-5.2.3-dist/js/bootstrap.js"></script>
-<!-- Script -->
-<script src="js/script.js"></script>
-<script src="js/requetes.js"></script>
-<!-- jQuery -->
-<script src="js/jQuery.js"></script>
-<script>
-  $(function(){
-    $("#ecranChargement").load("ecranChargement.html");
-    $("#ecranChargement").fadeIn();
-    $("#footNavBar").load("footNavBar.html");
-  });
-
-  onload = function() {
-    if(sessionStorage.getItem('userID') == null) {
-      location.href = "connexion.html";
-    } else {
-      $.ajax(getUserById(sessionStorage.getItem('userID'))).done(function (user) {
-        if(user.longitude == 0 && user.latitude == 0) {
-          user.latitude = 45.72177;
-          user.longitude = 4.91582;
-        }
-        const map = L.map('map').setView([user.latitude, user.longitude], 13);
-        map.on('click', function() {
-          document.querySelector("#detailMap").style.visibility = 'hidden';
-        });
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
-        L.marker([user.latitude, user.longitude]).addTo(map).bindPopup('Vous êtes ici !');
-
-        function onMarkerClick(product) {
-          document.querySelector("#detailMap").querySelector("a").onclick = function() {
-            sessionStorage.setItem('lastUrl', location.href);
-            location.href = "product.html?productID=" + product.id_product;
-          }
-          document.querySelector("#nomProduit").innerHTML = product.name;
-          document.querySelector("#prenomNomDon").innerHTML = "par " + product.user.first_name + " " + product.user.last_name;
-          document.querySelector("#sendMessageBtn").onclick = function() {
-            sessionStorage.setItem('lastUrl', location.href);
-            location.href = "message.html?userID=" + product.user.id;
-          };
-          document.querySelector("#profilBtn").onclick = function() {
-            location.href = "profil.html?userID=" + product.user.id;
-          };
-          document.querySelector("#detailMap").style.visibility = 'visible';
-        }
-
-        $.ajax(getAllProduct()).done(function (products) {
-          const productsNotMe = [];
-          for(let i = 0; i < products.length; i++) {
-            if(products[i].user.id != sessionStorage.getItem('userID') && products[i].quantity_stock != 0) {
-              productsNotMe.push(products[i]);
+  <!-- Bootstrap Script -->
+  <script src="bootstrap-5.2.3-dist/js/bootstrap.js"></script>
+  <!-- Script -->
+  <script src="js/script.js"></script>
+  <script src="js/requetes.js"></script>
+  <!-- jQuery -->
+  <script src="js/jQuery.js"></script>
+  <script>
+    onload = function () {
+      if (sessionStorage.getItem('userID') == null) {
+        location.href = "connexion.html";
+      } else {
+        // Ecran de chargement
+        fDebutChargement();
+        // Barre de navigation basse
+        $("#footNavBar").load("footNavBar.html");
+        getUserById(sessionStorage.getItem('userID'))
+          .then((user) => {
+            if (user.longitude == 0 && user.latitude == 0) {
+              user.latitude = 45.72177;
+              user.longitude = 4.91582;
             }
-          }
-          for(let i = 0; i < productsNotMe.length; i++) {
-            const latitude = productsNotMe[i].user.latitude;
-            const longitude = productsNotMe[i].user.longitude;
-            L.marker([latitude, longitude]).addTo(map).on('click', function() { onMarkerClick(productsNotMe[i]) });
-          }
-          // Fin de chargement des données
-          document.body.style.backgroundColor = "#E94E1B";
-          fFinChargement()
-        });
-      });
+            const map = L.map('map').setView([user.latitude, user.longitude], 13);
+            map.on('click', function () {
+              get("#detailMap").style.visibility = 'hidden';
+            });
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+              attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+            L.marker([user.latitude, user.longitude]).addTo(map).bindPopup('Vous êtes ici !');
+
+            function onMarkerClick(product) {
+              get("#detailMap a").onclick = function () {
+                sessionStorage.setItem('lastUrl', location.href);
+                location.href = "product.html?productID=" + product.id_product;
+              }
+              get("#nomProduit p").innerHTML = product.name;
+              get("#prenomNomDon").innerHTML = "par " + product.user.first_name + " " + product.user.last_name;
+              get("#sendMessageBtn").onclick = function () {
+                sessionStorage.setItem('lastUrl', location.href);
+                location.href = "message.html?userID=" + product.user.id;
+              };
+              get("#profilBtn").onclick = function () {
+                location.href = "profil.html?userID=" + product.user.id;
+              };
+              get("#detailMap").style.visibility = 'visible';
+            }
+            getAllProduct()
+              .then((products) => {
+                const productsNotMe = [];
+                for (let i = 0; i < products.length; i++) {
+                  if (products[i].user.id != sessionStorage.getItem('userID') && products[i].quantity_stock != 0) {
+                    productsNotMe.push(products[i]);
+                  }
+                }
+                for (let i = 0; i < productsNotMe.length; i++) {
+                  const latitude = productsNotMe[i].user.latitude;
+                  const longitude = productsNotMe[i].user.longitude;
+                  L.marker([latitude, longitude]).addTo(map).on('click', function () { onMarkerClick(productsNotMe[i]) });
+                }
+                // Fin de chargement des données
+                document.body.style.backgroundColor = "#E94E1B";
+                fFinChargement()
+              })
+          })
+      }
     }
-  }
-</script>
+  </script>
 </body>
+
 </html>

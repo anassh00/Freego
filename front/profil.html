@@ -90,7 +90,7 @@
     <div id="head-section">
       <div class="row">
         <div class="col-auto">
-          <img class="mx-3" src="images/logo_long.png" />
+          <img src="images/logo_long.png" />
         </div>
         <div class="col btn-don">
           <button class="btn_submit" onclick="location.href = 'don.html';">Je donne</button>
@@ -129,7 +129,6 @@
         </div>
       </div>
     </div>
-    <div style="height: 60px"></div>
     <div class="section m-3">
       <div class="row">
         <div class="col" style="display: flex; align-items: center">
@@ -199,21 +198,23 @@
           const userID = search_params.get('userID');
           getUserById(userID)
             .then((data) => {
-              getUserImage(userID)
+              if(data.entity_name != null) {
+                getUserImage(userID)
                 .then((image) => {
-                  get("#profilImage").src = "data:image/png;base64," + response.image;
-                })
+                  get("#profilImage").src = "data:image/png;base64," + image.image;
+                });
+              }
               get("#prenomNom").innerHTML = "<b>" + data.first_name + " " + data.last_name + "</b>";
               get("#biographie").innerHTML = data.biographie == null || data.biographie == "" ? "<i>Vous n'avez pas encore de biographie !</i>" : data.biographie;
               if (userID == sessionStorage.getItem('userID')) {
-                get("#freegoContainer > h6").innerHTML = "Mon freego";
+                get("#freegoContainer h6").innerHTML = "Mon freego";
                 get("#modifProfilContainer").style.display = 'flex';
               } else {
-                get("#freegoContainer > h6").innerHTML = "Freego de " + data.first_name;
+                get("#freegoContainer h6").innerHTML = "Freego de " + data.first_name;
                 get("#messageContainer").style.display = 'flex';
-                get("#messageContainer > button").onclick = function () {
+                get("#messageContainer button").onclick = function () {
                   sessionStorage.setItem('lastUrl', location.href);
-                  location.href = "message.html?userID=" + response.id;
+                  location.href = "message.html?userID=" + data.id;
                 };
                 get("#lienSignalementContainer").style.display = 'flex';
               }
@@ -275,15 +276,15 @@
       const modal = get("#modal");
       switch (num) {
         case 0:
-          get("#modal > button").innerHTML = "J'ai compris";
-          get("#modal > p").innerHTML = "Tout signalement abusif sera sanctionné !";
-          get("#modal > button").onclick = function () {
+          get("#modal button").innerHTML = "J'ai compris";
+          get("#modal p").innerHTML = "Tout signalement abusif sera sanctionné !";
+          get("#modal button").onclick = function () {
             fReport(1);
           }
           break;
         case 1:
-          get("#modal > button").innerHTML = "Suivant";
-          get("#modal > button").onclick = function () {
+          get("#modal button").innerHTML = "Suivant";
+          get("#modal button").onclick = function () {
             if (document.getElementsByName("report")[0].checked) {
               fReport(2);
             } else {
@@ -291,24 +292,24 @@
             }
           }
           fHideButton(true);
-          get("#modal > p").innerHTML =
+          get("#modal p").innerHTML =
             'Vous voulez signaler : <br>' +
             '<input class="my-3" type="radio" name="report" onclick="fHideButton(false)"/> Un produit<br>' +
             '<input type="radio" name="report" onclick="fHideButton(false)"/> Un utilisateur';
           break;
         case 2:
-          get("#modal > button").innerHTML = "Fermer";
-          get("#modal > p").innerHTML = "<b>Votre demande de signalement a bien été prise en compte.</b><br>" +
+          get("#modal button").innerHTML = "Fermer";
+          get("#modal p").innerHTML = "<b>Votre demande de signalement a bien été prise en compte.</b><br>" +
             "Nous allons examiner le produit et nous prendrons des mesures en fonction de la légitimé de la demande.";
-          get("#modal > button").onclick = function () {
+          get("#modal button").onclick = function () {
             get('#modalContainer').style.display = 'none';
           }
           break;
         case 3:
-          get("#modal > button").innerHTML = "Fermer";
-          get("#modal > p").innerHTML = "<b>Votre demande de signalement a bien été prise en compte.</b><br>" +
+          get("#modal button").innerHTML = "Fermer";
+          get("#modal p").innerHTML = "<b>Votre demande de signalement a bien été prise en compte.</b><br>" +
             "Nous allons examiner l'utilisateur et nous prendrons des mesures en fonction de la légitimé de la demande.";
-          get("#modal > button").onclick = function () {
+          get("#modal button").onclick = function () {
             get('#modalContainer').style.display = 'none';
           }
           break;
@@ -316,7 +317,7 @@
     }
 
     function fHideButton(desactiver) {
-      get("#modal > button").disabled = desactiver;
+      get("#modal button").disabled = desactiver;
     }
 
     function fClickJyGo(productID) {

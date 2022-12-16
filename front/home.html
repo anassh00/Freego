@@ -76,7 +76,7 @@
     <div id="head-section">
       <div class="row">
         <div class="col-auto">
-          <img class="mx-3" src="images/logo_long.png" />
+          <img src="images/logo_long.png" />
         </div>
         <div class="col btn-don">
           <button class="btn_submit" onclick="location.href = 'don.html';">Je donne</button>
@@ -115,7 +115,6 @@
         </div>
       </div>
     </div>
-    <div style="height: 60px"></div>
     <div class="section m-3">
       <div class="top-freego">
         <h6>Freego à la une</h6>
@@ -177,64 +176,7 @@
             topFreego.innerHTML = "<p><i>Problème de chargement des \"Freego à la une\" !</i></p>";
           });
         // Tous les rayons
-        const rayons = get('.rayons');
-        getAllCategory()
-          .then((data) => {
-            for (let i = 0; i < data.length; i++) {
-              rayons.innerHTML +=
-                '<span>' + data[i].name + '</span><br>';
-              getProductsByCategory(data[i].id)
-                .then((products) => {
-                  const productsNotMe = [];
-                  for (let i = 0; i < products.length; i++) {
-                    if (products[i].user.id != sessionStorage.getItem('userID') && products[i].quantity_stock != 0) {
-                      productsNotMe.push(products[i]);
-                    }
-                  }
-                  const nbLignes = Math.ceil(productsNotMe.length / 3);
-                  let index = 0;
-                  for (let i = 0; i < nbLignes; i++) {
-                    let tmpContain = "";
-                    for (let j = 0; j < 3; j++) {
-                      if (index != productsNotMe.length) {
-                        tmpContain +=
-                          '<div class="col productContainer">';
-                        // Récupération de la première photo de chaque produit
-                        getProductImages(productsNotMe[index].id_product)
-                          .then((images) => {
-                            tmpContain += '<div class="row imgContainer" style="background-image: url(' + 'data:image/png;base64,' + images[0].image + ');"></div>';
-                          })
-                          .catch(() => {
-                            tmpContain += '<div class="row imgContainer"></div>';
-                          });
-                        tmpContain +=
-                          '<div class="row titleProduct">' +
-                          productsNotMe[index].name +
-                          '</div>' +
-                          '<div class="row buttonProduct">' +
-                          '<button onClick="fClickJyGo(' + productsNotMe[index].id_product + ');">J\'y go !</button>' +
-                          '</div>' +
-                          '</div>';
-                        index++;
-                      } else {
-                        tmpContain +=
-                          '<div class="col productContainer"></div>';
-                      }
-                    }
-                    rayons.innerHTML +=
-                      '<div class="row">' +
-                      tmpContain +
-                      '</div>';
-                  }
-                })
-                .catch(() => {
-                  rayons.innerHTML += "<p><i>Erreur de chargement des produits dans ce rayon !</i></p>";
-                })
-            }
-          })
-          .catch(() => {
-            rayons.innerHTML = "<p><i>Problème de chargement des rayons !</i></p>";
-          });
+        fCreateAllCategory();
         fFinChargement();
       }
     }
@@ -242,6 +184,71 @@
     function fClickJyGo(productID) {
       sessionStorage.setItem('lastUrl', location.href);
       location.href = "product.html?productID=" + productID;
+    }
+
+    async function fCreateAllCategory() {
+      const rayons = get('.rayons');
+      await getAllCategory()
+        .then(async(data) => {
+          for (let i = 0; i < data.length; i++) {
+            rayons.innerHTML +=
+              '<span>' + data[i].name + '</span><br>';
+            await getProductsByCategory(data[i].id)
+              .then(async(products) => {
+                const productsNotMe = [];
+                for (let i = 0; i < products.length; i++) {
+                  if (products[i].user.id != sessionStorage.getItem('userID') && products[i].quantity_stock != 0) {
+                    productsNotMe.push(products[i]);
+                  }
+                }
+                await fCreateProducts(productsNotMe);
+              })
+              .catch(() => {
+                rayons.innerHTML += "<p><i>Erreur de chargement des produits dans ce rayon !</i></p>";
+              })
+          }
+        })
+        .catch(() => {
+          rayons.innerHTML = "<p><i>Problème de chargement des rayons !</i></p>";
+        });
+    }
+
+    async function fCreateProducts(productsNotMe) {
+      const rayons = get('.rayons');
+      const nbLignes = Math.ceil(productsNotMe.length / 3);
+      let index = 0;
+      for (let i = 0; i < nbLignes; i++) {
+        let tmpContain = "";
+        for (let j = 0; j < 3; j++) {
+          if (index != productsNotMe.length) {
+            tmpContain += '<div class="col productContainer">';
+            // Récupération de la première photo de chaque produit
+            await getProductImages(productsNotMe[index].id_product)
+              .then((images) => {
+                tmpContain += '<div class="row imgContainer" style="background-image: url(' + 'data:' + images[0].type + ';base64,' + images[0].image + ');"></div>';
+              })
+              .catch(() => {
+                tmpContain += '<div class="row imgContainer"></div>';
+              });
+            tmpContain +=
+              '<div class="row titleProduct">' +
+              '<p>' + productsNotMe[index].name + '</p>' +
+              '</div>' +
+              '<div class="row buttonProduct">' +
+              '<button onClick="fClickJyGo(' + productsNotMe[index].id_product + ');">J\'y go !</button>' +
+              '</div>' +
+              '</div>';
+            index++;
+          } else {
+            tmpContain +=
+              '<div class="col productContainer"></div>';
+          }
+        }
+        rayons.innerHTML +=
+          '<div class="row">' +
+          tmpContain +
+          '</div>';
+      }
     }
   </script>
 </body>

@@ -1,115 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        
-        <title>Messagerie - Freego</title>
 
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="bootstrap-5.2.3-dist/css/bootstrap.css">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <!-- Style -->
-        <link rel="stylesheet" href="css/style.css">
+    <title>Messagerie - Freego</title>
 
-        <!-- Google Icon -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="bootstrap-5.2.3-dist/css/bootstrap.css">
 
-        <style>
-            .imgMessage {
-                width: 80px;
-                border-radius: 50px;
-            }
-            .message {
-                display: flex;
-                align-items: center;
-                border-top: 1px solid white;
-                border-bottom: 1px solid white;
-                padding: 1rem;
-            }
-            .material-icons.whiteIcon {
-                color: white;
-                font-size: 46px;
-            }
-            h5, span {
-                color: white;
-            }
+    <!-- Style -->
+    <link rel="stylesheet" href="css/style.css">
 
-            a {
-                text-decoration: none;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="allContent">
-            <div id="head-section-bis">
-                <div class="row m-1">
-                    <div class="col">
-                        <a href="home.html"><i class="material-icons whiteIcon">keyboard_backspace</i></a>
-                    </div>
+    <!-- Google Icon -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <style>
+        .imgMessage {
+            width: 80px;
+            border-radius: 50px;
+        }
+
+        .message {
+            display: flex;
+            align-items: center;
+            border-top: 1px solid white;
+            border-bottom: 1px solid white;
+            padding: 1rem;
+        }
+
+        .material-icons.whiteIcon {
+            color: white;
+            font-size: 46px;
+        }
+
+        h5,
+        span {
+            color: white;
+        }
+
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="allContent">
+        <div id="head-section-bis" class="red">
+            <div class="row m-1">
+                <div class="col p-0">
+                    <a href="home.html"><i class="material-icons whiteIcon">keyboard_backspace</i></a>
+                </div>
+                <div class="col-auto" style="padding-right: 0;">
+                    <img src="images/logo_long.png" />
                 </div>
             </div>
-            <div style="height: 60px"></div>
-            <div class="row m-3">
-                <input type="text" class="form-control" id="searchBar" onkeyup="searchUser()" placeholder="Rechercher un freegonaute..."/>
-            </div>
-            <!-- Tous les messages de l'utilisateur -->
-            <div class="messages"></div>
-
-            <!-- Nav bar basse -->
-            <div id="footNavBar"></div>
-            <div style="height:50px"></div>
         </div>
+        <div class="row mx-3 mb-3">
+            <input type="text" class="form-control" id="searchBar" onkeyup="searchUser()"
+                placeholder="Rechercher un freegonaute..." />
+        </div>
+        <!-- Tous les messages de l'utilisateur -->
+        <div class="messages"></div>
 
-        <!-- Ecran de chargement -->
-        <div id="ecranChargement"></div>
+        <!-- Nav bar basse -->
+        <div id="footNavBar"></div>
+        <div style="height:50px"></div>
+    </div>
 
-        <!-- Bootstrap Script -->
-        <script src="bootstrap-5.2.3-dist/js/bootstrap.js"></script>
-        <!-- Script -->
-        <script src="js/script.js"></script>
-        <script src="js/requetes.js"></script>
-        <!-- jQuery -->
-        <script src="js/jQuery.js"></script>
-        <script>
-            $(function(){
-                $("#ecranChargement").load("ecranChargement.html");
-                $("#ecranChargement").fadeIn();
+    <!-- Ecran de chargement -->
+    <div id="ecranChargement"></div>
+
+    <!-- Bootstrap Script -->
+    <script src="bootstrap-5.2.3-dist/js/bootstrap.js"></script>
+    <!-- Script -->
+    <script src="js/script.js"></script>
+    <script src="js/requetes.js"></script>
+    <!-- jQuery -->
+    <script src="js/jQuery.js"></script>
+    <script>
+        onload = function () {
+            if (sessionStorage.getItem('userID') == null) {
+                location.href = "connexion.html";
+            } else {
+                // Ecran de chargement
+                fDebutChargement();
+                // Barre de navigation basse
                 $("#footNavBar").load("footNavBar.html");
-            });
-
-            onload = function() {
-                if(sessionStorage.getItem('userID') == null) {
-                    location.href = "connexion.html";
-                } else {
-                    $.ajax(getDiscussionContactList()).done(function (response) {
-                        const messages = document.querySelector(".messages");
-                        console.log(response);
-                        for(let i = 0; i < response.length; i++) {
-                            if(response[i].id != sessionStorage.getItem('userID')) {
+                getDiscussionContactList()
+                    .then((data) => {
+                        const messages = get(".messages");
+                        for (let i = 0; i < data.length; i++) {
+                            if (data[i].id != sessionStorage.getItem('userID')) {
                                 const date = new Date();
-                                messages.innerHTML += "" +
-                                    "<a href=\"javascript:void(0)\" onclick=\"sessionStorage.setItem('lastUrl', location.href); location.href='message.html?userID=" + response[i].id + "';\">" +
+                                let tmpMessage = "" +
+                                    "<a href=\"javascript:void(0)\" onclick=\"sessionStorage.setItem('lastUrl', location.href); location.href='message.html?userID=" + data[i].id + "';\">" +
                                     "   <div class=\"row message\">" +
-                                    "       <div class=\"col-auto\">" +
-                                    "           <img class=\"imgMessage\" src=\"images/person_profile.png\"/>" +
+                                    "       <div class=\"col-auto\">";
+                                if (data.entity_name != null) {
+                                    getUserImage(data[i].id)
+                                        .then((image) => {
+                                            tmpMessage += "<img class=\"imgMessage\" src=\"" + "data:image/png;base64," + image.image + "\"/>";
+                                        })
+                                } else {
+                                    tmpMessage += "<img class=\"imgMessage\" src=\"images/person_profile.png\"/>";
+                                }
+                                tmpMessage += "" +
                                     "       </div>" +
                                     "       <div class=\"col\">" +
-                                    "            <h5>" + response[i].first_name + " " + response[i].last_name + "</h5>" +
+                                    "            <h5>" + data[i].first_name + " " + data[i].last_name + "</h5>" +
                                     "       </div>" +
                                     "       <div class=\"col-auto\">" +
                                     "           <span>" + date.getHours() + ":" + date.getMinutes() + "</span>" +
                                     "       </div>" +
                                     "    </div>" +
                                     "</a>";
+                                messages.innerHTML += tmpMessage;
                             }
                         }
                         document.body.style.backgroundColor = "#E94E1B";
                         fFinChargement();
                     });
-                }
             }
-        </script>
-    </body>
+        }
+    </script>
+</body>
+
 </html>

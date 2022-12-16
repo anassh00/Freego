@@ -1,7 +1,7 @@
 const urlBack = "http://hanass@polymnie.univ-lyon2.fr:8080/api/"
 
 function connexion(pseudo, mdp) {
-    return {
+    const settings = {
         "url": urlBack + "auth/login",
         "method": "POST",
         "timeout": 0,
@@ -13,10 +13,11 @@ function connexion(pseudo, mdp) {
             "password": mdp
         }),
     };
+    return createPromise(settings);
 }
 
 function inscription(first_name, last_name, username, latitude, longitude, mdp, entity_name) {
-    return {
+    const settings = {
         "url": urlBack + "auth/signup",
         "method": "POST",
         "timeout": 0,
@@ -34,10 +35,11 @@ function inscription(first_name, last_name, username, latitude, longitude, mdp, 
             "roles": ["user"]
         }),
     };
+    return createPromise(settings);
 }
 
 function getProductById(productId) {
-    return {
+    const settings = {
         "url": urlBack + "product/getProduct?id=" + productId,
         "method": "GET",
         "timeout": 0,
@@ -47,6 +49,7 @@ function getProductById(productId) {
             "Authorization": "Bearer " + sessionStorage.getItem("userToken"),
         },
     };
+    return createPromise(settings);
 }
 
 function getProductsByUserId(userId) {
@@ -63,7 +66,7 @@ function getProductsByUserId(userId) {
 }
 
 function getAllProduct() {
-    return {
+    const settings = {
         "url": urlBack + "product/listProduct",
         "method": "GET",
         "timeout": 0,
@@ -72,6 +75,7 @@ function getAllProduct() {
             "Authorization": "Bearer " + sessionStorage.getItem("userToken"),
         },
     };
+    return createPromise(settings);
 }
 
 function getUserById(id) {
@@ -101,7 +105,7 @@ function getAllUsers() {
 }
 
 function addProduct(categoryId, etat, nom, description, image1, image2, image3) {
-    return {
+    const settings = {
         "url": urlBack + "product/save?category_id=" + categoryId,
         "method": "POST",
         "timeout": 0,
@@ -119,6 +123,7 @@ function addProduct(categoryId, etat, nom, description, image1, image2, image3) 
             "quantity_stock": 1
         }),
     };
+    return createPromise(settings);
 }
 
 function getAllCategory() {
@@ -151,7 +156,7 @@ function getProductsByCategory(id_category) {
 
 function updateUserInfo(id_user, pseudo, first_name, last_name, biographie, latitude, longitude, password, entity_name) {
     // NB : si un attribut est envoyé comme null le backend va garder l'ancienne valeur enregistrée sur la base
-    return {
+    const settings = {
         "url": urlBack + "user/update?id=" + id_user,
         "method": "POST",
         "timeout": 0,
@@ -172,10 +177,11 @@ function updateUserInfo(id_user, pseudo, first_name, last_name, biographie, lati
             "entity_name": entity_name
         }),
     };
+    return createPromise(settings);
 }
 
 function getDiscussion(idReceiver) {
-    return {
+    const settings = {
         "url": urlBack + "message/getDiscussion?idReceiver=" + idReceiver,
         "method": "GET",
         "timeout": 0,
@@ -184,10 +190,11 @@ function getDiscussion(idReceiver) {
             "Authorization": "Bearer " + sessionStorage.getItem("userToken"),
         },
     };
+    return createPromise(settings);
 }
 
 function sendMessage(idReceiver, message) {
-    return {
+    const settings = {
         "url": urlBack + "message/saveMessage",
         "method": "POST",
         "timeout": 0,
@@ -197,10 +204,11 @@ function sendMessage(idReceiver, message) {
         },
         "data": JSON.stringify({ "userReceiverId": idReceiver, "text": message }),
     };
+    return createPromise(settings);
 }
 
 function getDiscussionContactList() {
-    return {
+    const settings = {
         "url": urlBack + "message/getListOfContact",
         "method": "GET",
         "timeout": 0,
@@ -209,10 +217,11 @@ function getDiscussionContactList() {
             "Authorization": "Bearer " + sessionStorage.getItem("userToken"),
         },
     };
+    return createPromise(settings);
 }
 
 function reserveProduct(productId) {
-    return {
+    const settings = {
         "url": urlBack + "order/save",
         "method": "POST",
         "timeout": 0,
@@ -222,6 +231,7 @@ function reserveProduct(productId) {
         },
         "data": JSON.stringify({ "address": "address", "productList": [{ "productId": productId, "quantity": 1 }] }),
     };
+    return createPromise(settings);
 }
 
 function getCategoryById(id) {
@@ -283,7 +293,7 @@ function saveImage(formData) {
 }
 
 function updateProduct(idProduct, categoryId, name, description, etat, image1, image2, image3) {
-    return {
+    const settings = {
         "url": "http://localhost:8080/api/product/update?id=" + idProduct + "&category_id=" + categoryId,
         "method": "POST",
         "timeout": 0,
@@ -301,6 +311,7 @@ function updateProduct(idProduct, categoryId, name, description, etat, image1, i
             "entity_name_2": image3,
         }),
     };
+    return createPromise(settings);
 }
 
 function getProductImages(productId) {
@@ -318,7 +329,7 @@ function getProductImages(productId) {
 }
 
 function deleteProduct(idProduct, categoryId) {
-    return {
+    const settings = {
         "url": "http://localhost:8080/api/product/update?id=" + idProduct + "&category_id=" + categoryId,
         "method": "POST",
         "timeout": 0,
@@ -330,6 +341,7 @@ function deleteProduct(idProduct, categoryId) {
             "quantity_stock": 0
         }),
     };
+    return createPromise(settings);
 }
 
 function createPromise(settings) {

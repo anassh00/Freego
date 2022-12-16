@@ -43,13 +43,18 @@
       display: flex;
       align-items: center;
       justify-content: right;
+      overflow: hidden;
     }
 
-    .donneur span {
+    .donneur p {
       color: #345DA8;
       font-size: 14px;
       text-align: right;
       width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin: 0;
     }
 
     .rayonProduct>.row>.col>.row {
@@ -72,15 +77,25 @@
       font-size: 12px;
     }
 
+    .productInfo {
+      overflow: hidden;
+    }
+
     .productTitle {
       margin-bottom: 0;
+    }
+    .productTitle p {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin: 0;
     }
   </style>
 </head>
 
 <body>
   <div class="allContent">
-    <div id="head-section-bis">
+    <div id="head-section-bis" class="white">
       <div class="row m-1">
         <div class="col-auto">
           <a href="rayons.html"><i class="material-icons orangeIcon">keyboard_backspace</i></a>
@@ -90,11 +105,10 @@
         </div>
       </div>
     </div>
-    <div style="height: 60px"></div>
-    <h3 id="rayonTitle" class="mt-3" style="text-align: center"></h3>
+    <h3 id="rayonTitle" style="text-align: center"></h3>
     <div class="section mx-3">
       <div class="form-group">
-        <input class="my-3" type="text form-control" onkeyup="searchRayon()" id="searchBar"
+        <input class="mt-3" type="text form-control" onkeyup="searchRayon()" id="searchBar"
           placeholder="Rechercher un produit..." />
         <i class="material-icons" id="searchBarLogo">search</i>
       </div>
@@ -146,25 +160,25 @@
               } else {
                 for (let i = 0; i < productsNotMe.length; i++) {
                   getUserById(sessionStorage.getItem('userID'))
-                    .then((user) => {
+                    .then(async (user) => {
                       const distance = fDistance(user.latitude, productsNotMe[i].user.latitude, user.longitude, productsNotMe[i].user.longitude);
-                      rayon.innerHTML +=
+                      let tmpProduct =
                         '<div class="row mb-3">' +
                         '<div class="col-auto">' +
                         '<a href="javascript:void(0)" onclick="fClickJyGo(' + productsNotMe[i].id_product + ')">';
-                      getProductImages(productsNotMe[i].id_product)
+                      await getProductImages(productsNotMe[i].id_product)
                         .then((images) => {
-                          rayon.innerHTML += '<div class="imgProduit" style="background-image: url(' + 'data:image/png;base64,' + images[0].image + ');"></div>';
+                          tmpProduct += '<div class="imgProduit" style="background-image: url(' + 'data:' + images[0].type + ';base64,' + images[0].image + ');"></div>';
                         })
                         .catch(() => {
-                          rayon.innerHTML += '<div class="imgProduit"></div>';
+                          tmpProduct += '<div class="imgProduit"></div>';
                         });
-                      rayon.innerHTML +=
+                      tmpProduct +=
                         '</a>' +
                         '</div>' +
-                        '<div class="col">' +
+                        '<div class="col productInfo">' +
                         '<div class="row">' +
-                        '<h6 class="productTitle">' + products[i].name + '</h6>' +
+                        '<h6 class="productTitle"><p>' + products[i].name + '</p></h6>' +
                         '</div>' +
                         '<div class="row">' +
                         '<div class="col-auto distance">' +
@@ -172,7 +186,7 @@
                         '<span>' + distance + ' km(s)</span>' +
                         '</div>' +
                         '<div class="col donneur">' +
-                        '<span>par ' + products[i].user.last_name + '</span>' +
+                        '<p>par ' + products[i].user.first_name + ' ' + products[i].user.last_name + '</p>' +
                         '</div>' +
                         '</div>' +
                         '<div class="row">' +
@@ -186,7 +200,9 @@
                         '</div>' +
                         '</div>' +
                         '</div>';
+                      rayon.innerHTML += tmpProduct;
                     });
+
                 }
               }
               fFinChargement();

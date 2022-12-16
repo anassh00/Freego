@@ -1,114 +1,125 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <title>Connexion - Freego</title>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <!-- Style -->
-        <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <title>Connexion - Freego</title>
 
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="bootstrap-5.2.3-dist/css/bootstrap.css">
+    <!-- Style -->
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
 
-        <style>
-            body {
-                background: linear-gradient(#E94E1B, #345DA8);
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                min-height: 100vh;
-                padding: 20% !important;
-            }
-            #logo_container {
-                display: flex;
-                justify-content: center;
-                margin-bottom: 2em;
-            }
-            #logo {
-                width: 200px;
-            }
-            h1 {
-                color: white;
-                font-weight: bold;
-            }
-            .btn_submit {
-                width: 100% !important;
-                height: fit-content !important;
-            }
-            .link {
-                color: white;
-                font-size: 1rem !important;
-            }
-            .link:hover {
-                color: white;
-            }
-            .textError {
-                color: red;
-                display: flex;
-                justify-content: center;
-                font-weight: bold;
-            }
-            #bienvenue {
-                text-align: center;
-                margin-bottom: 1em;
-            }
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="bootstrap-5.2.3-dist/css/bootstrap.css">
 
-        </style>
+    <style>
+        body {
+            background: linear-gradient(#E94E1B, #345DA8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20% !important;
+        }
 
-    </head>
-    <body>
-        <div id="logo_container">
-            <img id="logo" src="images/logo.png"/>
-        </div>
-        <h1 id="bienvenue">Bienvenue</h1>
-        <div class="row inputRow">
-            <label class="px-0" for="pseudo">Pseudonyme*</label>
-            <br>
-            <input class="px-0" type="text" id="pseudo"/>
-            <hr style="opacity: 1;">
-        </div>
-        <div class="row inputRow">
-            <label class="px-0" for="password">Mot de passe*</label>
-            <br>
-            <input class="px-0" type="password" id="password"/>
-            <hr style="opacity: 1;">
-        </div>
-        <span class="textError"></span>
-        <div style="display: flex; justify-content: center; margin-top: 3rem;">
-            <button class="btn btn_submit" onclick="sendForm()">Connexion</button>
-        </div>
-        <div style="display: flex; justify-content: center; margin-top: 3rem;">
-            <a href="inscription.html" class="link">Je ne suis pas encore membre</a>
-        </div>
+        #logo_container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2em;
+        }
 
-        <!-- Script -->
-        <script src="js/requetes.js"></script>
+        #logo {
+            width: 200px;
+        }
 
-        <!-- jQuery -->
-        <script src="js/jQuery.js"></script>
+        h1 {
+            color: white;
+            font-weight: bold;
+        }
 
-        <script>
-            function sendForm() {
-                let pseudo = document.querySelector("#pseudo").value;
-                let mdp = document.querySelector("#password").value;
-                if(pseudo != "" && mdp != "") {
-                    const reqAjax = $.ajax(connexion(pseudo, mdp));
-                    reqAjax.done(function (response) {
+        .btn_submit {
+            width: 100% !important;
+            height: fit-content !important;
+        }
+
+        .link {
+            color: white;
+            font-size: 1rem !important;
+        }
+
+        .link:hover {
+            color: white;
+        }
+
+        .textError {
+            color: red;
+            display: flex;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        #bienvenue {
+            text-align: center;
+            margin-bottom: 1em;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="logo_container">
+        <img id="logo" src="images/logo.png" />
+    </div>
+    <h1 id="bienvenue">Bienvenue</h1>
+    <div class="row inputRow">
+        <label class="px-0" for="pseudo">Pseudonyme*</label>
+        <br>
+        <input class="px-0" type="text" id="pseudo" />
+        <hr style="opacity: 1;">
+    </div>
+    <div class="row inputRow">
+        <label class="px-0" for="password">Mot de passe*</label>
+        <br>
+        <input class="px-0" type="password" id="password" />
+        <hr style="opacity: 1;">
+    </div>
+    <span class="textError"></span>
+    <div style="display: flex; justify-content: center; margin-top: 3rem;">
+        <button class="btn btn_submit" onclick="sendForm()">Connexion</button>
+    </div>
+    <div style="display: flex; justify-content: center; margin-top: 3rem;">
+        <a href="inscription.html" class="link">Je ne suis pas encore membre</a>
+    </div>
+
+    <!-- Script -->
+    <script src="js/script.js"></script>
+    <script src="js/requetes.js"></script>
+
+    <!-- jQuery -->
+    <script src="js/jQuery.js"></script>
+
+    <script>
+        function sendForm() {
+            let pseudo = get("#pseudo").value;
+            let mdp = get("#password").value;
+            if (pseudo != "" && mdp != "") {
+                connexion(pseudo, mdp)
+                    .then((response) => {
                         sessionStorage.setItem('userID', response.id);
                         sessionStorage.setItem('userToken', response.token);
                         window.location.href = "home.html";
-                        document.querySelector(".textError").innerHTML = "";
-                    });
-                    reqAjax.fail(function (error) {
-                        document.querySelector(".textError").innerHTML = "Une erreur s'est produite !";
-                    });
-                } else {
-                    document.querySelector(".textError").innerHTML = "Des champs requis (*) sont manquants !";
-                }
+                        get(".textError").innerHTML = "";
+                    })
+                    .catch(() => {
+                        get(".textError").innerHTML = "Une erreur s'est produite !";
+                    })
+            } else {
+                get(".textError").innerHTML = "Des champs requis (*) sont manquants !";
             }
-        </script>
+        }
+    </script>
 </body>
+
 </html>

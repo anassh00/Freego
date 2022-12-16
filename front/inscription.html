@@ -1,206 +1,216 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <title>Inscription - Freego</title>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <style>
-            body {
-                min-height: 100%;
-                background: linear-gradient(#E94E1B, #345DA8);
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                padding: 20% !important;
-            }
+    <title>Inscription - Freego</title>
 
-            #logo_container {
-                display: flex;
-                justify-content: center;  
-                margin-bottom: 2em;
-            }
+    <style>
+        body {
+            min-height: 100%;
+            background: linear-gradient(#E94E1B, #345DA8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 20% !important;
+        }
 
-            #logo {
-                width: 200px;
-            }
+        #logo_container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2em;
+        }
 
-            h1 {
-                color: white;
-                font-weight: bold !important;
-            }
+        #logo {
+            width: 200px;
+        }
 
-            .link {
-                color: white;
-            }
+        h1 {
+            color: white;
+            font-weight: bold !important;
+        }
 
-            .link:hover {
-                color: white;
-            }
-            .btn_submit {
-                width: 100% !important;
-                height: fit-content !important;
-            }
-            .textError {
-                color: red;
-                display: flex;
-                justify-content: center;
-                font-weight: bold;
-            }
-            #geolocalise {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: fit-content !important;
-                font-size: 0.9em;
-            }
-            #geolocalise i {
-                font-size: 20px;
-                margin-right: .5em;
-            }
-            #bienvenue {
-                text-align: center;
-                margin-bottom: 1em;
-            }
-        </style>
+        .link {
+            color: white;
+        }
 
-        <!-- Style -->
-        <link rel="stylesheet" type="text/css" href="css/style.css"/>
+        .link:hover {
+            color: white;
+        }
 
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="bootstrap-5.2.3-dist/css/bootstrap.css">
+        .btn_submit {
+            width: 100% !important;
+            height: fit-content !important;
+        }
 
-        <!-- Google Icon -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        .textError {
+            color: red;
+            display: flex;
+            justify-content: center;
+            font-weight: bold;
+        }
 
-    </head>
+        #geolocalise {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: fit-content !important;
+            font-size: 0.9em;
+        }
 
-    <body>
-        <div id="logo_container">
-            <img id="logo" src="images/logo.png" />
-        </div>
-        <h1 id="bienvenue" style="text-align: center">Bienvenue</h1>
-        <div class="row inputRow">
-            <label class="px-0" for="first-name">Prénom*</label>
-            <br>
-            <input class="px-0" type="text" id="first-name"/>
-            <hr style="opacity: 1;">
-        </div>
-        <div class="row inputRow">
-            <label class="px-0" for="last-name">Nom*</label>
-            <br>
-            <input class="px-0" type="text" id="last-name"/>
-            <hr style="opacity: 1;">
-        </div>
-        <div class="row inputRow">
-            <label class="px-0" for="pseudo">Pseudonyme</label>
-            <br>
-            <input class="px-0" type="text" id="pseudo"/>
-            <hr style="opacity: 1;">
-        </div>
-        <div class="row" style="text-align: center;">
-            <span style="color: white; font-size: 0.9em; padding: 0;">Si non renseigné, il sera de la forme <i>prénom.nom</i></span>
-        </div>
+        #geolocalise i {
+            font-size: 20px;
+            margin-right: .5em;
+        }
+
+        #bienvenue {
+            text-align: center;
+            margin-bottom: 1em;
+        }
+    </style>
+
+    <!-- Style -->
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="bootstrap-5.2.3-dist/css/bootstrap.css">
+
+    <!-- Google Icon -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+</head>
+
+<body>
+    <div id="logo_container">
+        <img id="logo" src="images/logo.png" />
+    </div>
+    <h1 id="bienvenue" style="text-align: center">Bienvenue</h1>
+    <div class="row inputRow">
+        <label class="px-0" for="first-name">Prénom*</label>
         <br>
-        <div class="row">
-            <div class="row p-0">
-                <span style="color: white;">Adresse</span>
-            </div>
-            <div class="row m-0">
-                <div class="col px-0">
-                    <div class="row inputRow" style="padding-right: 1em;">
-                        <label class="px-0" for="latitude" style="font-size: .9em !important;">Latitude*</label>
-                        <br>
-                        <input class="px-0" type="text" id="latitude"/>
-                        <hr style="opacity: 1;">
-                    </div>
+        <input class="px-0" type="text" id="first-name" />
+        <hr style="opacity: 1;">
+    </div>
+    <div class="row inputRow">
+        <label class="px-0" for="last-name">Nom*</label>
+        <br>
+        <input class="px-0" type="text" id="last-name" />
+        <hr style="opacity: 1;">
+    </div>
+    <div class="row inputRow">
+        <label class="px-0" for="pseudo">Pseudonyme</label>
+        <br>
+        <input class="px-0" type="text" id="pseudo" />
+        <hr style="opacity: 1;">
+    </div>
+    <div class="row" style="text-align: center;">
+        <span style="color: white; font-size: 0.9em; padding: 0;">Si non renseigné, il sera de la forme
+            <i>prénom.nom</i></span>
+    </div>
+    <br>
+    <div class="row">
+        <div class="row p-0">
+            <span style="color: white;">Adresse</span>
+        </div>
+        <div class="row m-0">
+            <div class="col px-0">
+                <div class="row inputRow" style="padding-right: 1em;">
+                    <label class="px-0" for="latitude" style="font-size: .9em !important;">Latitude*</label>
+                    <br>
+                    <input class="px-0" type="text" id="latitude" />
+                    <hr style="opacity: 1;">
                 </div>
-                <div class="col px-0">
-                    <div class="row inputRow" style="padding-left: 1em;">
-                        <label class="px-0" for="longitude" style="font-size: .9em !important;">Longitude*</label>
-                        <br>
-                        <input class="px-0" type="text" id="longitude"/>
-                        <hr style="opacity: 1;">
-                    </div>
+            </div>
+            <div class="col px-0">
+                <div class="row inputRow" style="padding-left: 1em;">
+                    <label class="px-0" for="longitude" style="font-size: .9em !important;">Longitude*</label>
+                    <br>
+                    <input class="px-0" type="text" id="longitude" />
+                    <hr style="opacity: 1;">
                 </div>
             </div>
         </div>
-        <div style="display: flex; justify-content: center; margin-bottom: 1em;">
-            <button class="btn btn_submit mx-3" id="geolocalise" onclick="fGetLocation()"><i class="material-icons">my_location</i> Me géolocaliser</button>
-        </div>
-        <div class="row inputRow">
-            <label class="px-0" for="password">Mot de passe*</label>
-            <br>
-            <input class="px-0" type="password" id="password"/>
-            <hr style="opacity: 1;">
-        </div>
-        <div class="row inputRow">
-            <label class="px-0" for="confirm-password">Confirmer le mot de passe*</label>
-            <br>
-            <input class="px-0" type="password" id="confirm-password"/>
-            <hr style="opacity: 1;">
-        </div>
-        <span class="mx-3 textError"></span>
-        <div style="display: flex; justify-content: center; margin-top: 1em;">
-            <button class="btn btn_submit" id="btnSendForm" onclick="sendForm()">Inscription</button>
-        </div>
-        <div style="display: flex; justify-content: center; margin-top: 1em;">
-            <a href="connexion.html" class="mx-3 link">Je suis déjà membre</a>
-        </div>
+    </div>
+    <div style="display: flex; justify-content: center; margin-bottom: 1em;">
+        <button class="btn btn_submit mx-3" id="geolocalise" onclick="fGetLocation()"><i
+                class="material-icons">my_location</i> Me géolocaliser</button>
+    </div>
+    <div class="row inputRow">
+        <label class="px-0" for="password">Mot de passe*</label>
+        <br>
+        <input class="px-0" type="password" id="password" />
+        <hr style="opacity: 1;">
+    </div>
+    <div class="row inputRow">
+        <label class="px-0" for="confirm-password">Confirmer le mot de passe*</label>
+        <br>
+        <input class="px-0" type="password" id="confirm-password" />
+        <hr style="opacity: 1;">
+    </div>
+    <span class="mx-3 textError"></span>
+    <div style="display: flex; justify-content: center; margin-top: 1em;">
+        <button class="btn btn_submit" id="btnSendForm" onclick="sendForm()">Inscription</button>
+    </div>
+    <div style="display: flex; justify-content: center; margin-top: 1em;">
+        <a href="connexion.html" class="mx-3 link">Je suis déjà membre</a>
+    </div>
 
-        <!-- Script -->
-        <script src="js/requetes.js"></script>
-        <!-- jQuery -->
-        <script src="js/jQuery.js"></script>
-        <script>
-            function sendForm() {
-                let firstName = document.querySelector("#first-name").value;
-                let lastName = document.querySelector("#last-name").value;
-                let pseudo;
-                if(document.querySelector("#pseudo").value == "") {
-                    pseudo = firstName.toLowerCase() + "." + lastName.toLowerCase();
-                } else {
-                    pseudo = document.querySelector("#pseudo").value;
-                }
-                let latitude = document.querySelector("#latitude").value;
-                let longitude = document.querySelector("#longitude").value;
-                let mdp = document.querySelector("#password").value;
-                let confMdp = document.querySelector("#confirm-password").value;
-                if(firstName != "" && lastName != "" && latitude != "" && longitude != "" && mdp != "" && confMdp != "") {
-                    if(mdp == confMdp) {
-                        const reqAjax = $.ajax(inscription(firstName, lastName, pseudo, latitude, longitude, mdp));
-                        reqAjax.done(function (response) {
-                            document.querySelector(".textError").innerHTML = "";
+    <!-- Script -->
+    <script src="js/script.js"></script>
+    <script src="js/requetes.js"></script>
+    <!-- jQuery -->
+    <script src="js/jQuery.js"></script>
+    <script>
+        function sendForm() {
+            let firstName = get("#first-name").value;
+            let lastName = get("#last-name").value;
+            let pseudo;
+            if (get("#pseudo").value == "") {
+                pseudo = firstName.toLowerCase() + "." + lastName.toLowerCase();
+            } else {
+                pseudo = get("#pseudo").value;
+            }
+            let latitude = get("#latitude").value;
+            let longitude = get("#longitude").value;
+            let mdp = get("#password").value;
+            let confMdp = get("#confirm-password").value;
+            if (firstName != "" && lastName != "" && latitude != "" && longitude != "" && mdp != "" && confMdp != "") {
+                if (mdp == confMdp) {
+                    inscription(firstName, lastName, pseudo, latitude, longitude, mdp)
+                        .then(() => {
+                            get(".textError").innerHTML = "";
                             window.location.href = "connexion.html";
-                        });
-                        reqAjax.fail(function() {
-                            document.querySelector(".textError").innerHTML = "Une erreur s'est produite !";
                         })
-                    } else {
-                        document.querySelector(".textError").innerHTML = "Les mots de passe doivent correspondre !";
-                    }
+                        .catch(() => {
+                            get(".textError").innerHTML = "Une erreur s'est produite !";
+                        });
                 } else {
-                    document.querySelector(".textError").innerHTML = "Des champs requis (*) sont manquants !";
+                    get(".textError").innerHTML = "Les mots de passe doivent correspondre !";
                 }
-
+            } else {
+                get(".textError").innerHTML = "Des champs requis (*) sont manquants !";
             }
 
-            function fGetLocation() {
-                if(navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(
-                    function(pos) {
-                        document.querySelector("#latitude").value = pos.coords.latitude;
-                        document.querySelector("#longitude").value = pos.coords.longitude;
+        }
+
+        function fGetLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function (pos) {
+                        get("#latitude").value = pos.coords.latitude;
+                        get("#longitude").value = pos.coords.longitude;
                     },
-                    function(err) {
+                    function (err) {
                         alert("Erreur : " + err.message);
                     });
-                } else {
-                    alert("La géolocalisation n'est pas supportée !");
-                }
+            } else {
+                alert("La géolocalisation n'est pas supportée !");
             }
-        </script>
-    </body>
+        }
+    </script>
+</body>
+
 </html>

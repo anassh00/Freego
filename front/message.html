@@ -1,153 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Message - Freego</title>
 
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="bootstrap-5.2.3-dist/css/bootstrap.css">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Message - Freego</title>
 
-        <!-- Style -->
-        <link rel="stylesheet" href="css/style.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="bootstrap-5.2.3-dist/css/bootstrap.css">
 
-        <!-- Google Icon -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- Style -->
+    <link rel="stylesheet" href="css/style.css">
 
-        <style>
-            .material-icons.orangeIcon {
-                color: #FE835A;
-                font-size: 46px;
-            }
+    <!-- Google Icon -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-            .userImage {
-                width: 55px;
-                border-radius: 50px;
-            }
-            .enTete {
-                display: flex;
-                align-items: center;
-            }
-            .messU {
-                background-color: #345DA8;
-                color: white;
-                border-radius: 10px;
-                padding: 1rem;
-                width: 75%;
-                margin-left: auto;
-                margin-right: 1rem;
-            }
-            .messO {
-                background-color: #FE835A;
-                color: white;
-                border-radius: 10px;
-                padding: 1rem;
-                width: 75%;
-                margin-right: auto;
-                margin-left: 1rem;
-            }
-            span {
-                text-align: right;
-            }
-            .sendMessage {
-                color: #E94E1B;
+    <style>
+        .material-icons.orangeIcon {
+            color: #FE835A;
+            font-size: 46px;
+        }
 
-            }
-            #messageAction {
-                position: absolute;
-                bottom: 40px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="allContent">
-            <div id="head-section-bis">
-                <div class="row m-1 enTete">
-                    <div class="col-auto">
-                        <a href="javascript:void(0)" onclick="location.href = sessionStorage.getItem('lastUrl');"><i class="material-icons orangeIcon">keyboard_backspace</i></a>
-                    </div>
-                    <div class="col-auto">
-                        <img id="profilImage" class="userImage" src="images/person_profile.png"/>
-                    </div>
-                    <div class="col">
-                        <h6 id="prenomNom"></h6>
-                    </div>
+        .userImage {
+            width: 55px;
+            border-radius: 50px;
+        }
+
+        .enTete {
+            display: flex;
+            align-items: center;
+        }
+
+        .messU {
+            background-color: #345DA8;
+            color: white;
+            border-radius: 10px;
+            padding: 1rem;
+            width: 75%;
+            margin-left: auto;
+            margin-right: 1rem;
+        }
+
+        .messO {
+            background-color: #FE835A;
+            color: white;
+            border-radius: 10px;
+            padding: 1rem;
+            width: 75%;
+            margin-right: auto;
+            margin-left: 1rem;
+        }
+
+        span {
+            text-align: right;
+        }
+
+        .sendMessage {
+            color: #E94E1B;
+
+        }
+
+        #messageAction {
+            position: absolute;
+            bottom: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="allContent">
+        <div id="head-section-bis" class="red">
+            <div class="row m-1 enTete">
+                <div class="col-auto" style="padding-left: 0;">
+                    <a href="javascript:void(0)" onclick="location.href = sessionStorage.getItem('lastUrl');"><i
+                            class="material-icons orangeIcon">keyboard_backspace</i></a>
+                </div>
+                <div class="col-auto">
+                    <img id="profilImage" class="userImage" src="images/person_profile.png" />
+                </div>
+                <div class="col" style="padding-right: 0;">
+                    <h6 id="prenomNom"></h6>
                 </div>
             </div>
-            <div style="height: 60px;"></div>
-            <div id="messageContainer" class="container"></div>
-            <div id="messageAction" class="row m-3">
-                <div class="col">
-                    <input id="messageInput" type="text" class="form-control"/>
-                </div>
-                <div class="col-auto p-0">
-                    <button class="btn" onclick="fSendMessage()"><i class="material-icons sendMessage">send</i></button>
-                </div>
+        </div>
+        <div id="messageContainer" class="container"></div>
+        <div id="messageAction" class="row m-3">
+            <div class="col">
+                <input id="messageInput" type="text" class="form-control" />
             </div>
-
-            <!-- Nav bar basse -->
-            <div id="footNavBar"></div>
-            <div style="height:50px"></div>
+            <div class="col-auto p-0">
+                <button class="btn" onclick="fSendMessage()"><i class="material-icons sendMessage">send</i></button>
+            </div>
         </div>
 
-        <!-- Ecran de chargement -->
-        <div id="ecranChargement"></div>
+        <!-- Nav bar basse -->
+        <div id="footNavBar"></div>
+        <div style="height:50px"></div>
+    </div>
 
-        <!-- Bootstrap Script -->
-        <script src="bootstrap-5.2.3-dist/js/bootstrap.js"></script>
-        <!-- Script -->
-        <script src="js/script.js"></script>
-        <script src="js/requetes.js"></script>
-        <!-- jQuery -->
-        <script src="js/jQuery.js"></script>
-        <script>
-            $(function(){
-                $("#ecranChargement").load("ecranChargement.html");
-                $("#ecranChargement").fadeIn();
+    <!-- Ecran de chargement -->
+    <div id="ecranChargement"></div>
+
+    <!-- Bootstrap Script -->
+    <script src="bootstrap-5.2.3-dist/js/bootstrap.js"></script>
+    <!-- Script -->
+    <script src="js/script.js"></script>
+    <script src="js/requetes.js"></script>
+    <!-- jQuery -->
+    <script src="js/jQuery.js"></script>
+    <script>
+        let userID = null;
+        onload = function () {
+            if (sessionStorage.getItem('userID') == null) {
+                location.href = "connexion.html";
+            } else {
+                // Ecran de chargement
+                fDebutChargement();
+                // Barre de navigation basse
                 $("#footNavBar").load("footNavBar.html");
-            });
-            let userID = null;
-            onload = function() {
-                if(sessionStorage.getItem('userID') == null) {
-                    location.href = "connexion.html";
-                } else {
-                    const url = new URL(location.href);
-                    const search_params = new URLSearchParams(url.search);
-                    if(search_params.has('userID')) {
-                        userID = search_params.get('userID');
-                        $.ajax(getUserImage(userID)).done(function (response) {
-                            document.querySelector("#profilImage").src = "data:image/png;base64," + response.image;
-                        });
-                        $.ajax(getUserById(userID)).done(function (user) {
-                            document.querySelector("#prenomNom").innerHTML = user.first_name + " " + user.last_name;
-                        });
-                        fGetDiscussion();
-                    }
+                const url = new URL(location.href);
+                const search_params = new URLSearchParams(url.search);
+                if (search_params.has('userID')) {
+                    userID = search_params.get('userID');
+                    getUserById(userID)
+                        .then((data) => {
+                            if (data.entity_name != null) {
+                                getUserImage(userID)
+                                    .then((image) => {
+                                        get("#profilImage").src = "data:image/png;base64," + image.image;
+                                    });
+                            }
+                            get("#prenomNom").innerHTML = data.first_name + " " + data.last_name;
+                        })
+                    fGetDiscussion();
                 }
             }
-            function fSendMessage() {
-                const message = document.querySelector("#messageInput");
-                $.ajax(sendMessage(userID, message.value)).done(function (response) {
-                    if(response.message != "Message registered successfully!") {
-                        console.log("Erreur d'envoi !");
-                    } else {
-                        message.value = "";
-                        fGetDiscussion();
-                    }
-                    //document.querySelector("#prenomNom").innerHTML = user.first_name + " " + user.last_name;
+        }
+        function fSendMessage() {
+            const message = document.querySelector("#messageInput");
+            sendMessage(userID, message.value)
+                .then(() => {
+                    message.value = "";
+                    fGetDiscussion();
+                })
+                .catch(() => {
+                    console.log("Erreur d'envoi !");
                 });
-            }
+        }
 
-            function fGetDiscussion() {
-                $.ajax(getDiscussion(userID)).done(function (messagesA) {
-                    let messages = messagesA.sort(
+        function fGetDiscussion() {
+            getDiscussion(userID)
+                .then((messagesUnsort) => {
+                    let messages = messagesUnsort.sort(
                         (p1, p2) => (p1.creation_date_timestamp > p2.creation_date_timestamp) ? 1 : (p1.creation_date_timestamp < p2.creation_date_timestamp) ? -1 : 0);
-                    const messageContainer = document.querySelector("#messageContainer");
+                    const messageContainer = get("#messageContainer");
                     messageContainer.innerHTML = "";
-                    for(let i = 0; i < messages.length; i++) {
+                    for (let i = 0; i < messages.length; i++) {
                         let classMess = "";
-                        if(messages[i].userReceiver.id != sessionStorage.getItem('userID')) {
+                        if (messages[i].userReceiver.id != sessionStorage.getItem('userID')) {
                             classMess = "messU";
                         } else {
                             classMess = "messO";
@@ -155,16 +166,16 @@
                         var date = new Date(messages[i].creation_date_timestamp);
                         messageContainer.innerHTML += '' +
                             '<div class="row">' +
-                                '<span>' + date.getHours() + ":" + date.getMinutes() + '</span>' +
-                                '<div class="' + classMess + '">' +
-                                    messages[i].messageText +
-                                '</div>' +
+                            '<span>' + date.getHours() + ":" + date.getMinutes() + '</span>' +
+                            '<div class="' + classMess + '">' +
+                            messages[i].messageText +
+                            '</div>' +
                             '</div>';
                     }
                     fFinChargement();
-                    //document.querySelector("#prenomNom").innerHTML = user.first_name + " " + user.last_name;
-                });
-            }
-        </script>
-    </body>
+                })
+        }
+    </script>
+</body>
+
 </html>
